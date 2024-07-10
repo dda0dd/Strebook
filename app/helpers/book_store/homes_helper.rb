@@ -1,0 +1,2 @@
+module BookStore::HomesHelper
+end

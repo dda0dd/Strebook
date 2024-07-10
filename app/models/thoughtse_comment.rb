@@ -1,0 +1,2 @@
+class ThoughtseComment < ApplicationRecord
+end

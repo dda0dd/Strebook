@@ -1,0 +1,2 @@
+class BookStoteTag < ApplicationRecord
+end
