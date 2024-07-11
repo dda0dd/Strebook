@@ -9,8 +9,6 @@ Rails.application.routes.draw do
   scope module: :book_store do
     # root :to =>"homes#top"
     # get '/about' => 'homes#about'
-    # ゲストログイン
-    resources :guests, only: [:guest_login]
     # 退会機能のルーティング
     resources :book_stores, only: [:show, :edit, :update] do
       collection do
@@ -18,6 +16,11 @@ Rails.application.routes.draw do
         patch 'withdraw'
       end
     end
+    # ゲストログイン
+    # devise_scope :customer do
+      # guest/sessions_controller.rbのアクションに処理を繋げる
+      # post "customers/guest_sign_in", to: "customers/sessions#guest_sign_in"
+    # end
     # 投稿機能(index, showがいるかも？)
     resources :posts, except: [:edit, :update, :create, :destroy] do
       # キーワードでリクエストを検索する機能(searchはresourcesで作成されない)
@@ -44,14 +47,17 @@ Rails.application.routes.draw do
   scope module: :public do
     root :to =>"homes#top"
     get '/about' => 'homes#about'
-    # ゲストログイン
-    resources :guests, only: [:guest_login]
     # 退会機能のルーティング
     resources :customers, only: [:show, :edit, :update] do
       collection do
         get 'unsubscribe'
         patch 'withdraw'
       end
+    end
+    # ゲストログイン
+    devise_scope :customer do
+      # guest/sessions_controller.rbのアクションに処理を繋げる
+      post "customers/guest_sign_in", to: "customers/sessions#guest_sign_in"
     end
     # 書店一覧表示, 書店マイページ表示
     resources :book_stores, only: [:index, :show] do

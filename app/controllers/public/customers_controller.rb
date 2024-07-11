@@ -1,6 +1,8 @@
 class Public::CustomersController < ApplicationController
   # 権限の設定：ログインしていないお客様が作業できないように設定
   before_action :authenticate_customer!
+  # edit(編集)アクション実行前に処理を行う」
+  before_action :ensure_guest_customer, only: [:edit]
 
 
   def show
@@ -38,4 +40,11 @@ class Public::CustomersController < ApplicationController
                                      :occupation
                                      )
   end
+  # 会員編集画面へのURLを直接入力時にメッセージ表示で会員詳細画面へリダイレクトさせる
+  def ensure_guest_customer
+    @customer = Customer.find(params[:id])
+    if @customer.guest_customer?
+      redirect_to customer_path(current_customer) , notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
+    end
+  end  
 end
