@@ -6,9 +6,9 @@ Rails.application.routes.draw do
     sessions: 'book_store/sessions'
   }
   #ログイン以外の機能
-  scope module: :public do
-    root :to =>"homes#top"
-    get '/about' => 'homes#about'
+  scope module: :book_store do
+    # root :to =>"homes#top"
+    # get '/about' => 'homes#about'
     # ゲストログイン
     resources :guests, only: [:guest_login]
     # 退会機能のルーティング
@@ -18,22 +18,21 @@ Rails.application.routes.draw do
         patch 'withdraw'
       end
     end
-    # 投稿機能
+    # 投稿機能(index, showがいるかも？)
     resources :posts, except: [:edit, :update, :create, :destroy] do
-      # キーワードでリクエストを検索する機能
-      resources :comments, only: [:search]
+      # キーワードでリクエストを検索する機能(searchはresourcesで作成されない)
+      get 'search'
       # resources :comments, only: [:search] do
         # collection do
         # delete 'destroy_all'
         # end
       # end
-      #タグ作成, 取得, 削除
+      #タグ作成, 取得, 削除(管理者で削除できた方がいい？)createいらないかも？
       resources :tags, except: [:index, :create, :destroy]
         # collection do
         #   get 'thanks'
         # end
     end
-  end
   end
 
   # お客様(新規登録・ログイン)
@@ -54,26 +53,25 @@ Rails.application.routes.draw do
         patch 'withdraw'
       end
     end
-    # 都道府県で書店を検索する機能
-    resources :searches, only: [:search]
-    # resources :searches, only: [:search] do
-      # collection do
-      # delete 'destroy_all'
-      # end
-    # end
     # 書店一覧表示, 書店マイページ表示
     resources :book_stores, only: [:index, :show] do
       # リクエストコメント保存, 削除
       resources :request_comments, except: [:create, :destroy]
       # 感想コメント保存, 削除
       resources :thoughtse_comments, except: [:create, :destroy]
-      # 書店の投稿にレビュー評価
+      # 都道府県で書店を検索する機能(searchはresourcesで作成されない)
+      get 'search'
+      # resources :searches, only: [:search] do
+        # collection do
+        # delete 'destroy_all'
+        # end
+      # end
+      # 書店の投稿にレビュー評価(:destroyいるかも？)
       resources :ratings, except: [:create]
         # collection do
         #   get 'thanks'
         # end
     end
-  end
   end
 
 
@@ -85,10 +83,13 @@ Rails.application.routes.draw do
   #ログイン以外の機能
   namespace :admin do
 	  get '/' => 'homes#top'
+	 # 全てのレビュー閲覧, 削除ボタン設置
 	  resources :reviews, except: [:index, :destroy]
-	  #顧客詳細情報(管理者)
+	  #お客様詳細情報(管理者)
     resources :customers, only: [:index, :show, :edit, :update]
-	  resources :comments, only: [:index, :show, :edit, :destroy]
+    # update追記(編集内容を更新できないので)
+	  resources :comments, only: [:index, :show, :edit, :update, :destroy]
+	  #書店詳細情報(管理者)
 	  resources :book_stores, only: [:index, :show, :edit, :update]
 	end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.htm
