@@ -1,0 +1,24 @@
+<!--管理者が会員(お客様)一覧を確認する画面の記述(現在会員のお客様と既に退会しているお客様を確認)-->
+ <table class="table table-hover align-middle text-secondary">
+  <thead>
+    <tr>
+      <th>お客様ID</th>
+      <th>ニックネーム</th>
+      <th>ステータス</th>
+    </tr>
+  </thead>
+  <% @customers.each do |customer| %>
+    <tr>
+      <!--会員(お客様)ID-->
+      <td><%= customer.id %></td>
+        <!--お客様表示のためのメソッドを定義して、それをリンクにする-->
+      <td><%= link_to customer.name, admin_customer_path(customer.id) %></td>
+      <!--ステータス-->
+        <!--No Method Error発生でdeletedをactiveに変更-->
+          <!--三項演算子は式、true、falseの順-->
+      <td class="<%= customer.is_active ? 'text-green' : 'text-gray' %>"><%= customer.is_active ? '有効' : '退会' %></td>
+    </tr>
+  <% end %>
+</table>
+<!--kaminari(ページネーション)記述-->
+<%= paginate @customers %>

@@ -1,17 +1,36 @@
 <h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<!--form_forをform_withに変更-->
+<%= form_with model: @customer, url: customer_registration_path do |f| %>
+<!--<%#= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>-->
+
 <!--publicsからpublicにフォルダ名を改名したためpublicsのsを削除-->
   <!--新規登録画面でのエラーメッセージを呼び出し記述-->
   <%= render "public/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <!--emailをnameに変更(ニックネームで新規登録してもらうため)-->
+    <%= f.label :name %><br />
+    <%= f.name_field :name, autofocus: true, autocomplete: "name" %>
   </div>
-
+  <!--新規登録時に住所(都道府県のみ)記載してもらう-->
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :address, "住所" %>
+    <%= f.text_field :address, autofocus: true, placefield: "大阪府" %>
+  </div>
+  <!--新規登録時に年齢(数字のみ)記載してもらう-->
+  <div class="field">
+    <%= f.label :age, "年齢" %>
+    <%= f.text_field :age, autofocus: true, placefield: "67" %>
+  </div>
+  <!--新規登録時に職業記載してもらう-->
+  <div class="field">
+    <%= f.label :occupation, "職業" %>
+    <%= f.text_field :occupation, autofocus: true, placefield: "管理職" %>
+  </div>
+  <!--新規登録時にパスワード(英数字8文字上)記載してもらう-->
+  <div class="field">
+    <%= f.label :password, "英数字8文字以上" %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
@@ -19,10 +38,10 @@
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :password_confirmation, "確認用" %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
-
+  <!--新規登録ボタン設置-->
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
