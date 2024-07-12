@@ -55,9 +55,9 @@ Rails.application.routes.draw do
       end
     end
     # ゲストログイン
-    devise_scope :customer do
+    devise_scope :user do
       # guest/sessions_controller.rbのアクションに処理を繋げる
-      post "customers/guest_sign_in", to: "customers/sessions#guest_sign_in"
+      get "users/guest_sign_in", to: "users/sessions#guest_sign_in"
     end
     # 書店一覧表示, 書店マイページ表示
     resources :book_stores, only: [:index, :show] do

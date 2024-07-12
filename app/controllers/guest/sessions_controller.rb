@@ -1,10 +1,10 @@
 class Guests::SessionsController < Devise::SessionsController
   def guest_sign_in
     # Customer.guestのguestメソッドをcustomer.rbで定義
-    customer = Customer.guest
+    user = User.guest
     # ゲスト会員をログイン状態にする
-    sign_in customer
+    sign_in user
     # ログイン後ゲスト会員の詳細(マイページ)に遷移
-    redirect_to customer_path(customer), notice: "guestcustomerでログインしました。"
+    redirect_to user_path(user), notice: "guestcustomerでログインしました。"
   end
 end

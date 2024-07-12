@@ -3,9 +3,9 @@
   <header class="shadow-sm">
   	<nav class="navbar navbar-expand-lg navbar-light bg-light">
   	  <div class="container">
-				<!--<span class="border border-5 rounded-pill px-3 py-2">-->
-					<%#= link_to "LOGO", root_path, class:"text-secondary" %>
-				<!--</span>-->
+				<span class="border border-5 rounded-pill px-3 py-2">
+					<%= link_to "Strebook", root_path, class:"text-secondary" %>
+				</span>
 
 				<!--会員ログイン時のヘッダー-->
 				<% if customer_signed_in? %>
@@ -25,23 +25,6 @@
 
 				  <!--ログアウトリンク-->
 				  <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
-
-				<!--誰もログインしていない時のヘッダー-->
-				<% else %>
-
-					<!--Aboutリンク-->
-					<%= link_to "About", about_path, class:"text-secondary" %>
-
-					<!--投稿一覧リンク→ログインしていなくても閲覧できるよう設定-->
-					<%= link_to "投稿一覧", posts_path, class:"text-secondary" %>
-
-					<!--新規登録リンク-->
-					<%= link_to "新規登録", new_customer_registration_path, class:"text-secondary" %>
-
-					<!--ログインリンク→ここは会員用のURL-->
-					<%= link_to "ログイン", new_customer_session_path, class:"text-secondary" %>
-
-
 				<!--書店ログイン時のヘッダー-->
 				<% elsif book_store_signed_in? %>
 
@@ -56,25 +39,8 @@
 
 				  <!--ログアウトリンク-->
 				  <%= link_to "ログアウト", destroy_book_store_session_path, method: :delete %>
-
-				<!--誰もログインしていない時のヘッダー-->
-				<% else %>
-
-				  <!--Aboutリンク-->
-					<%= link_to "About", about_path, class:"text-secondary" %>
-
-					<!--投稿一覧リンク→ログインしていなくても閲覧できるよう設定-->
-					<%= link_to "投稿一覧", posts_path, class:"text-secondary" %>
-
-					<!--新規登録リンク-->
-					<%= link_to "新規登録", new_book_store_registration_path, class:"text-secondary" %>
-
-					<!--ログインリンク→ここは会員用のURL-->
-					<%= link_to "ログイン", new_book_store_session_path, class:"text-secondary" %>
-
 				<!--管理者ログイン時のヘッダー-->
 				<% elsif admin_signed_in? %>
-
 					<!--お客様一覧リンク-->
 					<%= link_to "お客様一覧", admin_customers_path, class:"text-secondary" %>
 
@@ -89,9 +55,8 @@
 
 					<!--ログアウトリンク-->
 					<%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"text-secondary" %>
-
         <!--ゲストログイン時のヘッダー-->
-				<% elsif guest_customer_signed_in? %>
+				<% elsif customer_signed_in? && current_customer.guest? %>
 
 				  <!--マイページリンク-->
 				  <%= link_to "マイページ", guest_customer_path(current_customer), class:"text-secondary" %>
@@ -101,7 +66,16 @@
 
 				  <!--ログアウトリンク-->
 				  <%= link_to "ログアウト", destroy_guest_customer_session_path, method: :delete %>
+				<!--誰もログインしていない時のヘッダー-->
+				<% else %>
+					<!--Aboutリンク-->
+					<%= link_to "About", about_path, class:"text-secondary" %>
 
+					<!--新規登録リンク-->
+					<%= link_to "新規登録", new_customer_registration_path, class:"text-secondary" %>
+
+					<!--ログインリンク→ここは会員用のURL-->
+					<%= link_to "ログイン", new_customer_session_path, class:"text-secondary" %>
 				<% end %>
 			</div>
 		</nav>
