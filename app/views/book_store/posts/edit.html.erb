@@ -1,0 +1,42 @@
+<!--投稿タイトルから遷移する編集ボタン-->
+
+<!--Bootstrapはhtmlに記述可能-->
+<div class="container">
+  <dic class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h1>Editing Book</h1>
+<!--エラーメッセージの記述-->
+      <% if @book.errors.any? %>
+            <%= @book.errors.count %>errors prohibited this obj from being saved:
+              <ul>
+                <% @book.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+      <% end %>
+
+
+      <%= form_with model: @book, local: true do |f| %>
+  <!--Title（本のタイトル記述箇所）作成-->
+        <div class="form-group">
+          <%= f.label :Title %>
+          <%= f.text_field :title, class:"form-control book_title" %>
+        </div>
+  <!--Opinion（本の感想記述箇所）作成-->
+        <div class="form-group">
+          <%= f.label :Opinion %>
+          <%= f.text_area :body, class:"form-control book_body" %>
+        </div>
+  <!--Update Bookボタン記述-->
+        <div class="form-group">
+          <%= f.submit 'Update Book', class:"btn btn-success" %>
+        </div>
+  <!--showボタンとBackボタン記述-->
+        <%= link_to "Show", book_path(@book) %> |
+        <%= link_to "Back", books_path %>
+      <% end %>
+    </div>
+  </dic>
+</div>
+
+
