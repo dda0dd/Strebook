@@ -16,8 +16,8 @@ class Customer < ApplicationRecord
       end
     end
   # メールアドレスがゲスト会員のものか判定し、trueかfalseの値を返す(guest_customer?メソッド定義で複数箇所に同じメソッド共有)
-  def guest_customer?
-    name == guestcustomer
-  end
+  # def guest_customer?
+  #   name == guest_customer
+  # end
 
 end

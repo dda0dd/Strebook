@@ -3,19 +3,21 @@ class Admin::CustomersController < ApplicationController
   before_action :authenticate_admin!
 
   def index
+    @customers = Customer.all
+    @book_stores = BookStore.all
     #管理者のお客様一覧記述
     #ページネーション対応に変更
-    @customers = Customer.page(params[:page])
+    # @customers = Customer.page(params[:page])
     #管理者の書店一覧記述
     #ページネーション対応に変更
-    @book_stores = Book_store.page(params[:page])
+    # @book_stores = Book_store.page(params[:page])
   end
 
   def show
     # 会員(お客様)
     @customer = Customer.find(params[:id])
     # 会員(書店)
-    @book_store = Book_store.find(params[:id])
+    @book_store = BookStore.find(params[:id])
   end
 
   def edit

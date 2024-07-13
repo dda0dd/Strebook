@@ -1,7 +1,7 @@
 <!--会員(お客様)マイページ画面-->
 
 <!--会員(お客様)情報編集画面に遷移(public/customers/edit.html)-->
-<%= link_to "編集する", edit_customer_path(params[:id]), class:"btn btn-outline-success ml-2 btn-sm" %>
+<%#= link_to "編集する", edit_customer_path(params[:id]), class:"btn btn-outline-success ml-2 btn-sm" %>
   <table class="table table-hover align-middle text-secondary">
     <tr>
       <td class="bg-light">ニックネーム</td>
@@ -20,6 +20,6 @@
       <td><%= @customer.address %></td>
     </tr>
   </table>
-    <%= link_to "編集", edit_customer_path, class:"btn btn-outline-primary btn-sm" %>
+    <%#= link_to "編集", edit_customer_path, class:"btn btn-outline-primary btn-sm" %>
     <!--退会するボタン押した時確認メッセージ表示させる(退会後退会画面に遷移)-->
     <%= link_to "退会する", unsubscribe_customers_path, data: { confirm: "退会してもよろしいですか？" }, class:"btn btn-outline-danger ml-1" %>
