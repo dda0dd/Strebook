@@ -1,24 +1,62 @@
-<!--管理者が会員(お客様)一覧を確認する画面の記述(現在会員のお客様と既に退会しているお客様を確認)-->
- <table class="table table-hover align-middle text-secondary">
-  <thead>
-    <tr>
-      <th>お客様ID</th>
-      <th>ニックネーム</th>
-      <th>ステータス</th>
-    </tr>
-  </thead>
-  <% @customers.each do |customer| %>
-    <tr>
-      <!--会員(お客様)ID-->
-      <td><%= customer.id %></td>
-        <!--お客様表示のためのメソッドを定義して、それをリンクにする-->
-      <td><%= link_to customer.name, admin_customer_path(customer.id) %></td>
-      <!--ステータス-->
-        <!--No Method Error発生でdeletedをactiveに変更-->
+<!--会員のお客様一覧ページ-->
+<div class="container">
+  <div class="row">
+    <h2 class="mx-3 my-5 text-secondary border border-3 rounded-top col-2 text-center">お客様一覧</h2>
+    <table class="table table-hover align-middle text-secondary">
+      <thead>
+        <tr>
+          <th>会員ID</th>
+          <th>ニックネーム</th>
+          <th>ステータス</th>
+        </tr>
+      </thead>
+      <% @customers.each do |customer| %>
+        <tr>
+          <!--会員ID-->
+          <td><%= customer.id %></td>
+          <td><%= link_to customer.name, admin_customer_path(customer.id) %></td>
           <!--三項演算子は式、true、falseの順-->
-      <td class="<%= customer.is_active ? 'text-green' : 'text-gray' %>"><%= customer.is_active ? '有効' : '退会' %></td>
-    </tr>
-  <% end %>
-</table>
+          <td class="<%= customer.is_active ? 'text-green' : 'text-gray' %>"><%= customer.is_active ? '有効' : '退会' %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+<!--会員の書店一覧表示(お客様一覧と切り替え)ページ-->
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="col-md-8 offset-md-1">
+        <h2>書店一覧</h2>
+          <table class="table table-hover table-inverse">
+            <thead>
+              <tr>
+                <th>会員ID</th>
+                <th>書店名</th>
+                <th>ステータス</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!--複数のデータを登録する記述-->
+              <% @book_stores.each do |book_store| %>
+                <tr>
+                  <td>
+                    <!--会員ID-->
+                    <%= book_store.id %>
+                  </td>
+                  <td>
+                    <!--書店名をリンクに(書店マイページに遷移)-->
+                    <%= link_to book_store.neme, book_store %>
+                  </td>
+                  <!--三項演算子は式、true、falseの順-->
+                  <td class="<%= customer.is_active ? 'text-green' : 'text-gray' %>"><%= customer.is_active ? '有効' : '退会' %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+      </div>
+    </div>
+  </div>
+</div>
 <!--kaminari(ページネーション)記述-->
 <%#= paginate @customers %>
