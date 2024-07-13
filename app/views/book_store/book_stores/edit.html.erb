@@ -1,8 +1,8 @@
-<!--会員(お客様)情報編集画面-->
-<%= form_with model:@customer, local:true do |f| %>
+<!--会員(書店)情報編集画面-->
+<%= form_with model:@book_store, local:true do |f| %>
   <table class="table table-borderless text-secondary">
     <tr>
-      <td>ニックネーム</td>
+      <td>書店名</td>
       <td><%= f.text_field :name, class:"border border-secondary form-text text-muted form-control-sm" %></td>
     </tr>
     <tr>
@@ -10,8 +10,8 @@
       <td><%= f.text_field :age, class:"border border-secondary form-text text-muted form-control-sm" %></td>
     </tr>
     <tr>
-      <td>職業</td>
-      <td><%= f.text_field :occupation, class:"border border-secondary form-text text-muted form-control-sm" %></td>
+      <td>電話番号(ハイフンなし)</td>
+      <td><%= f.text_field :telephone_number, class:"border border-secondary form-text text-muted form-control-sm" %></td>
     </tr>
     <tr>
       <td>住所</td>

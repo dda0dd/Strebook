@@ -1,26 +1,44 @@
 <h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<!--form_forをform_withに変更-->
+<%= form_with model: @book_store, url: book_store_registration_path do |f| %>
+<%#= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 <!--book_storesからbook_storeにフォルダ名を改名したためbook_storesのsを削除-->
   <!--新規登録画面でのエラーメッセージを呼び出し記述-->
   <%= render "book_store/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <!--emailをnameに変更(書店名で新規登録してもらうため)-->
+    <%= f.label :name, "書店名" %><br />
+    <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "春書店" %>
   </div>
-
+   <!--新規登録時に住所記載してもらう-->
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :address, "住所" %>
+    <%= f.text_field :address, autofocus: true, placefield: "大阪府荒木町0-0-0000", placeholder: "大阪府荒木町0-0-0000" %>
+  </div>
+  <!--新規登録時に創立年齢(数字のみ)記載してもらう-->
+  <div class="field">
+    <%= f.label :age, "創立年齢" %>
+    <%= f.text_field :age, autofocus: true, placefield: "1857", placeholder: "1857" %>
+  </div>
+  <!--新規登録時に電話番号(ハイフンなし)記載してもらう-->
+  <div class="field">
+    <%= f.label :telephone_number, "電話番号（ハイフンなし）" %>
+    <%= f.text_field :telephone_number, autofocus: true, placefield: "00000000000", placeholder: "000000000000" %>
+  </div>
+  <!--新規登録時にパスワード(英数字8文字上)記載してもらう-->
+  <div class="field">
+    <%= f.label :password, "パスワード" %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <!--<em>(<%#= @minimum_password_length %> characters minimum)</em>-->
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, autocomplete: "new-password", placeholder: "英数字8文字以上" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.label :password_confirmation, "確認用" %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "英数字8文字以上" %>
   </div>
 
   <div class="actions">

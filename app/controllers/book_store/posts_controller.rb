@@ -1,4 +1,7 @@
-class BookStore::BostsController < ApplicationController
+class BookStore::PostsController < ApplicationController
+  def new
+    @post = Post.new
+  end
 
   # 投稿データを作成・保存
   def create

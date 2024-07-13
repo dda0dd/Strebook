@@ -1,1 +1,50 @@
-<!--書店編集ページ-->
+<!--会員(書店)情報編集画面(admin/customers/:id/edit)-->
+<%= form_with model: @book_store, url: admin_book_store_path(@book_store), method: :patch, local: true do |f| %>
+  <% render "book_store/shared/error_messages", resource: @book_store %>
+    <!--会員(お客様)ID追記-->
+    <div class="row">
+      <label class="col-lg-3">書店ID</label>
+      <div class="col-lg-3">
+        <%= @book_store.id %>
+      </div>
+    </div>
+    <div class="row">
+      <label class="col-lg-3">書店名</label>
+      <div class="col-lg-3">
+        <%= f.text_field :name,autoforcus: true, autocomplete: "name",  placeholder: "春書店" %>
+      </div>
+      </div><br>
+      <div class="row">
+        <label class="col-lg-3">創立年齢</label>
+        <div class="col-lg-3">
+          <%= f.text_field :age,autoforcus: true, autocomplete: "age",  placeholder: "1867" %>
+      </div>
+      </div><br>
+      <div class="row">
+        <label class="col-lg-3">電話番号(ハイフンなし)</label>
+        <div class="col-lg-3">
+          <%= f.text_field :telephone_number,autoforcus: true, autocomplete: "telephone_number",  placeholder: "00000000000" %>
+      </div>
+      </div><br>
+      <div class="row">
+        <label class="col-lg-3">住所</label>
+        <div class="col-lg-3">
+          <%= f.text_field :address,autoforcus: true, autocomplete: "address",  placeholder: "大阪府荒木町0-0-0000" %>
+        </div>
+      </div><br>
+      <div class="form-group row">
+        <%= f.label :is_active, '会員ステータス', class: 'col-sm-3 col-form-label' %>
+        <div class="col-sm-9">
+          <div class="custom-control custom-radio custom-control-inline">
+            <%= f.radio_button :is_active, true, checked: @book_store.is_active == true, class: 'custom-control-input', id: 'status-active' %>
+            <%= f.label :is_active, '有効', class: 'custom-control-label', for: 'status-active' %>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <%= f.radio_button :is_active, false, checked: @book_store.is_active == false, class: 'custom-control-input', id: 'status-deleted' %>
+            <%= f.label :is_active, '退会', class: 'custom-control-label', for: 'status-deleted' %>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-9"><%= f.submit "変更を保存", class: "btn btn-outline-success ml-2 btn-sm" %></div>
+<!--form_withのend-->
+<% end %>

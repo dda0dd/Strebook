@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 2024_07_10_093950) do
   end
 
   create_table "book_stores", force: :cascade do |t|
-    t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "name", default: "", null: false
     t.string "address", default: "", null: false
@@ -37,7 +36,6 @@ ActiveRecord::Schema.define(version: 2024_07_10_093950) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["email"], name: "index_book_stores_on_email", unique: true
     t.index ["reset_password_token"], name: "index_book_stores_on_reset_password_token", unique: true
   end
 
@@ -56,7 +54,6 @@ ActiveRecord::Schema.define(version: 2024_07_10_093950) do
   end
 
   create_table "customers", force: :cascade do |t|
-    t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "name", default: "", null: false
     t.integer "age", null: false
@@ -68,7 +65,6 @@ ActiveRecord::Schema.define(version: 2024_07_10_093950) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 

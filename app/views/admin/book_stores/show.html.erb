@@ -1,3 +1,34 @@
+<!--会員(書店)詳細画面(admin/book_stores/:id)-->
+<table class="table table-borderless">
+  <tr>
+    <th>書店ID</td>
+    <td><%= @book_store.id %></td>
+  </tr>
+  <tr>
+    <th>書店名</td>
+    <td><%= @book_store.name %></td>
+  </tr>
+  <tr>
+    <th>創立年齢</td>
+    <td><%= @book_store.age %></td>
+  </tr>
+  <tr>
+    <th>電話番号</td>
+    <td><%= @book_store.telephone_number %></td>
+  </tr>
+  <tr>
+    <th>住所</th>
+    <td><%= @book_store.address %></td>
+  </tr>
+  <tr>
+    <th>会員ステータス</th>
+    <th><%= @book_store.customer_status %></th>
+  </tr>
+  <tr>
+    <td></td>
+    <td><%= link_to "編集する", edit_admin_book_store_path, class:"btn btn-outline-success ml-2 btn-sm" %>
+  </tr>
+</table>
 <!--書店マイページ(詳細)表示-->
 <div class="container">
   <div class="row">

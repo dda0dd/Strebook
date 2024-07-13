@@ -1,0 +1,31 @@
+<!--会員(お客様)詳細画面(admin/customers/:id)-->
+<table class="table table-borderless">
+  <tr>
+    <th>お客様ID</td>
+    <td><%= @customer.id %></td>
+  </tr>
+  <tr>
+    <th>ニックネーム</td>
+    <td><%= @customer.name %></td>
+  </tr>
+  <tr>
+    <th>年齢</td>
+    <td><%= @customer.age %></td>
+  </tr>
+  <tr>
+    <th>職業</td>
+    <td><%= @customer.occupation %></td>
+  </tr>
+  <tr>
+    <th>住所</th>
+    <td><%= @customer.address %></td>
+  </tr>
+  <tr>
+    <th>会員ステータス</th>
+    <th><%#= @customer.customer_status %></th>
+  </tr>
+  <tr>
+    <td></td>
+    <td><%#= link_to "編集する", edit_admin_customer_path, class:"btn btn-outline-success ml-2 btn-sm" %>
+  </tr>
+</table>
