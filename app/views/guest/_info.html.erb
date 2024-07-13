@@ -1,5 +1,5 @@
 <!--ゲストログイン時にプロフィール編集ボタン表示しないよう設定-->
-<% unless user.guest_user? %>
+<% unless customer.guest_customer? %>
 <div class="row">
   <%= link_to "",edit_customer_path(customer),class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_customer_#{customer.id}" %>
 </div>

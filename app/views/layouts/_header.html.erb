@@ -21,7 +21,7 @@
 				  <%= link_to "投稿一覧", posts_path %>
 
 				  <!--リクエストリンク-->
-				  <%= link_to "リクエスト", request_comments_path %>
+				  <%= link_to "リクエスト", book_stores_request_comments_path %>
 
 				  <!--ログアウトリンク-->
 				  <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
@@ -29,13 +29,13 @@
 				<% elsif book_store_signed_in? %>
 
 				  <!--マイページリンク-->
-				  <%= link_to "マイページ", book_store_path(current_customer), class:"text-secondary" %>
+				  <%= link_to "マイページ", book_store_path(current_book_store), class:"text-secondary" %>
 
 				  <!--リクエスト一覧リンク-->
-				  <%= link_to "リクエスト一覧", request_comments_path %>
+				  <%= link_to "リクエスト一覧", book_stores_request_comments_path %>
 
 				  <!--投稿リンク-->
-				  <%= link_to "投稿", posts_path %>
+				  <%= link_to "投稿", new_post_path %>
 
 				  <!--ログアウトリンク-->
 				  <%= link_to "ログアウト", destroy_book_store_session_path, method: :delete %>

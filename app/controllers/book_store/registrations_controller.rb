@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 class BookStore::RegistrationsController < Devise::RegistrationsController
-  before_action :configure_sign_up_params, only: [:create]
+  # サインアップ(新規登録)した書店
+  # def after_sign_up_path_for(resource)
+  #   book_store_path(resource)
+  # end
+   before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up

@@ -1,4 +1,4 @@
-class BookStore::CustomersController < ApplicationController
+class BookStore::BookStoresController < ApplicationController
   # 権限の設定：ログインしていない書店が作業できないように設定
   before_action :authenticate_book_store!
 

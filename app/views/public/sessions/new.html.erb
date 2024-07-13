@@ -1,35 +1,42 @@
-<h2>Log in</h2>
-
-<!--form_forをform_withに変更-->
-<%= form_with model: @customer, url: customer_session_path do |f| %>
-<!--<%#= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>-->
-  <div class="field">
-    <!--emailをnameに変更(ニックネームでログインしてもらうため)-->
-    <%= f.label :name, "ニックネーム" %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "はるちゃん" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password, "パスワード" %><br />
-    <%= f.password_field :password, autocomplete: "current-password", placeholder: "英数字8文字以上" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h4 class="mx-3 my-3 text-secondary border border-3 rounded-top col-2 text-center" alt="...">ログイン</h4>
+        <!--form_forをform_withに変更-->
+        <%= form_with model: @customer, url: customer_session_path do |f| %>
+          <!--<%#= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>-->
+          <table class="field text-secondary mx-3 my-3">
+            <tr>
+              <td>
+                <!--emailをnameに変更(ニックネームでログインしてもらうため)-->
+                <%= f.label :name, "ニックネーム" %><br />
+                <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "はるちゃん" %>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <%= f.label :password, "パスワード" %><br />
+                <%= f.password_field :password, autocomplete: "current-password", placeholder: "英数字8文字以上" %>
+              </td>
+            </tr>
+            <% if devise_mapping.rememberable? %>
+              <div class="field">
+                <%= f.check_box :remember_me %>
+                <%= f.label :remember_me %>
+              </div>
+            <% end %>
+          </table>
+          <div class="actions">
+            <%= f.submit "Log in", class:"btn btn-outline-primary ml-3 btn-sm" %>
+          </div>
+          <!--ゲストログインボタン追記-->
+          <div class="actions">
+            <%= link_to "ゲストログイン", customers_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in" %>
+          </div>
+        <% end %>
+        <!--publicsからpublicにフォルダ名を改名したためpublicsのsを削除-->
+          <!--お客様のログイン画面呼び出し記述-->
+        <%= render "public/shared/links" %>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-  <!--ゲストログインボタン追記-->
-  <div class="actions">
-    <%= link_to "ゲストログイン", users_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in" %>
-  </div>
-<% end %>
-
-<!--publicsからpublicにフォルダ名を改名したためpublicsのsを削除-->
-  <!--お客様のログイン画面呼び出し記述-->
-<%= render "public/shared/links" %>
+</div>
