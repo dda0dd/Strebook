@@ -1,0 +1,47 @@
+<!--書店のマイページ(詳細)表示ページ-->
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <!--書店のマイページを呼び出し-->
+      <%= render 'book_store/customers/show', book_store: @book_store_new, customer:@customer %>
+    </div>
+
+<!--削除を実行するためのリンクを追記-->
+<!--<div class="col-md-8 offset-md-1">-->
+<!--  <h2>Book detail</h2>-->
+    <table class="table">
+      <tbody>
+        <tr>
+<!--投稿ユーザー画像-->
+        <!--<td>-->
+        <!--  <%#= link_to user_path(@book.user) do %>-->
+        <!--  <%#= image_tag @book.user.get_profile_image(100,100) %><br>-->
+        <!--  <%# end %>-->
+        <!--  <%#= link_to @book.user.name, user_path(@user) %>-->
+        <!--</td>-->
+        <!--本人時、他人時両方に表示したいのでif~endの外に記述-->
+<!--本のタイトル-->
+<!--        <td>-->
+<!--          <%#= link_to @book.title, book_path(@book) %>-->
+          <!--<p><%#= @book.title %></p>-->
+<!--        </td>-->
+<!--本の感想-->
+<!--        <td>-->
+<!--          <%#= @book.body %>-->
+<!--        </td>-->
+<!--本人なら表示、他人なら不表示にする記述(if~end)-->
+<!--    <% if @book_store == current_book_store %>-->
+          <!--編集ボタン-->
+          <td>
+            <%= link_to "編集", edit_book_store_path(@book_store), class: "btn btn-sm btn-success" %>
+          </td>
+          <!--削除ボタン-->
+          <td>
+            <%= link_to "削除", book_store_path(@book_store), method: :delete, class: "btn btn-sm btn-danger destroy" %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<!--書店の投稿一覧表示-->
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="col-md-8 offset-md-1">
+        <h2>書店投稿一覧</h2>
+          <table class="table table-hover table-inverse">
+            <thead>
+              <tr>
+                <th>書店名</th>
+                <th>書店情報</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!--複数のデータを登録する記述-->
+              <% @book_stores.each do |book_store| %>
+                <tr>
+                  <td>
+                    <!--書店名をリンクに(書店マイページに遷移)-->
+                    <%= link_to book_store.neme, book_store do %>
+                    <%#=book.title %>
+                    <% end %>
+                  </td>
+                  <td>
+                    <!--投稿の削除ボタン設置-->
+                    <%= link_to "削除", book_store_path(@book_store), method: :delete, class: "btn btn-sm btn-danger destroy" %>
+                  </td>
+                  <td>
+                      <%= book.body%>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+      </div>
+    </div>
+  </div>
+</div>
