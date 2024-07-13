@@ -1,1 +1,26 @@
-<!--書店詳細ページ-->
+<!--書店マイページ(詳細)表示-->
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <!--書店のマイページを呼び出し-->
+      <%= render 'book_store/customers/show', book_store: @book_store_new, customer:@customer %>
+    </div>
+      <table class="table">
+        <tbody>
+          <tr>
+          <!--本人なら表示、他人なら不表示にする記述(if~end)-->
+          <% if @book_store == current_book_store %>
+            <!--編集ボタン-->
+            <td>
+              <%= link_to "編集", edit_book_store_path(@book_store), class: "btn btn-sm btn-success" %>
+            </td>
+            <!--削除ボタン-->
+            <td>
+              <%= link_to "削除", book_store_path(@book_store), method: :delete, class: "btn btn-sm btn-danger destroy" %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+  </div>
+</div>

@@ -1,18 +1,21 @@
 class Public::BookStoresController < ApplicationController
-  
+
   # 投稿一覧で表示する全ての画像をコントローラで取得
   def index
     # 1ページ分の決められた数のデータだけを、新しい順に取得するに変更(kaminari)
-  # 今回ページネーションは必要ない
-    # @books = Book.page(params[:page])
-# modelを全て選択
-    @books = Book.all
-# @userを定義
-    @user = current_user
-# @bookを定義
-    @book = Book.new
+    @book_stores = Book_store.page(params[:page])
+    # modelを全て選択
+    @book_stores = Book_store.all
+    # @book_storeを定義
+    @book_store = current_book_store
+    # @book_storeを定義
+    # @book_store = Book_store.new
   end
 
   def show
+    # 書店情報を表示
+    @book_store = Book_store.find(params[:id])
+    # 書店の投稿を表示
+    @book_store_posts = @book_store.posts
   end
 end
