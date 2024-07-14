@@ -1,24 +1,43 @@
-# README
+# Stre_book
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+### サイトテーマ
+お客様の要望を書店に届けるレビューサイト
 
-Things you may want to cover:
+​
+### テーマを選んだ理由
+- 全国で書店が減少している現状を危惧したため、書店の魅力を向上できるアプリを考案しました。
 
-* Ruby version
+- 普段から書店を利用しているお客様にリクエストをしていただいくことで、お客様側からでしか知り得ない情報を書店が知ることができます。
 
-* System dependencies
+- 書店を利用されない会員からのリクエストでは利用されない理由を知ることができるので、短期的に集客の見込みを立てることができたり、アイデアの糸口になると思います。
 
-* Configuration
+### ターゲットユーザ
+- 普段から書店を利用されるお客様
 
-* Database creation
+- 書店を利用したい新規のお客様
 
-* Database initialization
+- 存続を望んでいる書店
+​
+### 主な利用シーン
+- 書店に直接的には伝えられないことがある時
 
-* How to run the test suite
+- 書店に対して要望やアイデアを届けたい時
 
-* Services (job queues, cache servers, search engines, etc.)
+- 集客を得ることができるアイデアが欲しい時
 
-* Deployment instructions
+​
+## 設計書
+- 後ほど作成予定です。
 
-* ...
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
+​
+## 使用素材
+- 書店名や書店のホームページとSNSへのリンクに関しては著作権を考慮し、架空のデータを扱う予定です。
+
+- なお今後、実在するデータを利用する際には、事前に著作権保持者と契約を結んだ上で利用します。

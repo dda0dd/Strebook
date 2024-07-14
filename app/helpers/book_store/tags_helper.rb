@@ -1,0 +1,2 @@
+module BookStore::TagsHelper
+end

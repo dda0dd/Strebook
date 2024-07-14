@@ -1,0 +1,35 @@
+<h2>Log in</h2>
+
+<!--form_forをform_withに変更-->
+<%= form_with model: @book_store, url: book_store_session_path do |f| %>
+<%#= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="field">
+    <!--emailをnameに変更(書店名でログインしてもらうため)-->
+    <%= f.label :name, "書店名" %><br />
+    <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "春書店" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password, "パスワード" %><br />
+    <%= f.password_field :password, autocomplete: "current-password", placeholder: "英数字8文字以上" %>
+  </div>
+
+  <% if devise_mapping.rememberable? %>
+    <div class="field">
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit "Log in" %>
+  </div>
+  <!--ゲストログインボタン追記-->
+  <div class="actions">
+    <%= f.submit "ゲストログイン" %>
+  </div>
+<% end %>
+
+<!--book_storesからbook_storeにフォルダ名を改名したためbook_storesのsを削除-->
+  <!--書店のログイン画面呼び出し記述-->
+<%= render "book_store/shared/links" %>

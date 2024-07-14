@@ -1,0 +1,26 @@
+<!--会員(書店)情報編集画面-->
+<%= form_with model:@book_store, local:true do |f| %>
+  <table class="table table-borderless text-secondary">
+    <tr>
+      <td>書店名</td>
+      <td><%= f.text_field :name, class:"border border-secondary form-text text-muted form-control-sm" %></td>
+    </tr>
+    <tr>
+      <td>年齢</td>
+      <td><%= f.text_field :age, class:"border border-secondary form-text text-muted form-control-sm" %></td>
+    </tr>
+    <tr>
+      <td>電話番号(ハイフンなし)</td>
+      <td><%= f.text_field :telephone_number, class:"border border-secondary form-text text-muted form-control-sm" %></td>
+    </tr>
+    <tr>
+      <td>住所</td>
+      <td><%= f.text_field :address, class:"border border-secondary form-text text-muted form-control-sm" %></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><%= f.submit "編集内容を保存", class:"btn btn-outline-success" %></td>
+    </tr>
+  </table>
+<% end %>
