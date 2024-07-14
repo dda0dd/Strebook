@@ -6,7 +6,7 @@ class CreateRequestComments < ActiveRecord::Migration[6.1]
 
       # リクエストコメント機能カラム記述
         # 会員(お客様)ID
-        t.integer :customer_id, null: false, default: ""
+        t.integer :customer_id, null: false
         # リクエスト内容
         t.string :content, null: false, default: ""
 
