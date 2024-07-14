@@ -46,7 +46,7 @@
                   </td>
                   <td>
                     <!--書店名をリンクに(書店マイページに遷移)-->
-                    <%= link_to book_store.neme, book_store %>
+                    <%= link_to book_store.name, book_store %>
                   </td>
                   <!--三項演算子は式、true、falseの順-->
                   <td class="<%= customer.is_active ? 'text-green' : 'text-gray' %>"><%= customer.is_active ? '有効' : '退会' %></td>
