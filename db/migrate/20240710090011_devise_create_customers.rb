@@ -11,7 +11,7 @@ class DeviseCreateCustomers < ActiveRecord::Migration[6.1]
       t.string :name, null: false, default: ""
         # パスワード(上記に記載ありなので記述しない)
         # 年齢
-      t.integer :age, null: false, default: ""
+      t.integer :age, null: false
         # 職業
       t.string :occupation, null: false, default: ""
         # 住所(都道府県のみ)
