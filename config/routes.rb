@@ -100,7 +100,7 @@ Rails.application.routes.draw do
 	  #書店詳細情報(管理者)
 	  resources :book_stores, only: [:index, :show, :destroy]
 	  resources :posts, only: [:index]
-	  resources :request_comments, only: [:index]
+	 # resources :request_comments, only: [:index]
 	end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.htm
 end
