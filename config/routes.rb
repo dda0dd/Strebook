@@ -64,9 +64,9 @@ Rails.application.routes.draw do
     # 書店一覧表示, 書店マイページ表示
     resource :book_stores, only: [:index, :show] do
       # リクエストコメント保存, 削除
-      resources :request_comments, only: [:create, :destroy]
+      resources :request_comments, only: [:new, :index, :create, :destroy]
       # 感想コメント保存, 削除
-      resources :thoughtse_comments, only: [:create, :destroy]
+      resources :thoughtse_comments, only: [:index, :create, :destroy]
       # 都道府県で書店を検索する機能(searchはresourcesで作成されない)
       get 'search'
       # resources :searches, only: [:search] do
@@ -100,7 +100,7 @@ Rails.application.routes.draw do
 	  #書店詳細情報(管理者)
 	  resources :book_stores, only: [:index, :show, :destroy]
 	  resources :posts, only: [:index]
-	 # resources :request_comments, only: [:index]
+	  resources :request_comments, only: [:index]
 	end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.htm
 end
