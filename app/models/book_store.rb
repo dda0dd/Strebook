@@ -3,4 +3,6 @@ class BookStore < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable
+
+  has_many :posts
 end

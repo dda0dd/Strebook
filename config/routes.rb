@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     sessions: 'book_store/sessions'
   }
   #ログイン以外の機能
-  scope module: :book_store do
+  namespace :book_store do
     # root :to =>"homes#top"
     # get '/about' => 'homes#about'
     # 退会機能のルーティング
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
       # post "customers/guest_sign_in", to: "customers/sessions#guest_sign_in"
     # end
     # 投稿機能(index, showがいるかも？)
-    resources :posts, only: [:new, :edit, :update, :create, :destroy] do
+    resources :posts do
       # キーワードでリクエストを検索する機能(searchはresourcesで作成されない)
       get 'search'
       # resources :comments, only: [:search] do
@@ -36,6 +36,8 @@ Rails.application.routes.draw do
         #   get 'thanks'
         # end
     end
+    # リクエストコメント一覧
+	  resources :request_comments, only: [:index]
   end
 
   # お客様(新規登録・ログイン)
@@ -49,38 +51,39 @@ Rails.application.routes.draw do
     get "customers/guest_sign_in", to: "guest/sessions#guest_sign_in"
   end
   #ログイン以外の機能
-  scope module: :public do
     root :to =>"homes#top"
     get '/about' => 'homes#about'
-
-    # 退会機能のルーティング
-    resources :customers, only: [:show, :edit, :update] do
-      collection do
-        get 'unsubscribe'
-        patch 'withdraw'
+    namespace :public do
+      # 退会機能のルーティング
+      resources :customers, only: [:show, :edit, :update] do
+        collection do
+          get 'unsubscribe'
+          patch 'withdraw'
+        end
       end
-    end
     # ゲストログイン
-    # 書店一覧表示, 書店マイページ表示
-    resource :book_stores, only: [:index, :show] do
+      # 書店一覧表示, 書店マイページ表示
+      resources :book_stores do
+        # 感想コメント保存, 削除
+        resources :thoughtse_comments, only: [:index, :create, :destroy]
+        # 都道府県で書店を検索する機能(searchはresourcesで作成されない)
+        get 'search'
+        # resources :searches, only: [:search] do
+          # collection do
+          # delete 'destroy_all'
+          # end
+        # end
+        # 書店の投稿にレビュー評価(:destroyいるかも？)
+        resources :ratings, only: [:create]
+          # collection do
+          #   get 'thanks'
+          # end
+      end
+      # 投稿一覧
+      resources :posts, only: [:index]
       # リクエストコメント保存, 削除
       resources :request_comments, only: [:new, :index, :create, :destroy]
-      # 感想コメント保存, 削除
-      resources :thoughtse_comments, only: [:index, :create, :destroy]
-      # 都道府県で書店を検索する機能(searchはresourcesで作成されない)
-      get 'search'
-      # resources :searches, only: [:search] do
-        # collection do
-        # delete 'destroy_all'
-        # end
-      # end
-      # 書店の投稿にレビュー評価(:destroyいるかも？)
-      resources :ratings, only: [:create]
-        # collection do
-        #   get 'thanks'
-        # end
     end
-  end
 
 
    # skipオプションで不要ルーティングを削除(管理者登録：パスワード変更)
@@ -89,8 +92,8 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
   #ログイン以外の機能
-  namespace :admin do
 	  get '/' => 'homes#top'
+  namespace :admin do
 	 # 全てのレビュー閲覧, 削除ボタン設置
 	  resources :reviews, only: [:index, :destroy]
 	  #お客様詳細情報(管理者)
@@ -99,7 +102,9 @@ Rails.application.routes.draw do
 	  resources :comments, only: [:index, :show, :destroy]
 	  #書店詳細情報(管理者)
 	  resources :book_stores, only: [:index, :show, :destroy]
+	 # 投稿一覧
 	  resources :posts, only: [:index]
+	 # リクエストコメント一覧
 	  resources :request_comments, only: [:index]
 	end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.htm

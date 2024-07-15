@@ -12,21 +12,21 @@
 					<!--	<b>ようこそ、<%#= current_customer.last_name %>さん！</b>-->
 					<!--</div>-->
 					  <!--マイページリンク-->
-					  <%= link_to "マイページ", customer_path(current_customer), class:"text-secondary" %>
+					  <%= link_to "マイページ", public_customer_path(current_customer), class:"text-secondary" %>
 					  <!--投稿一覧リンク-->
-					  <%= link_to "投稿一覧", posts_path %>
+					  <%= link_to "投稿一覧", public_posts_path %>
 					  <!--リクエストリンク-->
-					  <%= link_to "リクエスト", new_book_stores_request_comment_path %>
+					  <%= link_to "リクエスト", new_public_request_comment_path %>
 					  <!--ログアウトリンク-->
 					  <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
 					<!--書店ログイン時のヘッダー-->
 					<% elsif book_store_signed_in? %>
 					  <!--マイページリンク-->
-					  <%= link_to "マイページ", book_store_path(current_book_store), class:"text-secondary" %>
+					  <%#= link_to "マイページ", book_store_path(current_book_store), class:"text-secondary" %>
 					  <!--リクエスト一覧リンク-->
-					  <%= link_to "リクエスト一覧", book_stores_request_comments_path %>
+					  <%= link_to "リクエスト一覧", book_store_request_comments_path %>
 					  <!--投稿リンク-->
-					  <%= link_to "投稿", new_post_path %>
+					  <%= link_to "投稿", new_book_store_post_path %>
 					  <!--ログアウトリンク-->
 					  <%= link_to "ログアウト", destroy_book_store_session_path, method: :delete %>
 					<!--サイト管理者ログイン時のヘッダー-->

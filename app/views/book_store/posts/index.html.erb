@@ -15,7 +15,7 @@
             <!--</thead>-->
             <tbody>
               <!--複数のデータを登録する記述-->
-              <% @book_stores.each do |book_store| %>
+              <% @posts.each do |post| %>
                 <tr>
                   <!--<td>-->
                   <!--  <%#= link_to user_path(book.user) do %>-->
@@ -23,12 +23,12 @@
                   <!--  <%# end %>-->
                   <!--</td>-->
                   <td>
-                    <%= link_to new_book_store_path(book_store) do %>
-                    <%#=book.title %>
+                    <%= link_to public_book_store_path(post.book_store) do %>
+                    <%= post.title %>
                     <% end %>
                   </td>
                   <td>
-                      <%= book_store.name%>
+                    <%= post.content %>
                   </td>
                 </tr>
               <% end %>

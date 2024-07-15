@@ -19,7 +19,15 @@
       <td class="bg-light">住所</td>
       <td><%= @book_store.address %></td>
     </tr>
+    <tr>
+      <td><%= link_to "編集", edit_book_store_path, class:"btn btn-outline-primary btn-sm" %></td>
+      <!--退会するボタン押した時確認メッセージ表示させる(退会後退会画面に遷移)-->
+      <td><%= link_to "退会する", unsubscribe_book_stores_path, data: { confirm: "退会してもよろしいですか？" }, class:"btn btn-outline-danger ml-1" %></td>
+    </tr>
   </table>
-    <%= link_to "編集", edit_book_store_path, class:"btn btn-outline-primary btn-sm" %>
-    <!--退会するボタン押した時確認メッセージ表示させる(退会後退会画面に遷移)-->
-    <%= link_to "退会する", unsubscribe_book_stores_path, data: { confirm: "退会してもよろしいですか？" }, class:"btn btn-outline-danger ml-1" %>
+  <!--投稿した投稿内容を表示させる-->
+    <% @book_store.posts.each do |post|%>
+      <%= post.title %>
+      <%= post.content %>
+    <%end%>
+  <%#= render "posts/new", post: @post_new %>

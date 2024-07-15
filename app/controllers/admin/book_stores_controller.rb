@@ -2,7 +2,7 @@ class Admin::BookStoresController < ApplicationController
 
   def index
     # book_storeモデルの全てのデータ取得
-    @book_stores = Book_store.all
+    @book_stores = BookStore.all
   end
 
   # 書店マイページ表示されるように設定

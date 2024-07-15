@@ -39,16 +39,16 @@
                 <tr>
                   <td>
                     <!--書店名をリンクに(書店マイページに遷移)-->
-                    <%= link_to book_store.neme, book_store do %>
+                    <%= link_to admin_book_store_path(book_store) do %>
                     <%#=book.title %>
                     <% end %>
                   </td>
                   <td>
                     <!--投稿の削除ボタン設置-->
-                    <%= link_to "削除", book_store_path(@book_store), method: :delete, class: "btn btn-sm btn-danger destroy" %>
+                    <%= link_to "削除", admin_book_store_path(book_store), method: :delete, class: "btn btn-sm btn-danger destroy" %>
                   </td>
                   <td>
-                      <%= book.body%>
+                      <%= book_store.name %>
                   </td>
                 </tr>
               <% end %>
