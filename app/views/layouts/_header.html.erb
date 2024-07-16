@@ -49,6 +49,14 @@
 					  <%= link_to "投稿一覧", guest_customer_posts_path %>
 					  <!--ログアウトリンク-->
 					  <%= link_to "ログアウト", destroy_guest_customer_session_path, method: :delete %>
+					<!--ゲストログイン時のヘッダー-->
+					<% elsif book_store_signed_in? && current_book_store.guest? %>
+					  <!--マイページリンク-->
+					  <%= link_to "マイページ", guest_book_store_path(current_book_store), class:"text-secondary" %>
+					  <!--リクエスト一覧リンク-->
+					  <%= link_to "リクエスト一覧", guest_book_store_request_comments_path %>
+					  <!--ログアウトリンク-->
+					  <%= link_to "ログアウト", destroy_guest_book_store_session_path, method: :delete %>
 					<!--誰もログインしていない時のヘッダー-->
 					<% else %>
 						<!--Aboutリンク-->

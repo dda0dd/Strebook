@@ -5,6 +5,11 @@ Rails.application.routes.draw do
     registrations: "book_store/registrations",
     sessions: 'book_store/sessions'
   }
+  devise_scope :book_store do
+    # ゲストログイン
+      # guest/sessions_controller.rbのアクションに処理を繋げる
+    get "book_stores/guest_sign_in", to: "guest/sessions#guest_sign_in"
+  end
   #ログイン以外の機能
   namespace :book_store do
     # root :to =>"homes#top"
@@ -47,7 +52,8 @@ Rails.application.routes.draw do
   }
 
   devise_scope :customer do
-  # guest/sessions_controller.rbのアクションに処理を繋げる
+    # ゲストログイン
+      # guest/sessions_controller.rbのアクションに処理を繋げる
     get "customers/guest_sign_in", to: "guest/sessions#guest_sign_in"
   end
   #ログイン以外の機能
@@ -61,7 +67,6 @@ Rails.application.routes.draw do
           patch 'withdraw'
         end
       end
-    # ゲストログイン
       # 書店一覧表示, 書店マイページ表示
       resources :book_stores do
         # 感想コメント保存, 削除

@@ -4,5 +4,16 @@ class BookStore < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable
 
-  has_many :posts
+    # guest/sessions_controller.rbの.guestメソッドを定義
+    def self.guest
+      # データの検索・作成を自動で判断して処理する(!=処理失敗時にエラー発生させる)
+      find_or_create_by!(name: "guestbook_store", age: 1879) do |book_store|
+        # ランダムな文字列を生成するRubyのメソッド(パスワードをランダムな文字列に設定)
+        book_store.password = SecureRandom.urlsafe_base64
+        # nameをguestcustomerに固定
+        book_store.name = "guestbook_store"
+      end
+    end
+    # アソシエーション(投稿)
+    has_many :posts
 end
