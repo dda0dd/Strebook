@@ -26,6 +26,15 @@ class Public::SessionsController < Devise::SessionsController
   def after_sign_out_path_for(resource)
 	  root_path
   end
+  
+  def guest_sign_in
+    # Customer.guestのguestメソッドをcustomer.rbで定義
+    customer = Customer.guest
+    # ゲスト会員をログイン状態にする
+    sign_in customer
+    # ログイン後ゲスト会員の詳細(マイページ)に遷移
+    redirect_to public_customer_path(customer.id), notice: "guestcustomerでログインしました。"
+  end
 
   protected
 

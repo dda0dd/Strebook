@@ -22,7 +22,7 @@
 					<!--書店ログイン時のヘッダー-->
 					<% elsif book_store_signed_in? %>
 					  <!--マイページリンク-->
-					  <%= link_to "マイページ", book_store_path(current_book_store), class:"text-secondary" %>
+					  <%= link_to "マイページ", book_store_book_store_path(current_book_store), class:"text-secondary" %>
 					  <!--リクエスト一覧リンク-->
 					  <%= link_to "リクエスト一覧", book_store_request_comments_path %>
 					  <!--投稿リンク-->

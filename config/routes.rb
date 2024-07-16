@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   devise_scope :book_store do
     # ゲストログイン
       # guest/sessions_controller.rbのアクションに処理を繋げる
-    get "book_stores/guest_sign_in", to: "guest/sessions#guest_sign_in"
+    get "book_stores/guest_sign_in", to: "book_store/sessions#guest_sign_in"
   end
   #ログイン以外の機能
   namespace :book_store do
@@ -54,7 +54,7 @@ Rails.application.routes.draw do
   devise_scope :customer do
     # ゲストログイン
       # guest/sessions_controller.rbのアクションに処理を繋げる
-    get "customers/guest_sign_in", to: "guest/sessions#guest_sign_in"
+    get "customers/guest_sign_in", to: "public/sessions#guest_sign_in"
   end
   #ログイン以外の機能
     root :to =>"homes#top"

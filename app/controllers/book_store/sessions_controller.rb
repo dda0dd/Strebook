@@ -27,6 +27,14 @@ class BookStore::SessionsController < Devise::SessionsController
 	  root_path
   end
 
+  def guest_sign_in
+     # BookStore.guestのguestメソッドをbook_store.rbで定義
+    book_store = BookStore.guest
+    sign_in book_store
+    # 遷移先にゲスト書店詳細(マイページ)指定
+    redirect_to book_store_book_store_path(book_store.id), notice: "guestbook_storeでログインしました。"
+  end
+
   protected
 
   def book_store_status

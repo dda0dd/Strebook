@@ -2,11 +2,11 @@ class Admin::SessionsController < Devise::SessionsController
 # frozen_string_literal: true
   # before_action :configure_sign_in_params, only: [:create]
   def after_sign_in_path_for(resource)
-	  new_admin_session_path
+	  admin_customers_path
   end
 
   def after_sign_out_path_for(resource)
-	  destroy_admin_session_path
+	  new_admin_session_path
   end
 
   # GET /resource/sign_in

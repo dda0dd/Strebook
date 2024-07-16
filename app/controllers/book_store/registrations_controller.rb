@@ -44,7 +44,7 @@ class BookStore::RegistrationsController < Devise::RegistrationsController
 
    # 新規登録後はマイページに移動
   def after_sign_up_path_for(resource)
-	  book_store_path(current_book_store.id)
+	  book_store_book_store_path(current_book_store.id)
   end
 
   protected
