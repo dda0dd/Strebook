@@ -31,6 +31,17 @@
                     <%= post.content %>
                   </td>
                 </tr>
+                <tr>
+                  <td id="comment_counter">
+                    <!--コメント数（book_comments/_counter）部分テンプレート呼び出し記述-->
+                    <%= render "book_comments/counter", book: book %>
+                  </td>
+                </tr>
+                <!--本の投稿ユーザと現在ログインのユーザが一致していたら表示する記述（if~end）-->
+                <% if @post.user == current_user %>
+                  <td><%= link_to 'Edit', edit_post_path(@post), class: "btn btn-sm btn-success" %></td>
+                  <td><%= link_to 'Destroy', @post, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+                <% end %>
               <% end %>
             </tbody>
           </table>

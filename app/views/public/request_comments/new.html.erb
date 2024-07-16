@@ -1,0 +1,7 @@
+<!--リクエストコメント作成ページ-->
+  <!--form_withヘルパーでlocal: falseを指定で非同期通信行うことができる-->
+    <!--id: "comment_textarea"追加でcomment_textareaというIDがテキストエリアに割り当てられる-->
+<%= form_with model: new_public_request_comment_path, local: false do |f| %>
+  <%= f.text_area :comment, rows: '5', style: "width:100%", id: "comment_textarea" %>
+  <%= f.submit "送信" %>
+<% end %>
