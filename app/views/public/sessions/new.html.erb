@@ -20,10 +20,12 @@
               </td>
             </tr>
             <% if devise_mapping.rememberable? %>
-              <div class="field">
-                <%= f.check_box :remember_me %>
-                <%= f.label :remember_me %>
-              </div>
+              <tr>
+                <td>
+                  <%= f.check_box :remember_me %>
+                  <%= f.label :remember_me %>
+                </td>
+              </tr>
             <% end %>
           </table>
           <div class="actions">
@@ -34,7 +36,7 @@
           </div>
           <!--ゲストログインボタン追記-->
           <div class="actions">
-            <%= link_to "ゲストログイン", customers_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in" %>
+            <%= link_to "ゲストログイン", customers_guest_sign_in_path, class: "btn btn-outline-secondary ml-3 btn-sm" %>
           </div>
         <% end %>
     </div>

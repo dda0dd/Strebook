@@ -1,0 +1,11 @@
+<!--投稿内容のリンク先-->
+  <!--感想コメント作成-->
+  <%= form_with url: public_post_path(current_customer) do |f| %>
+    <%#= f.text_area :customer_name, rows: '5', style: "width:30%", id: "customer_name.id" %>
+    <%= f.text_area :content, rows: '8', style: "width:80%", id: "thoughtse_comment_textarea" %>
+    <%= f.submit "コメント" %>
+  <% end %>
+  <!--特定投稿に紐づく感想コメント一覧-->
+  <% @thoughtse_comments.each do |thoughtse_comment| %>
+    <%= thoughtse_comment.content %>
+  <% end %>

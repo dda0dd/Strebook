@@ -14,6 +14,7 @@
         <tr>
           <!--会員ID-->
           <td><%= customer.id %></td>
+          
           <td><%= link_to customer.name, admin_customer_path(customer.id) %></td>
           <!--三項演算子は式、true、falseの順-->
           <td class="<%= customer.is_active ? 'text-green' : 'text-gray' %>"><%= customer.is_active ? '有効' : '退会' %></td>
@@ -46,7 +47,7 @@
                   </td>
                   <td>
                     <!--書店名をリンクに(書店マイページに遷移)-->
-                    <%= link_to admin_book_store_path(book_store) %>
+                    <%= link_to book_store.name, admin_book_store_path(book_store) %>
                   </td>
                   <!--三項演算子は式、true、falseの順-->
                   <td class="<%= book_store.is_active ? 'text-green' : 'text-gray' %>"><%= book_store.is_active ? '有効' : '退会' %></td>

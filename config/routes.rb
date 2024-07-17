@@ -85,7 +85,7 @@ Rails.application.routes.draw do
           # end
       end
       # 投稿一覧
-      resources :posts, only: [:index]
+      resources :posts, only: [:index, :show]
       # リクエストコメント保存, 削除
       resources :request_comments, only: [:new, :index, :create, :destroy]
     end
@@ -108,9 +108,9 @@ Rails.application.routes.draw do
 	  #書店詳細情報(管理者)
 	  resources :book_stores, only: [:index, :show, :destroy]
 	 # 投稿一覧
-	  resources :posts, only: [:index]
+	  resources :posts, only: [:index, :destroy]
 	 # リクエストコメント一覧
-	  resources :request_comments, only: [:index]
+	  resources :request_comments, only: [:index, :destroy]
 	end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.htm
 end

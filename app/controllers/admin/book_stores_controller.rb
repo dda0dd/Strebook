@@ -7,14 +7,14 @@ class Admin::BookStoresController < ApplicationController
 
   # 書店マイページ表示されるように設定
   def show
-     @book_store = Book_store.find(params[:id])
+    @book_store = BookStore.find(params[:id])
     # @book_storeを定義
     @book_store = current_book_store
-    @book_store_new = Book_store.new
+    @book_store_new = BookStore.new
   end
   # バリデーションの設定
   def edit
-     @book_store = Book_store.find(params[:id])
+     @book_store = BookStore.find(params[:id])
     # アクセス制限の記述（viewにも記述）
     unless @book_store == current_book_store.id
       redirect_to book_stores_path

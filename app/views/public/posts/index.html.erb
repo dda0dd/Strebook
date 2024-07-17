@@ -28,7 +28,10 @@
                     <% end %>
                   </td>
                   <td>
+                    <!--感想コメント作成・特定の投稿に紐づく感想コメント一覧表示ページに遷移(public/posts/show)-->
+                    <%= link_to public_post_path(current_customer) do %>
                     <%= post.content %>
+                    <% end %>
                   </td>
                 </tr>
               <% end %>

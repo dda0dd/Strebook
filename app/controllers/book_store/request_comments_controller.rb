@@ -1,6 +1,6 @@
 class BookStore::RequestCommentsController < ApplicationController
 
   def index
-    @request_comment = RequestComment.all
+    @request_comments = RequestComment.all
   end
 end

@@ -4,6 +4,7 @@ class Customer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable
 
+    has_many :request_comments
     # guest/sessions_controller.rbの.guestメソッドを定義
     def self.guest
       # データの検索・作成を自動で判断して処理する(!=処理失敗時にエラー発生させる)
