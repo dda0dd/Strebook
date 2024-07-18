@@ -1,5 +1,7 @@
+<!--エラーメッセージ記載(form_with記述があるページにこのエラーメッセージ呼び出し記述追記)-->
 <% if model.errors.any? %>
   <ul class="alert alert-warning">
+    <!--full_messages=エラーメッセージを日本語化してくれる-->
     <% model.errors.full_messages.each do |message| %>
       <li><%= message %></li>
     <% end %>

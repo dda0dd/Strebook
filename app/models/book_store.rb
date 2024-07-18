@@ -3,9 +3,8 @@ class BookStore < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable
-         
+  # バリデーション記載(書店名が空の場合はバリデーション実行される)全てのモデルにバリデーション      
   validates :name, presence: true
-  
     # guest/sessions_controller.rbの.guestメソッドを定義
     def self.guest
       # データの検索・作成を自動で判断して処理する(!=処理失敗時にエラー発生させる)

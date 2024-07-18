@@ -1,4 +1,6 @@
 class Public::ThoughtseCommentsController < ApplicationController
+  # バリデーション記載(空の時に実行される)
+  validates :content, presence: true
 
   def create
     # customer = Customer.find(params[:customer_id])
@@ -19,12 +21,12 @@ class Public::ThoughtseCommentsController < ApplicationController
     @thoughtse_comment.destroy
     # コメント削除後は行う前（books/show）に遷移記述
         # redirect_to book_path(params[:book_id])
-    
+
     # 非同期通信記述
       # redirect_backを削除（redirect_toがない時Railsは自動で対応するJavaScriptファイルを探し。読み込む）
     # 非同期通信行う時はJavaScriptファイル（.js.erb）を使用でビュー更新
   end
-  
+
    private
 
   def thoughtse_comment_params

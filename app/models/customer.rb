@@ -3,6 +3,8 @@ class Customer < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable
+    # バリデーション記載(空の時に実行される)
+    validates :name, presence: true
 
     has_many :request_comments
     has_many :thoughtse_comments

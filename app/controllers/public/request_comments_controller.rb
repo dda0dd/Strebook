@@ -1,9 +1,11 @@
 class Public::RequestCommentsController < ApplicationController
+  # バリデーション記載(空の時に実行される)
+  validates :content, presence: true
   
   def new
     @request_comment = RequestComment.new
   end
-
+  
   # コメント作成し、データベースに保存記述
   def create
     # customer = Customer.find(params[:customer_id])
