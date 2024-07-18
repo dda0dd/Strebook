@@ -1,4 +1,25 @@
 <!--リクエストコメント一覧表示ページ-->
-<% @request_comments.each do |request_comment| %>
-  <%= request_comment.content %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="col-md-8 offset-md-1">
+        <h2>リクエスト一覧</h2>
+          <table class="mx-3 my-3 table table-hover table-inverse">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Content</th>
+                <th colspan="3"></th>
+              </tr>
+            </thead>
+            <tbody>
+                <% @request_comments.each do |request_comment| %>
+                  <tr>
+                    <td>
+                      <%= request_comment.content %>
+                    </td>
+                  </tr>
+                <% end %>
+            </tbody>
+<!--ワードで検索をかける検索窓設置-->

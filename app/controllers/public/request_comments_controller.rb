@@ -7,8 +7,8 @@ class Public::RequestCommentsController < ApplicationController
     # comment.user_id = current_user.idの省略記述
     @request_comment = current_customer.request_comments.new(request_comment_params)
     @request_comment.save!
-    # コメント後は行う前（books/show）に遷移記述
-        redirect_to public_customer_path(current_customer)
+    # リクエストコメント後はお客様マイページ（customers/show）に遷移記述
+    redirect_to public_customer_path(current_customer)
 
     # 非同期通信記述
       # redirect_backを削除（redirect_toがない時Railsは自動で対応するJavaScriptファイルを探し。読み込む）

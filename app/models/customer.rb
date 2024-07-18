@@ -15,8 +15,10 @@ class Customer < ApplicationRecord
         customer.name = "guestcustomer"
       end
     end
-  # メールアドレスがゲスト会員のものか判定し、trueかfalseの値を返す(guest_customer?メソッド定義で複数箇所に同じメソッド共有)
-  # def guest_customer?
-  #   name == guest_customer
-  # end
+    # def~endで定義されている
+    def guest?
+      #ゲストログイン時はif~end内を表示しない(==論理演算子の比較の意味)
+        # nameがguestcustomerの場合はcustomers/showの23行目が実行される
+      name == "guest_customer"
+    end
 end

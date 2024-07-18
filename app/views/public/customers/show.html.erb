@@ -19,7 +19,17 @@
       <td class="bg-light">住所</td>
       <td><%= @customer.address %></td>
     </tr>
+      <!--customerでログインかつ(&&)じゃなければ(!)if~end内実行される(models/customer.rbにguest?の定義必要)-->
+      <% if customer_signed_in? && !current_customer.guest? %>
+    <tr>
+      <td><%= link_to "編集", edit_public_customer_path(current_customer.id), class:"btn btn-outline-primary btn-sm" %></td>
+      <!--退会するボタン押した時確認メッセージ表示させる(退会後退会画面に遷移)-->
+      <td><%= link_to "退会する", unsubscribe_public_customers_path, data: { confirm: "退会してもよろしいですか？" }, class:"btn btn-outline-danger ml-1" %></td>
+    </tr>
+      <% end %>
   </table>
-    <%#= link_to "編集", edit_customer_path, class:"btn btn-outline-primary btn-sm" %>
-    <!--退会するボタン押した時確認メッセージ表示させる(退会後退会画面に遷移)-->
-    <%#= link_to "退会する", unsubscribe_customers_path, data: { confirm: "退会してもよろしいですか？" }, class:"btn btn-outline-danger ml-1" %>
+    <!--投稿した投稿内容を表示させる-->
+    <%# @thoughtse_comments.each do |thoughtse_comment|%>
+      <%#= thoughtse_comment.title %>
+      <%#= thoughtse_comment.content %>
+    <%# end %>
