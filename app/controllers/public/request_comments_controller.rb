@@ -1,4 +1,8 @@
 class Public::RequestCommentsController < ApplicationController
+  
+  def new
+    @request_comment = RequestComment.new
+  end
 
   # コメント作成し、データベースに保存記述
   def create
@@ -30,6 +34,6 @@ class Public::RequestCommentsController < ApplicationController
   private
 
   def request_comment_params
-    params.permit(:content)
+    params.require(:request_comment).permit(:content)
   end
 end

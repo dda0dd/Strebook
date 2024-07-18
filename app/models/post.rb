@@ -8,5 +8,5 @@ class Post < ApplicationRecord
   end
   belongs_to :book_store
   # BookCommentモデルとの関連付け（BookCommentモデルを複数持つ=has_manyで表す）
-  has_many :book_comments, dependent: :destroy
+  has_many :thoughtse_comments, dependent: :destroy
 end

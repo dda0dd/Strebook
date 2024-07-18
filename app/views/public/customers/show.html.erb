@@ -28,8 +28,18 @@
     </tr>
       <% end %>
   </table>
-    <!--投稿した投稿内容を表示させる-->
-    <%# @thoughtse_comments.each do |thoughtse_comment|%>
-      <%#= thoughtse_comment.title %>
-      <%#= thoughtse_comment.content %>
-    <%# end %>
+    <!--感想コメントを表示させる-->
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>content</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @request_comments.each do |request_comment|%>
+        <tr>
+          <td><%= request_comment.content %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>

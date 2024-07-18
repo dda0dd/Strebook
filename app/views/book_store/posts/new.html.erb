@@ -4,16 +4,9 @@
     <div class='col-md-3'>
       <h4 class="mx-3 my-3 text-secondary">新規投稿</h4>
         <!--フォーム作成（入力するbox）,編集時（box）,五段階評価（◯◯◯◯◯）時に使用（送信ボタンアリ）-->
-        <%= form_with model: @post, url: new_book_store_post_path, method: :get, local:true do |f| %>
+        <%= form_with model: @post, url: book_store_posts_path, local:true do |f| %>
           <!--本の投稿ができないエラーメッセージ-->
-          <% if @post.errors.any? %>
-      		  <%= @post.errors.count %>
-      		    <ul>
-      		      <% @post.errors.full_messages.each do |message| %>errors prohibited this obj from being saved:
-      		        <li><%= message %></li>
-      		      <% end %>
-      		    </ul>
-      		<% end %>
+          <%= render 'layouts/error_messages', model: f.object %>
           <div class="form-group mx-3 my-3 text-secondary">
             <%= f.label :書店名 %>
             <!--打ち込んだ情報を:titleに入れる-->

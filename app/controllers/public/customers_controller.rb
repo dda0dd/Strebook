@@ -8,6 +8,7 @@ class Public::CustomersController < ApplicationController
   def show
     # 現在ログインしているお客様
     @customer = current_customer
+    @request_comments = @customer.request_comments
   end
 
   def edit

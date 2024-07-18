@@ -6,6 +6,7 @@ class BookStore::BookStoresController < ApplicationController
   def show
     # 現在ログインしている書店
     @book_store = current_book_store
+    @posts = @book_store.posts
   end
 
   def edit
@@ -13,10 +14,16 @@ class BookStore::BookStoresController < ApplicationController
   end
 
   def update
-    book_store = current_book_store
-    book_store.update(book_store_params)
-    # リダイレクト先に会員(書店)マイページ
-    redirect_to book_store_path(params[:id])
+    @book_store = BookStore.find(params[:id])
+    if @book_store.update(book_store_params)
+      flash[:notice] = "success"
+      # リダイレクト先に会員(書店)マイページ
+      redirect_to book_store_book_store_path(@book_store)
+    else
+      flash.now[:alert] = "failer"
+      #render :edit
+      render "book_store/book_stores/edit"
+    end
   end
    # unsubscribe.htmlのlink_toでcurrent_book_storeを記述しているのでcontrollerに記述不要
   def unsubscribe

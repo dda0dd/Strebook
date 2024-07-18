@@ -22,7 +22,7 @@ class BookStore::PostsController < ApplicationController
       # フラッシュメッセージ(book_stores/showへリンク)if~end
       flash[:notice] = "You have created book successfully."
       # アクションを通してviewを指定（redirect_to）
-      redirect_to new_post_path
+      redirect_to book_store_book_store_path(current_book_store)
     # バリデーションで保存できなかった時はsaveメソッドがfalseになり、renderでbook_stores/index.html.erbが表示され投稿ページを再表示する設定
     else
       @book_stores = Book_store.all

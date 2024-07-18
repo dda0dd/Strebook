@@ -1,9 +1,9 @@
 <!--検索結果表示画面（検索結果一覧表示）-->
-  <!--"<%#= @word %>"追記で検索した文字（例:title1）が表示される-->
+  <!--"<%#= @word %>"追記で検索した文字（例:大阪府）が表示される-->
     <!--searches_controllerで定義する（@word = params[:word]）-->
-<h2>Books search for "<%= @word %>"</h2>
+<h2>BookStores_posts search for "<%= @word %>"</h2>
 <table class="table table-hover table-inverse">
-  <% if @range == "User" %>
+  <% if @prefectures == "User" %>
     <!--ヘッダー箇所記述-->
     <thead>
       <tr>

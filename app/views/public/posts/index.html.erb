@@ -7,10 +7,9 @@
           <table class="mx-3 my-3 table table-hover table-inverse">
             <thead>
               <tr>
-                <th></th>
                 <th>Title</th>
                 <th>Content</th>
-                <th colspan="3"></th>
+                <!--<th colspan="3"></th>-->
               </tr>
             </thead>
             <tbody>
@@ -24,13 +23,13 @@
                   <!--</td>-->
                   <td>
                     <%= link_to public_book_store_path(post.book_store) do %>
-                    <%= post.title %>
+                      <%= post.title %>
                     <% end %>
                   </td>
                   <td>
                     <!--感想コメント作成・特定の投稿に紐づく感想コメント一覧表示ページに遷移(public/posts/show)-->
-                    <%= link_to public_post_path(current_customer) do %>
-                    <%= post.content %>
+                    <%= link_to public_post_path(post) do %>
+                      <%= post.content %>
                     <% end %>
                   </td>
                 </tr>
@@ -42,3 +41,5 @@
     </div>
   </div>
 </div>
+
+<%= @posts.inspect %>

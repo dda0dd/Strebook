@@ -80,8 +80,8 @@ ActiveRecord::Schema.define(version: 2024_07_10_093950) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "book_store_id", null: false
-    t.text "title", default: "", null: false
-    t.text "content", default: "", null: false
+    t.text "title", null: false
+    t.text "content", null: false
   end
 
   create_table "request_comments", force: :cascade do |t|
@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 2024_07_10_093950) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "customer_id", null: false
-    t.integer "book_store_id", null: false
+    t.integer "post_id", null: false
     t.float "evaluation_score", null: false
     t.string "content", default: "", null: false
   end

@@ -1,10 +1,11 @@
 class ThoughtseComment < ApplicationRecord
   # UserモデルもBookモデルも関連付けられるのは1つだけなのでbelong_to記述
-  belongs_to :user
-  belongs_to :book
+  belongs_to :customer
+  belongs_to :post
 
-# 空のコメントは保存できないバリデーション
-  validates :thoughtse_comment, presence:true
+  # 空のコメントは保存できないバリデーション
+  validates :content, presence:true
+  
   # 検索方法の分岐定義(検索方法毎に適した検索が行われる)
   def self.looks(search, word)
     # perfect_match=完全一致（検索方法）送られてきたsearchで条件分岐

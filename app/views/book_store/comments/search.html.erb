@@ -1,6 +1,7 @@
 <!--検索結果表示画面（検索結果一覧表示）-->
   <!--"<%#= @word %>"追記で検索した文字（例:title1）が表示される-->
     <!--searches_controllerで定義する（@word = params[:word]）-->
+      <!--プルダウンメニューで選択できる(ワードでリクエスト一覧検索=イベントや本など)-->
 <h2>Books search for "<%= @word %>"</h2>
 <table class="table table-hover table-inverse">
   <% if @range == "User" %>
