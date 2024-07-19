@@ -19,6 +19,18 @@
       <td class="bg-light">住所</td>
       <td><%= @book_store.address %></td>
     </tr>
+    <tr>
+      <td class="bg-light">店内画像</td>
+      <!--accept: "image/*"で画像ファイルのみ投稿できるように(ActiveStorage導入)-->
+      <td><%= f.file_field :image, accept: "image/*" %></td>
+      <!--image画像がない時にno_imageを表示してエラー回避(imageがないとエラー発生する)-->
+      <% if @book_store.image.attached? %>
+      <!--book_storeに紐づいているimageをimage_tagに渡して画像を表示する-->
+      <td><%= image_tag @book_store.image, size: "200x200" %></td>
+      <% else %>
+      <td><%= image_tag 'no_image', size: "200x200" %></td>
+      <% end %>
+    </tr>
   </table>
     <%= link_to "編集", edit_book_store_path, class:"btn btn-outline-primary btn-sm" %>
     <!--退会するボタン押した時確認メッセージ表示させる(退会後退会画面に遷移)-->
