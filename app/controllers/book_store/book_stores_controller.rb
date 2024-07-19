@@ -6,6 +6,8 @@ class BookStore::BookStoresController < ApplicationController
   def show
     # 現在ログインしている書店
     @book_store = current_book_store
+    # 店内の画像を背景画像として選択できる
+    # @post_images = PostImage.page(params[:page])
   end
 
   def edit
