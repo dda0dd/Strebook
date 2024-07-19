@@ -37,7 +37,9 @@ class BookStore::BookStoresController < ApplicationController
     params.require(:book_store).permit(:name,
                                      :age,
                                      :address,
-                                     :telephone_number
+                                     :telephone_number,
+                                    # 店内画像を追記
+                                     :image
                                      )
   end
 end
