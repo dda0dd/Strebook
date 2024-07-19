@@ -44,4 +44,6 @@ class BookStore < ApplicationRecord
       @book = Book.all
     end
   end
+  # ActiveStorageで書店の詳細に背景画像を表示するため、book_store.rbに宣言追記
+  has_one_attached :image
 end

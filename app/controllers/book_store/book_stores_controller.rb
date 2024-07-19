@@ -7,6 +7,8 @@ class BookStore::BookStoresController < ApplicationController
     # 現在ログインしている書店
     @book_store = current_book_store
     @posts = @book_store.posts
+    # 店内の画像を背景画像として選択できる
+    @post_images = PostImage.page(params[:page])
   end
 
   def edit
@@ -42,7 +44,9 @@ class BookStore::BookStoresController < ApplicationController
     params.require(:book_store).permit(:name,
                                      :age,
                                      :address,
-                                     :telephone_number
+                                     :telephone_number,
+                                    # 店内画像を追記
+                                     :image
                                      )
   end
 end

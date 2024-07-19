@@ -27,6 +27,18 @@
         <td><%= link_to "退会する", unsubscribe_book_store_book_stores_path, data: { confirm: "退会してもよろしいですか？" }, class:"btn btn-outline-danger ml-1" %></td>
     </tr>
       <% end %>
+    <tr>
+      <td class="bg-light">店内画像</td>
+      <!--accept: "image/*"で画像ファイルのみ投稿できる(ActiveStorage導入で)-->
+      <td><%= f.file_field :image, accept: "image/*" %></td>
+      <!--image画像ない時にno_imageを表示してエラー回避(imageがないとエラー発生する)-->
+      <% if @book_store.image.attached? %>
+      <!--book_storeに紐づいているimageをimage_tagに渡して画像を表示する-->
+      <td><%= image_tag @book_store.image, size: "200x200" %></td>
+      <% else %>
+      <td><%= image_tag 'no_image', size: "200x200" %></td>
+      <% end %>
+    </tr>
   </table>
   <!--投稿した投稿内容を表示させる-->
     <% @book_store.posts.each do |post|%>
