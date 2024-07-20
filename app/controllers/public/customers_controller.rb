@@ -42,10 +42,10 @@ class Public::CustomersController < ApplicationController
                                      )
   end
   # 会員編集画面へのURLを直接入力時にメッセージ表示で会員詳細画面へリダイレクトさせる
-  def ensure_guest_customer
-    @customer = Customer.find(params[:id])
-    if @customer.guest_customer?
-      redirect_to customer_path(current_customer) , notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
-    end
-  end  
+  # def ensure_guest_customer
+  #   @customer = Customer.find(params[:id])
+  #   if @customer.guest_customer?
+  #     redirect_to customer_path(current_customer) , notice: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
+  #   end
+  # end  
 end

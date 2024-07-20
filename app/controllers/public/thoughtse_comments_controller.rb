@@ -1,6 +1,6 @@
 class Public::ThoughtseCommentsController < ApplicationController
   # バリデーション記載(空の時に実行される)
-  validates :content, presence: true
+  # validates :content, presence: true
 
   def create
     # customer = Customer.find(params[:customer_id])

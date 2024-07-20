@@ -2,7 +2,7 @@
 <div class='container px-5 px-sm-0'>
   <div class='row'>
     <div class='col-md-3'>
-      <h4 class="mx-3 my-3 text-secondary">新規投稿</h4>
+      <h4 class="mx-3  my-3 text-secondary border border-3 rounded-top text-center">新規投稿</h4>
         <!--フォーム作成（入力するbox）,編集時（box）,五段階評価（◯◯◯◯◯）時に使用（送信ボタンアリ）-->
         <%= form_with model: @post, url: book_store_posts_path, local:true do |f| %>
           <!--本の投稿ができないエラーメッセージ-->
@@ -10,12 +10,12 @@
           <div class="form-group mx-3 my-3 text-secondary">
             <%= f.label :書店名 %>
             <!--打ち込んだ情報を:titleに入れる-->
-            <%= f.text_field :title, class: 'form-control book_title' %>
+            <%= f.text_field :title, class: 'form-control book_title text-secondary' %>
           </div>
           <div class="form-group mx-3 my-3 text-secondary">
             <%= f.label :投稿内容 %>
             <!--打ち込んだ情報を:bodyに入れる-->
-            <%= f.text_area :content, class: 'form-control book_body' %>
+            <%= f.text_area :content, class: 'form-control book_body text-secondary' %>
           </div>
           <div class="form-group mx-3 my-3">
             <%= f.submit '新規投稿', class:"btn btn-outline-success" %>

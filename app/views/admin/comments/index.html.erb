@@ -1,0 +1,20 @@
+<div class="col-md-8">
+      <h3 class="mx-3  my-3 text-secondary border border-3 rounded-top col-7 text-center">感想コメント一覧</h3>
+      <!--特定投稿に紐づく感想コメント一覧-->
+      <table class="mx-3 my-3 table table-hover align-middle text-secondary">
+        <thead>
+          <tr>
+            <th>content</th>
+            <th>evaluation_score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @thoughtse_comments.each do |thoughtse_comment|%>
+            <tr>
+              <td><%= thoughtse_comment.content %></td>
+              <td><%= thoughtse_comment.evaluation_score %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
