@@ -1,7 +1,21 @@
 <!--会員のお客様一覧ページ-->
 <div class="container">
   <div class="row">
+    <div class="col">
     <h2 class="mx-3 my-5 text-secondary border border-3 rounded-top col-2 text-center">お客様一覧</h2>
+      <!--有効か退会かを検索できる検索窓設置-->
+      <% if admin_signed_in? %>
+        <div class="search_form">
+          <!--url: search_public_posts_path=検索内容をresources :postsのget 'search'に送信-->
+          <%= form_with url: search_admin_customers_path, local: true, method: :get do |f| %>
+            <!--検索内容をwordとしてdef searchアクションに送る-->
+            <%= f.text_field :word %>
+            <!--"btn"箇所=検索ボタン記述-->
+              <!--style: =Bootstrap内でのCSS記述（<div>や<link_to>内では上手く動作しないことも）カスタマイズツールなどある-->
+            <%= f.submit "検索", class: "btn btn-outline-secondary", style: "padding:0;" %>
+          <% end %>
+        </div>
+      <% end %>
     <table class="table table-hover align-middle text-secondary">
       <thead>
         <tr>
@@ -14,48 +28,12 @@
         <tr>
           <!--会員ID-->
           <td><%= customer.id %></td>
-          
           <td><%= link_to customer.name, admin_customer_path(customer.id) %></td>
           <!--三項演算子は式、true、falseの順-->
           <td class="<%= customer.is_active ? 'text-green' : 'text-gray' %>"><%= customer.is_active ? '有効' : '退会' %></td>
         </tr>
       <% end %>
     </table>
-  </div>
-</div>
-<!--会員の書店一覧表示(お客様一覧と切り替え)ページ-->
-<div class="container">
-  <div class="row">
-    <div class="col-md-3">
-      <div class="col-md-8 offset-md-1">
-        <h2>書店一覧</h2>
-          <table class="table table-hover table-inverse">
-            <thead>
-              <tr>
-                <th>会員ID</th>
-                <th>書店名</th>
-                <th>ステータス</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!--複数のデータを登録する記述-->
-              <% @book_stores.each do |book_store| %>
-                <tr>
-                  <td>
-                    <!--会員ID-->
-                    <%= book_store.id %>
-                  </td>
-                  <td>
-                    <!--書店名をリンクに(書店マイページに遷移)-->
-                    <%= link_to book_store.name, admin_book_store_path(book_store) %>
-                  </td>
-                  <!--三項演算子は式、true、falseの順-->
-                  <td class="<%= book_store.is_active ? 'text-green' : 'text-gray' %>"><%= book_store.is_active ? '有効' : '退会' %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-      </div>
     </div>
   </div>
 </div>

@@ -1,5 +1,20 @@
+<div class="container">
+  <div class="row">
 <div class="col-md-8">
       <h3 class="mx-3  my-3 text-secondary border border-3 rounded-top col-7 text-center">感想コメント一覧</h3>
+        <!--ワード(不適切な言葉など)で感想コメントを検索できる検索窓設置-->
+        <% if admin_signed_in? %>
+          <div class="search_form">
+            <!--url: search_public_posts_path=検索内容をresources :postsのget 'search'に送信-->
+            <%= form_with url: search_admin_comments_path, local: true, method: :get do |f| %>
+              <!--検索内容をwordとしてdef searchアクションに送る-->
+              <%= f.text_field :word %>
+              <!--"btn"箇所=検索ボタン記述-->
+                <!--style: =Bootstrap内でのCSS記述（<div>や<link_to>内では上手く動作しないことも）カスタマイズツールなどある-->
+              <%= f.submit "検索", class: "btn btn-outline-secondary", style: "padding:0;" %>
+            <% end %>
+          </div>
+        <% end %>
       <!--特定投稿に紐づく感想コメント一覧-->
       <table class="mx-3 my-3 table table-hover align-middle text-secondary">
         <thead>
@@ -13,8 +28,13 @@
             <tr>
               <td><%= thoughtse_comment.content %></td>
               <td><%= thoughtse_comment.evaluation_score %></td>
+              <td><%#= link_to "Destroy", admin_comment_path(@thoughtse_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger float-end", remote: true %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
     </div>
+  </div>
+</div>
+    <!--kaminari(ページネーション)記述-->
+    <%#= paginate @thoughtse_comments %>

@@ -28,8 +28,6 @@ Rails.application.routes.draw do
     # end
     # 投稿機能(index, showがいるかも？)
     resources :posts do
-      # キーワードでリクエストを検索する機能(searchはresourcesで作成されない)
-      get 'search'
       # resources :comments, only: [:search] do
         # collection do
         # delete 'destroy_all'
@@ -42,7 +40,12 @@ Rails.application.routes.draw do
         # end
     end
     # リクエストコメント一覧
-	  resources :request_comments, only: [:index]
+	  resources :request_comments, only: [:index] do
+      # キーワードでリクエストを検索する機能(searchはresourcesで作成されない)
+      collection do
+        get 'search'
+      end
+	  end
   end
 
   # お客様(新規登録・ログイン)
@@ -71,8 +74,7 @@ Rails.application.routes.draw do
       resources :book_stores do
         # 感想コメント保存, 削除
         resources :thoughtse_comments, only: [:index, :create, :destroy]
-        # 都道府県で書店を検索する機能(searchはresourcesで作成されない)
-        get 'search'
+          # 都道府県で書店を検索する機能(searchはresourcesで作成されない)
         # resources :searches, only: [:search] do
           # collection do
           # delete 'destroy_all'
@@ -85,7 +87,13 @@ Rails.application.routes.draw do
           # end
       end
       # 投稿一覧
-      resources :posts, only: [:index, :show]
+      resources :posts, only: [:index, :show] do
+        # お客様の書店投稿一覧で都道府県検索(書店を)窓設置
+          # collection=do~end内をID含まないものとして指定できる
+          collection do
+            get 'search'
+          end
+      end
       # リクエストコメント保存, 削除
       resources :request_comments, only: [:new, :index, :create, :destroy]
     end
@@ -102,15 +110,40 @@ Rails.application.routes.draw do
 	 # 全てのレビュー閲覧, 削除ボタン設置
 	  resources :reviews, only: [:index, :destroy]
 	  #お客様詳細情報(管理者)
-    resources :customers, only: [:index, :show, :destroy]
+    resources :customers, only: [:index, :show, :destroy] do
+      # お客様一覧で有効か退会かの検索窓設置
+      collection do
+        get 'search'
+      end
+    end
     # update追記(編集内容を更新できないので)
-	  resources :comments, only: [:index, :show, :destroy]
+	  resources :comments, only: [:index, :show, :destroy] do
+	   # 投稿に紐づく感想コメント一覧で不適切なワード検索窓設置
+	   collection do
+	     get 'search'
+	   end
+	  end
 	  #書店詳細情報(管理者)
-	  resources :book_stores, only: [:index, :show, :destroy]
+	  resources :book_stores, only: [:index, :show, :destroy] do
+	   # 書店一覧で有効か退会かの検索窓を設置
+	   collection do
+	     get 'search'
+	   end
+	  end
 	 # 投稿一覧
-	  resources :posts, only: [:index, :destroy]
+	  resources :posts, only: [:index, :destroy] do
+	   # 書店投稿一覧で不適切なワード検索窓を設置
+	   collection do
+	     get 'search'
+	   end
+	  end
 	 # リクエストコメント一覧
-	  resources :request_comments, only: [:index, :destroy]
+	  resources :request_comments, only: [:index, :destroy] do
+	   # リクエストコメント一覧で不適切なワード検索窓を設置
+	   collection do
+	     get 'search'
+	   end
+	  end
 	end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.htm
 end

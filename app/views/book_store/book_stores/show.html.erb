@@ -54,11 +54,14 @@
             <tr>
               <td><%= post.title %></td>
               <!--投稿に紐づく感想コメントが見られるページ(book_store/comments/search)に遷移-->
-              <%= link_to book_store_post_search(post_id) do %>
+              <%#= link_to book_store_post_search_path(post) do %>
               <td><%= post.content %></td>
-              <% end %>
+              <%# end %>
             </tr>
             <% end %>
             </table>
           </tbody>
+        </div>
+      </div>
+    </div>
       <%#= render "posts/new", post: @post_new %>
