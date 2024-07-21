@@ -18,7 +18,8 @@ class Customer < ApplicationRecord
         customer.name = "guestcustomer"
       end
     end
-    # def~endで定義されている
+    # def(def=定義するの意味)~endで定義されている
+      # guest?=独自で命名したもの
     def guest?
       #ゲストログイン時はif~end内を表示しない(==論理演算子の比較の意味)
         # nameがguestcustomerの場合はcustomers/showの23行目が実行される

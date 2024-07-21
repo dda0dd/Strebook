@@ -42,6 +42,7 @@
 						<!--ログアウトリンク-->
 						<%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"text-secondary" %>
 	        <!--ゲストログイン時のヘッダー-->
+	        	<!--elsifは3つ以上の条件分岐実装時に使用-->
 					<% elsif customer_signed_in? && current_customer.guest? %>
 					  <!--マイページリンク-->
 					  <%= link_to "マイページ", guest_customer_path(current_customer), class:"text-secondary" %>

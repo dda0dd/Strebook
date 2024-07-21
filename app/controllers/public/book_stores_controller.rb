@@ -16,6 +16,6 @@ class Public::BookStoresController < ApplicationController
     # 書店情報を表示
     @book_store = BookStore.find(params[:id])
     # 書店の投稿を表示
-    @book_store_posts = @book_store.posts
+    @book_store_posts = @book_store.posts.page(params[:page]).per(5)
   end
 end

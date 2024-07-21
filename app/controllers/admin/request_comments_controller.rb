@@ -2,7 +2,7 @@ class Admin::RequestCommentsController < ApplicationController
 
   # リクエストコメントを一覧で表示
   def index
-    @request_comments = RequestComment.all
+    @request_comments = RequestComment.all.page(params[:page]).per(5)
   end
 
   # リクエストコメントの一覧に削除ボタン設置して削除

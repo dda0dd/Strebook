@@ -1,7 +1,7 @@
 class BookStore::RequestCommentsController < ApplicationController
 
   def index
-    @request_comments = RequestComment.all
+    @request_comments = RequestComment.all.page(params[:page]).per(5)
   end
 
   def search

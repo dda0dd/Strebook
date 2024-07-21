@@ -49,7 +49,7 @@
   </div>
 </div>
 <!--kaminari(ページネーション)記述-->
-<%#= paginate @request_comments %>
+<%= paginate @request_comments %>
 <!--model/user.rbのget_profile_imageに合わせる（100,100）を, size:'100x100'に変更-->
     <!--<td><%#= image_tag book_comment.user.get_profile_image, size:'100x100' %></td>-->
 <!--コメントしたのがログインユーザなら削除ボタン表示で削除できる記述-->

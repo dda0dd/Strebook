@@ -47,11 +47,11 @@
             <% end %>
           </td>
             <!--感想コメント作成・特定の投稿に紐づく感想コメント一覧表示ページに遷移(public/posts/show)-->
-            <td><%#= link_to "感想コメント", public_post_path(current_customer.id), class:"btn btn-outline-primary btn-sm" %></td>
+            <td><%= link_to "感想コメント", public_post_path(current_customer.id), class:"btn btn-outline-primary btn-sm" %></td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
 <!--kaminari(ページネーション)記述-->
-<%#= paginate @posts %>
+<%= paginate @book_store_posts %>

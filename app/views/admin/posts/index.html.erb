@@ -32,9 +32,9 @@
                   <!--  <%# end %>-->
                   <!--</td>-->
                   <td>
-                    <%= link_to public_book_store_path(post.book_store) do %>
+                    <%#= link_to public_book_store_path(post.book_store) do %>
                       <%= post.title %>
-                    <% end %>
+                    <%# end %>
                   </td>
                   <td>
                     <!--感想コメント作成・特定の投稿に紐づく感想コメント一覧表示ページに遷移(public/posts/show)-->
@@ -43,7 +43,7 @@
                     <% end %>
                   </td>
                   <td>
-                    <%= link_to "Destroy", admin_post_path(post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger float-end", remote: true %>
+                    <%= link_to "削除", admin_post_path(post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger float-end", remote: true %>
                   </td>
                 </tr>
               <% end %>
@@ -53,5 +53,5 @@
   </div>
 </div>
 <!--kaminari(ページネーション)記述-->
-<%#= paginate @customers %>
+<%= paginate @posts %>
 <%= @posts.inspect %>

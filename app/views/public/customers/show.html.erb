@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row">
     <div class="col">
-        <h2 class="mx-3  my-3 text-secondary border border-3 rounded-top col-3 text-center">書店投稿一覧</h2>
+        <h2 class="mx-3  my-3 text-secondary border border-3 rounded-top col-5 text-center">お客様マイページ</h2>
           <table class="mx-3 my-3 table table-hover align-middle text-secondary">
             <tr>
               <td class="bg-light">ニックネーム</td>
@@ -50,4 +50,4 @@
       </div>
     </div>
           <!--kaminari(ページネーション)導入で下記追記-->
-          <%#= paginate @customer.request_comments %>
+          <%= paginate @request_comments %>

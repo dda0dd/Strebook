@@ -2,7 +2,7 @@ class Admin::CommentsController < ApplicationController
 
   def index
     # 特定の投稿に紐づく全ての感想コメントを表示
-    @thoughtse_comments = ThoughtseComment.all
+    @thoughtse_comments = ThoughtseComment.all.page(params[:page]).per(5)
   end
 
   def destroy
@@ -11,7 +11,7 @@ class Admin::CommentsController < ApplicationController
     # コメント削除後は行う前（books/show）に遷移記述
         # redirect_to book_path(params[:book_id])
   end
-  
+
   def search
     # 検索フォームから情報を受け取る params[:range](検索モデル)
     # searches/search.htmlの"<%= @word %>"を定義
