@@ -38,7 +38,7 @@
                   </td>
                   <td>
                     <!--感想コメント作成・特定の投稿に紐づく感想コメント一覧表示ページに遷移(public/posts/show)-->
-                    <%= link_to admin_comments_path do %>
+                    <%= link_to admin_comments_path(id: post.id) do %>
                       <%= post.content %>
                     <% end %>
                   </td>

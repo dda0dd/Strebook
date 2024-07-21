@@ -3,7 +3,7 @@ class Admin::PostsController < ApplicationController
   def index
     @posts = Post.all.page(params[:page]).per(5)
   end
-  
+
     # リクエストコメントの一覧に削除ボタン設置して削除
   def destroy
     @post = Post.find(params[:id])
@@ -11,7 +11,7 @@ class Admin::PostsController < ApplicationController
     # コメント削除後は行う前（books/show）に遷移記述
         # redirect_to book_path(params[:book_id])
   end
-  
+
   def search
     # 検索フォームから情報を受け取る params[:range](検索モデル)
     # searches/search.htmlの"<%= @word %>"を定義
@@ -23,7 +23,7 @@ class Admin::PostsController < ApplicationController
       # book_stores_ids = BookStore.where("address LIKE?", "%#{@word}%").pluck(:id)
       # where=Postの中(右の括弧内)を検索する
         # book_store_idでbook_store_idsを検索する
-      @posts = Post.where("content LIKE?", "%#{@word}%")
+      @posts = Post.where("content LIKE?", "%#{@word}%").page(params[:page]).per(5)
     # 検索後に検索結果を下記ページに表示(検索後の遷移先)
     render "admin/posts/index"
   end

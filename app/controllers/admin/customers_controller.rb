@@ -4,7 +4,7 @@ class Admin::CustomersController < ApplicationController
 
   def index
     @customers = Customer.all.page(params[:page]).per(5)
-    @book_stores = BookStore.all
+    # @book_stores = BookStore.all
     #管理者のお客様一覧記述
     #ページネーション対応に変更
     # @customers = Customer.page(params[:page])
@@ -17,7 +17,7 @@ class Admin::CustomersController < ApplicationController
     # 会員(お客様)
     @customer = Customer.find(params[:id])
     # 会員(書店)
-    @book_store = BookStore.find(params[:id])
+    # @book_store = BookStore.find(params[:id])
   end
 
   def edit

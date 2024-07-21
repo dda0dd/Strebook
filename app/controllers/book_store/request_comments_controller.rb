@@ -15,7 +15,7 @@ class BookStore::RequestCommentsController < ApplicationController
       # book_stores_ids = BookStore.where("address LIKE?", "%#{@word}%").pluck(:id)
       # where=Postの中(右の括弧内)を検索する
         # book_store_idでbook_store_idsを検索する
-      @request_comments = RequestComment.where("content LIKE?", "%#{@word}%")
+      @request_comments = RequestComment.where("content LIKE?", "%#{@word}%").page(params[:page]).per(5)
     # 検索後に検索結果を下記ページに表示(検索後の遷移先)
     render "book_store/request_comments/index"
   end
