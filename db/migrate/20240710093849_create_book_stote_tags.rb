@@ -6,7 +6,7 @@ class CreateBookStoteTags < ActiveRecord::Migration[6.1]
 
       # タグ(書店)カラム記述
         # 会員(書店)ID
-        t.integer :book_store_id, null: false, default: ""
+        t.integer :book_store_id, null: false
         # タグ名
         t.string :tag_name, null: false, default: ""
 

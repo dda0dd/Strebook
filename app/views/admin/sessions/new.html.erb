@@ -20,11 +20,11 @@
             </tr>
           </table>
           <div class="actions">
-            <%= f.submit "Log in", class:"btn btn-outline-primary ml-3 btn-sm" %>
+            <%= f.submit "ログイン", class:"btn btn-outline-primary ml-3 btn-sm" %>
+            <!--adminsからadminにフォルダ名を改名したためadminsのsを削除-->
+            <%= render "admin/shared/links" %>
           </div>
         <% end %>
-        <!--adminsからadminにフォルダ名を改名したためadminsのsを削除-->
-        <%= render "admin/shared/links" %>
     </div>
   </div>
 </div>

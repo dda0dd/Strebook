@@ -5,9 +5,9 @@
         <!--form_forをform_withに変更-->
         <%= form_with model: @customer, url: customer_registration_path do |f| %>
         <!--<%#= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>-->
-        <!--publicsからpublicにフォルダ名を改名したためpublicsのsを削除-->
-          <!--新規登録画面でのエラーメッセージを呼び出し記述-->
-        <%= render "public/shared/error_messages", resource: resource %>
+          <!--publicsからpublicにフォルダ名を改名したためpublicsのsを削除-->
+            <!--新規登録画面でのエラーメッセージを呼び出し記述-->
+          <%= render "public/shared/error_messages", resource: resource %>
           <table class="field text-secondary mx-3 my-3">
             <tr>
               <td>
@@ -19,51 +19,49 @@
             <tr>
               <td>
                 <!--新規登録時に住所(都道府県のみ)記載してもらう-->
-                <%= f.label :address, "住所" %>
+                <%= f.label :address, "住所" %><br />
                 <%= f.text_field :address, autofocus: true, placefield: "大阪府", placeholder: "大阪府" %>
               </td>
             </tr>
             <tr>
               <td>
                 <!--新規登録時に年齢(数字のみ)記載してもらう-->
-                <%= f.label :age, "年齢" %>
+                <%= f.label :age, "年齢" %><br />
                 <%= f.text_field :age, autofocus: true, placefield: "67", placeholder: "67" %>
               </td>
             </tr>
             <tr>
               <td>
                 <!--新規登録時に職業記載してもらう-->
-                <%= f.label :occupation, "職業" %>
+                <%= f.label :occupation, "職業" %><br />
                 <%= f.text_field :occupation, autofocus: true, placefield: "管理職", placeholder: "管理職" %>
               </td>
             </tr>
             <tr>
               <td>
                 <!--新規登録時にパスワード(英数字8文字上)記載してもらう-->
-                <%= f.label :password, "パスワード" %>
-                <% if @minimum_password_length %>
+                <%= f.label :password, "パスワード" %><br />
+                <%# if @minimum_password_length %>
                 <!--<em>(<%#= @minimum_password_length %> characters minimum)</em>-->
-                <% end %><br />
-                <%= f.password_field :password, autocomplete: "new-password", placeholder: "英数字8文字以上" %>
+                <%# end %>
+                <%= f.password_field :password, autocomplete: "new-password", placeholder: "半角英数字8文字以上" %>
               </td>
             </tr>
-
             <tr>
               <td>
                 <%= f.label :password_confirmation, "確認用" %><br />
-                <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "英数字8文字以上" %>
+                <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "半角英数字8文字以上" %>
               </td>
             </tr>
+          </table>
           <!--新規登録ボタン設置-->
           <div class="actions">
-            <%= f.submit "Sign up", class:"text-center btn btn-outline-success ml-3 btn-sm" %>
+            <%= f.submit "新規登録", class:"text-center btn btn-outline-success ml-3 btn-sm" %>
+            <!--publicsからpublicにフォルダ名を改名したためpublicsのsを削除-->
+              <!--お客様の会員登録画面呼び出し記述-->
+            <%= render "public/shared/links" %>
           </div>
-        </table>
-      <% end %>
-
-<!--publicsからpublicにフォルダ名を改名したためpublicsのsを削除-->
-  <!--お客様の会員登録画面呼び出し記述-->
-<%= render "public/shared/links" %>
-   </div>
+        <% end %>
+    </div>
   </div>
 </div>

@@ -1,5 +1,7 @@
 <!--会員(書店)情報編集画面-->
-<%= form_with model:@book_store, local:true do |f| %>
+<%= form_with model:@book_store, url: book_store_book_store_path(@book_store), local:true do |f| %>
+  <!--下記をform_withの記載あるページ全てに追記(f.object=変数名の代わりになる)-->
+  <%= render 'layouts/error_messages', model: f.object %>
   <table class="table table-borderless text-secondary">
     <tr>
       <td>書店名</td>

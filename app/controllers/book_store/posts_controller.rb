@@ -1,20 +1,28 @@
 class BookStore::PostsController < ApplicationController
+
+  def index
+    @posts = Post.all
+  end
+  # 特定の投稿に紐づく感想コメント一覧表示(book_store/posts/show)
+  def show
+    @thoughtse_comments = ThoughtseComment.all
+  end
+  # 投稿作成
   def new
     @post = Post.new
   end
-
   # 投稿データを作成・保存
   def create
     # フォームに入力されたデータが@book_storeに格納される
-    @book_store = Book_store.new(book_store_params)
+    @post = Post.new(post_params)
     # @book_store(投稿データ)のbook_store_idを、current_book_store.id(今ログインしている書店のID)に指定することで投稿データに、今ログイン中の書店のIDを持たせる
-    @book_store.book_store_id = current_book_store.id
+    @post.book_store_id = current_book_store.id
     # save（保存のメソッド）
-    if @book_store.save
+    if @post.save
       # フラッシュメッセージ(book_stores/showへリンク)if~end
       flash[:notice] = "You have created book successfully."
       # アクションを通してviewを指定（redirect_to）
-      redirect_to book_store_path(@book_store.id)
+      redirect_to book_store_book_store_path(current_book_store)
     # バリデーションで保存できなかった時はsaveメソッドがfalseになり、renderでbook_stores/index.html.erbが表示され投稿ページを再表示する設定
     else
       @book_stores = Book_store.all
@@ -43,5 +51,11 @@ class BookStore::PostsController < ApplicationController
     @book_store = Book_store.find(params[:id])
     book_store.destroy
     redirect_to book_stores_path
+  end
+  
+  private
+  
+  def post_params
+    params.require(:post).permit(:title, :content)
   end
 end

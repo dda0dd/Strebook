@@ -1,0 +1,47 @@
+<!--投稿内容のリンク先-->
+  <!--感想コメント作成-->
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <h3 class="mx-3 my-3 text-secondary border border-3 rounded-top text-center">感想コメント</h3>
+      <%= form_with model: @thoughtse_comment, url: public_book_store_thoughtse_comments_path(@post.book_store) do |f| %>
+        <%= render 'layouts/error_messages', model: f.object %>
+        <%= f.hidden_field :post_id, value: @post.id %>
+
+        <div class="mx-3 my-3 text-secondary">
+          <%= f.label :content, "感想" %>
+          <%= f.text_area :content, rows: '8', class: "form-control" %>
+        </div>
+
+        <div class="mx-3 my-3 text-secondary">
+          <%= f.label :evaluation_score, "評価" %>
+          <%= f.select :evaluation_score, (1..5), { include_blank: "評価を選ぶ" }, { class: "form-control" } %>
+        </div>
+        <%= f.submit "感想コメント", class:"mx-3 my-3 btn btn-outline-primary btn-sm" %>
+      <% end %>
+    </div>
+
+    <div class="col-md-8">
+      <h3 class="mx-3  my-3 text-secondary border border-3 rounded-top col-7 text-center">感想コメント一覧</h3>
+      <!--特定投稿に紐づく感想コメント一覧-->
+      <table class="mx-3 my-3 table table-hover align-middle text-secondary">
+        <thead>
+          <tr>
+            <th>content</th>
+            <th>evaluation_score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @thoughtse_comments.each do |thoughtse_comment|%>
+            <tr>
+              <td><%= thoughtse_comment.content %></td>
+              <td><%= thoughtse_comment.evaluation_score %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!--kaminari(ページネーション)記述-->
+<%= paginate @thoughtse_comments %>

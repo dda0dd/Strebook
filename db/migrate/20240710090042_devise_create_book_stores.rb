@@ -15,7 +15,7 @@ class DeviseCreateBookStores < ActiveRecord::Migration[6.1]
         # 電話番号
         t.string :telephone_number, null: false, default: ""
         # 創立年齢
-        t.integer :age, null: false, default: ""
+        t.integer :age, null: false
         # 会員ステータス(退会機能のため)
         t.boolean :is_active, null: false, default: "TRUE"
 
