@@ -16,6 +16,9 @@ Rails.application.routes.draw do
     # get '/about' => 'homes#about'
     # 退会機能のルーティング
     resources :book_stores, only: [:show, :edit, :update] do
+      resources :posts do
+        resources :comments, only: [:index]
+      end
       collection do
         get 'unsubscribe'
         patch 'withdraw'
