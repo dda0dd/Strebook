@@ -55,9 +55,9 @@
             <tr>
               <td><%= post.title %></td>
               <!--投稿に紐づく感想コメントが見られるページ(book_store/comments/search)に遷移-->
-              <%= link_to book_store_post_search_path(post) do %>
+              <%#= link_to book_store_post_search_path(post) do %>
               <td><%= post.content %></td>
-              <% end %>
+              <%# end %>
             </tr>
             <% end %>
             </table>
