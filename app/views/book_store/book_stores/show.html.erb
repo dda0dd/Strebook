@@ -1,25 +1,69 @@
 <!--会員(書店)マイページ画面-->
-
-<!--会員(書店)情報編集画面に遷移(public/book_stores/edit.html)-->
-<%#= link_to "編集する", edit_book_store_path(params[:id]), class:"btn btn-outline-success ml-2 btn-sm" %>
-  <table class="table table-hover align-middle text-secondary">
-    <tr>
-      <td class="bg-light">書店名</td>
-      <td><%= @book_store.name %></td>
-    </tr>
-    <tr>
-      <td class="bg-light">創立年齢</td>
-      <td><%= @book_store.age %></td>
-    </tr>
-    <tr>
-      <td class="bg-light">電話番号</td>
-      <td><%= @book_store.telephone_number %></td>
-    </tr>
-    <tr>
-      <td class="bg-light">住所</td>
-      <td><%= @book_store.address %></td>
-    </tr>
-  </table>
-    <%= link_to "編集", edit_book_store_path, class:"btn btn-outline-primary btn-sm" %>
-    <!--退会するボタン押した時確認メッセージ表示させる(退会後退会画面に遷移)-->
-    <%= link_to "退会する", unsubscribe_book_stores_path, data: { confirm: "退会してもよろしいですか？" }, class:"btn btn-outline-danger ml-1" %>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2 class="mx-3  my-3 text-secondary border border-3 rounded-top col-3 text-center">書店投稿一覧</h2>
+        <table class="mx-3  my-3 table table-hover align-middle text-secondary">
+          <tr>
+            <td class="bg-light">書店名</td>
+            <td><%= @book_store.name %></td>
+          </tr>
+          <tr>
+            <td class="bg-light">創立年齢</td>
+            <td><%= @book_store.age %></td>
+          </tr>
+          <tr>
+            <td class="bg-light">電話番号</td>
+            <td><%= @book_store.telephone_number %></td>
+          </tr>
+          <tr>
+            <td class="bg-light">住所</td>
+            <td><%= @book_store.address %></td>
+          </tr>
+            <!--book_storeでログインかつ(&&)じゃなければ(!)if~end内実行される-->
+            <% if book_store_signed_in? && !current_book_store.guest? %>
+          <tr>
+              <td><%= link_to "編集", edit_book_store_book_store_path(current_book_store.id), class:"btn btn-outline-primary btn-sm" %></td>
+              <!--退会するボタン押した時確認メッセージ表示させる(退会後退会画面に遷移)-->
+              <td><%= link_to "退会する", unsubscribe_book_store_book_stores_path, data: { confirm: "退会してもよろしいですか？" }, class:"btn btn-outline-danger ml-1" %></td>
+          </tr>
+            <% end %>
+          <tr>
+            <td class="bg-light">店内画像</td>
+            <td><%#= f.label :店内画像 %></td>
+            <!--accept: "image/*"で画像ファイルのみ投稿できる(ActiveStorage導入で)-->
+            <td><%#= f.file_field :image, accept: "image/*" %></td>
+            <!--image画像ない時にno_imageを表示してエラー回避(imageがないとエラー発生する)-->
+            <% if @book_store.image.attached? %>
+            <!--book_storeに紐づいているimageをimage_tagに渡して画像を表示する-->
+            <td><%= image_tag @book_store.image, size: "200x200" %></td>
+            <% else %>
+            <td><%= image_tag 'no_image', size: "200x200" %></td>
+            <% end %>
+          </tr>
+        </table>
+        <table class="mx-3 my-3 table table-hover table-inverse align-middle text-secondary">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Content</th>
+             </tr>
+          </thead>
+          <tbody>
+            <!--投稿した投稿内容を表示させる-->
+            <% @book_store.posts.each do |post|%>
+            <tr>
+              <td><%= post.title %></td>
+              <!--投稿に紐づく感想コメントが見られるページ(book_store/comments/search)に遷移-->
+              <%= link_to book_store_post_search_path(post) do %>
+              <td><%= post.content %></td>
+              <% end %>
+            </tr>
+            <% end %>
+            </table>
+          </tbody>
+        </div>
+      </div>
+    </div>
+    <!--kaminari(ページネーション)記述-->
+    <%= paginate @posts %>

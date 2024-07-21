@@ -1,5 +1,5 @@
 <!--会員(お客様)情報編集画面-->
-<%= form_with model:@customer, local:true do |f| %>
+<%= form_with model:@customer, url: edit_public_customer_path(@customer), local:true do |f| %>
   <table class="table table-borderless text-secondary">
     <tr>
       <td>ニックネーム</td>

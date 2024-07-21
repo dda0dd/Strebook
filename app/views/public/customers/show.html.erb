@@ -1,25 +1,53 @@
 <!--会員(お客様)マイページ画面-->
 
-<!--会員(お客様)情報編集画面に遷移(public/customers/edit.html)-->
-<%#= link_to "編集する", edit_customer_path(params[:id]), class:"btn btn-outline-success ml-2 btn-sm" %>
-  <table class="table table-hover align-middle text-secondary">
-    <tr>
-      <td class="bg-light">ニックネーム</td>
-      <td><%= @customer.name %></td>
-    </tr>
-    <tr>
-      <td class="bg-light">年齢</td>
-      <td><%= @customer.age %></td>
-    </tr>
-    <tr>
-      <td class="bg-light">職業</td>
-      <td><%= @customer.occupation %></td>
-    </tr>
-    <tr>
-      <td class="bg-light">住所</td>
-      <td><%= @customer.address %></td>
-    </tr>
-  </table>
-    <%#= link_to "編集", edit_customer_path, class:"btn btn-outline-primary btn-sm" %>
-    <!--退会するボタン押した時確認メッセージ表示させる(退会後退会画面に遷移)-->
-    <%= link_to "退会する", unsubscribe_customers_path, data: { confirm: "退会してもよろしいですか？" }, class:"btn btn-outline-danger ml-1" %>
+<div class="container">
+  <div class="row">
+    <div class="col">
+        <h2 class="mx-3  my-3 text-secondary border border-3 rounded-top col-5 text-center">お客様マイページ</h2>
+          <table class="mx-3 my-3 table table-hover align-middle text-secondary">
+            <tr>
+              <td class="bg-light">ニックネーム</td>
+              <td><%= @customer.name %></td>
+            </tr>
+            <tr>
+              <td class="bg-light">年齢</td>
+              <td><%= @customer.age %></td>
+            </tr>
+            <tr>
+              <td class="bg-light">職業</td>
+              <td><%= @customer.occupation %></td>
+            </tr>
+            <tr>
+              <td class="bg-light">住所</td>
+              <td><%= @customer.address %></td>
+            </tr>
+              <!--customerでログインかつ(&&)じゃなければ(!)if~end内実行される(models/customer.rbにguest?の定義必要)-->
+              <% if customer_signed_in? && !current_customer.guest? %>
+            <tr>
+              <td><%= link_to "編集", edit_public_customer_path(current_customer.id), class:"btn btn-outline-primary btn-sm" %></td>
+              <!--退会するボタン押した時確認メッセージ表示させる(退会後退会画面に遷移)-->
+              <td><%= link_to "退会する", unsubscribe_public_customers_path, data: { confirm: "退会してもよろしいですか？" }, class:"btn btn-outline-danger ml-1" %></td>
+            </tr>
+              <% end %>
+          </table>
+          <!--リクエストコメントを表示させる-->
+          <h5 class="mx-3 my-3 text-secondary"><b>リクエスト一覧</b></h5>
+          <table class="mx-3 my-3 table table-hover align-middle text-secondary">
+            <thead>
+              <tr>
+                <th>content</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @request_comments.each do |request_comment|%>
+                <tr>
+                  <td><%= request_comment.content %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+          <!--kaminari(ページネーション)導入で下記追記-->
+          <%= paginate @request_comments %>

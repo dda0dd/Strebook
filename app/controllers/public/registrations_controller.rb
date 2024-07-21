@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 class Public::RegistrationsController < Devise::RegistrationsController
   # サインアップ(新規登録)したお客様
   # def after_sign_up_path_for(resource)
@@ -44,7 +43,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
 
   # 新規登録後はマイページに移動
   def after_sign_up_path_for(resource)
-	  customer_path(current_customer.id)
+	  public_customer_path(current_customer.id)
   end
 
   protected

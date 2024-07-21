@@ -23,12 +23,12 @@
                   <!--  <%# end %>-->
                   <!--</td>-->
                   <td>
-                    <%= link_to book_store.neme, book_store do %>
+                    <%= link_to new_book_store_path(book_store) do %>
                     <%#=book.title %>
                     <% end %>
                   </td>
                   <td>
-                      <%= book.body%>
+                      <%= book_store.name%>
                   </td>
                 </tr>
               <% end %>

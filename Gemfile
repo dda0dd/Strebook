@@ -68,3 +68,6 @@ end
 gem "net-smtp"
 gem "net-pop"
 gem "net-imap"
+
+# kaminari(ページネーション)導入で下記記述
+gem 'kaminari', '~> 1.2.1'
