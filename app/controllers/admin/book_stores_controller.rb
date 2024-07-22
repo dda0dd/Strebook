@@ -9,7 +9,7 @@ class Admin::BookStoresController < ApplicationController
   def show
     @book_store = BookStore.find(params[:id])
     # @book_storeを定義
-    @book_store = current_book_store
+    # @book_store = current_book_store
     @book_store_new = BookStore.new
   end
   # バリデーションの設定

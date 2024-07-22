@@ -7,7 +7,7 @@ class Public::PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @book_store = @post.book_store
-    @thoughtse_comments = ThoughtseComment.all.page(params[:page]).per(5)
+    @thoughtse_comments = @post.thoughtse_comments.all.page(params[:page]).per(5)
     @thoughtse_comment = ThoughtseComment.new
   end
 

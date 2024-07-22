@@ -38,7 +38,7 @@
             <!--book_storeに紐づいているimageをimage_tagに渡して画像を表示する-->
             <td><%= image_tag @book_store.image, size: "200x200" %></td>
             <% else %>
-            <td><%= image_tag 'no_image', size: "200x200" %></td>
+            <td><%= image_tag 'no_image.jpg', size: "200x200" %></td>
             <% end %>
           </tr>
         </table>
@@ -55,9 +55,9 @@
             <tr>
               <td><%= post.title %></td>
               <!--投稿に紐づく感想コメントが見られるページ(book_store/comments/search)に遷移-->
-              <%= link_to book_store_post_search_path(post) do %>
-              <td><%= post.content %></td>
-              <% end %>
+              <%#= link_to book_store_book_store_post_comments_path(post.book_store, post) do %>
+              <td><%= link_to post.content, book_store_book_store_post_comments_path(post.book_store, post) %></td>
+              <%# end %>
             </tr>
             <% end %>
             </table>

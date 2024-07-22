@@ -3,7 +3,7 @@ class Admin::PostsController < ApplicationController
   def index
     @posts = Post.all.page(params[:page]).per(5)
   end
-  
+
     # リクエストコメントの一覧に削除ボタン設置して削除
   def destroy
     @post = Post.find(params[:id])
@@ -11,7 +11,7 @@ class Admin::PostsController < ApplicationController
     # コメント削除後は行う前(admin/posts/index）に遷移記述
     redirect_to admin_posts_path
   end
-  
+
   def search
     # 検索フォームから情報を受け取る params[:range](検索モデル)
     # searches/search.htmlの"<%= @word %>"を定義

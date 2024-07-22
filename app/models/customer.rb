@@ -23,6 +23,6 @@ class Customer < ApplicationRecord
     def guest?
       #ゲストログイン時はif~end内を表示しない(==論理演算子の比較の意味)
         # nameがguestcustomerの場合はcustomers/showの23行目が実行される
-      name == "guest_customer"
+      name == "guestcustomer"
     end
 end

@@ -21,7 +21,7 @@ class Public::CustomersController < ApplicationController
     customer = current_customer
     customer.update(customer_params)
     # リダイレクト先に会員(お客様)マイページ
-    redirect_to customer_path(params[:id])
+    redirect_to public_customer_path(params[:id])
   end
   # unsubscribe.htmlのlink_toでcurrent_customerを記述しているのでcontrollerに記述不要
   def unsubscribe
