@@ -28,7 +28,7 @@
             <tr>
               <td><%= thoughtse_comment.content %></td>
               <td><%= thoughtse_comment.evaluation_score %></td>
-              <td><%= link_to "削除", admin_comment_path(@thoughtse_comments), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger float-end", remote: true %></td>
+              <td><%= link_to "削除", admin_comment_path(@thoughtse_comments), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger float-end" %></td>
             </tr>
           <% end %>
         </tbody>

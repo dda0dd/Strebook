@@ -43,7 +43,7 @@
                     <% end %>
                   </td>
                   <td>
-                    <%= link_to "削除", admin_post_path(post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger float-end", remote: true %>
+                    <%= link_to "削除", admin_post_path(post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger float-end" %>
                   </td>
                 </tr>
               <% end %>
@@ -54,4 +54,3 @@
 </div>
 <!--kaminari(ページネーション)記述-->
 <%= paginate @posts %>
-<%= @posts.inspect %>

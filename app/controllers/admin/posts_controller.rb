@@ -8,8 +8,8 @@ class Admin::PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    # コメント削除後は行う前（books/show）に遷移記述
-        # redirect_to book_path(params[:book_id])
+    # コメント削除後は行う前(admin/posts/index）に遷移記述
+    redirect_to admin_posts_path
   end
   
   def search
@@ -23,7 +23,8 @@ class Admin::PostsController < ApplicationController
       # book_stores_ids = BookStore.where("address LIKE?", "%#{@word}%").pluck(:id)
       # where=Postの中(右の括弧内)を検索する
         # book_store_idでbook_store_idsを検索する
-      @posts = Post.where("content LIKE?", "%#{@word}%")
+          # 検索結果にもページネーション反映させるため.page(params[:page]).per(5)追記
+      @posts = Post.where("content LIKE?", "%#{@word}%").page(params[:page]).per(5)
     # 検索後に検索結果を下記ページに表示(検索後の遷移先)
     render "admin/posts/index"
   end

@@ -23,7 +23,8 @@ class Public::PostsController < ApplicationController
       book_stores_ids = BookStore.where("address LIKE?", "%#{@word}%").pluck(:id)
       # where=Postの中(右の括弧内)を検索する
         # book_store_idでbook_store_idsを検索する
-      @posts = Post.where(book_store_id: book_stores_ids)
+          # 検索結果にもページネーション反映させるため.page(params[:page]).per(5)追記
+      @posts = Post.where(book_store_id: book_stores_ids).page(params[:page]).per(5)
     # 検索後に検索結果を下記ページに表示(検索後の遷移先)
     render "public/posts/index"
   end
