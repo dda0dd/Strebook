@@ -41,10 +41,12 @@ class Admin::BookStoresController < ApplicationController
       @word = params[:is_active]
       # 条件分岐(有効か退会時はif~end内実行する)
       if @word.present?
-       @book_stores = BookStore.where(is_active: @word)
+        # 検索結果にもページネーション反映させるため.page(params[:page]).per(5)追記
+        @book_stores = BookStore.where(is_active: @word).page(params[:page]).per(5)
       else
-      # 上記の条件に当てはまらない時は下記実行する
-       @book_stores = BookStore.all
+        # 上記の条件に当てはまらない時は下記実行する
+          # 検索結果にもページネーション反映させるため.page(params[:page]).per(5)追記
+        @book_stores = BookStore.all.page(params[:page]).per(5)
       end
       # 検索フォームから情報を受け取るparams[:word](検索ワード)
         # pluck(:id)でIDだけ持ってくる

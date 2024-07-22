@@ -2,44 +2,48 @@
 <div class="container">
   <div class="row">
     <div class="col">
-        <h2 class="mx-3 my-5 text-secondary border border-3 rounded-top col-3 text-center">書店一覧</h2>
-<!--有効か退会かを検索できる検索窓設置-->
-<% if admin_signed_in? %>
-  <div class="search_form">
-    <!--url: search_public_posts_path=検索内容をresources :postsのget 'search'に送信-->
-    <%= form_with url: search_admin_book_stores_path, local: true, method: :get do |f| %>
-      <!--検索内容をwordとしてdef searchアクションに送る-->
-        <!--ブルダウン実装:カラム名, [["表示する値", 送る値]], ""の文字を表示させる-->
-      <%= f.select :is_active, [["有効", true], ["退会", false]], include_blank: "全て" %>
-      <!--"btn"箇所=検索ボタン記述-->
-        <!--style: =Bootstrap内でのCSS記述（<div>や<link_to>内では上手く動作しないことも）カスタマイズツールなどある-->
-      <%= f.submit "検索", class: "btn btn-outline-secondary", style: "padding:0;" %>
-    <% end %>
-  </div>
-<% end %>
- <table class="table table-hover align-middle text-secondary">
-  <thead>
-    <tr>
-      <th>書店ID</th>
-      <th>書店名</th>
-      <th>ステータス</th>
-    </tr>
-  </thead>
-  <% @book_stores.each do |book_store| %>
-    <tr>
-      <!--会員(書店)ID-->
-      <td><%= book_store.id %></td>
-        <!--書店名表示のためのメソッドを定義して、それをリンクにする-->
-      <td><%= link_to book_store.name, admin_book_store_path(book_store.id) %></td>
-      <!--ステータス-->
-        <!--No Method Error発生でdeletedをactiveに変更-->
-          <!--三項演算子は式、true、falseの順-->
-      <td class="<%= book_store.is_active ? 'text-green' : 'text-gray' %>"><%= book_store.is_active ? '有効' : '退会' %></td>
-    </tr>
-  <% end %>
-</table>
+      <h2 class="mx-3 my-5 text-secondary border border-3 rounded-top col-3 text-center">書店一覧</h2>
+      <table class="table table-hover align-middle text-secondary">
+        <thead>
+          <tr>
+            <th>書店ID</th>
+            <th>書店名</th>
+            <th>ステータス</th>
+            <!--有効か退会かを検索できる検索窓設置-->
+            <% if admin_signed_in? %>
+              <th>
+                <!--url: search_public_posts_path=検索内容をresources :postsのget 'search'に送信-->
+                <%= form_with url: search_admin_book_stores_path, local: true, method: :get do |f| %>
+                  <!--検索内容をwordとしてdef searchアクションに送る-->
+                    <!--ブルダウン実装:カラム名, [["表示する値", 送る値]], ""の文字を表示させる-->
+                  <%= f.select :is_active, [["有効", true], ["退会", false]], include_blank: "全て" %>
+                  <!--"btn"箇所=検索ボタン記述-->
+                    <!--style: =Bootstrap内でのCSS記述（<div>や<link_to>内では上手く動作しないことも）カスタマイズツールなどある-->
+                  <%= f.submit "検索", class: "btn btn-outline-secondary", style: "padding:0;" %>
+                <% end %>
+              </th>
+            <% end %>
+          </tr>
+        </thead>
+        <% @book_stores.each do |book_store| %>
+          <tr>
+            <!--会員(書店)ID-->
+            <td>
+              <%= book_store.id %>
+            </td>
+            <!--書店名表示のためのメソッドを定義して、それをリンクにする-->
+            <td>
+              <%= link_to book_store.name, admin_book_store_path(book_store.id) %>
+            </td>
+            <!--ステータス-->
+              <!--No Method Error発生でdeletedをactiveに変更-->
+                <!--三項演算子は式、true、falseの順-->
+            <td class="<%= book_store.is_active ? 'text-green' : 'text-gray' %>"><%= book_store.is_active ? '有効' : '退会' %></td>
+          </tr>
+        <% end %>
+      </table>
+      <!--kaminari(ページネーション)記述-->
+      <%= paginate @book_stores %>
     </div>
   </div>
 </div>
-<!--kaminari(ページネーション)記述-->
-<%= paginate @book_stores %>

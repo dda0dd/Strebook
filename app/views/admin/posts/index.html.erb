@@ -2,55 +2,55 @@
   <div class="row">
     <div class="col">
       <h2 class="mx-3  my-3 text-secondary border border-3 rounded-top col-3 text-center">書店投稿一覧</h2>
-        <!--ワード(不適切な言葉など)で投稿を検索できる検索窓設置-->
-        <% if admin_signed_in? %>
-          <div class="search_form">
-            <!--url: search_public_posts_path=検索内容をresources :postsのget 'search'に送信-->
-            <%= form_with url: search_admin_posts_path, local: true, method: :get do |f| %>
-              <!--検索内容をwordとしてdef searchアクションに送る-->
-              <%= f.text_field :word %>
-              <!--"btn"箇所=検索ボタン記述-->
-                <!--style: =Bootstrap内でのCSS記述（<div>や<link_to>内では上手く動作しないことも）カスタマイズツールなどある-->
-              <%= f.submit "検索", class: "btn btn-outline-secondary", style: "padding:0;" %>
+      <table class="mx-3 my-3 table table-hover table-inverse align-middle text-secondary">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Content</th>
+            <!--ワード(不適切な言葉など)で投稿を検索できる検索窓設置-->
+            <% if admin_signed_in? %>
+              <th>
+                <!--url: search_public_posts_path=検索内容をresources :postsのget 'search'に送信-->
+                <%= form_with url: search_admin_posts_path, local: true, method: :get do |f| %>
+                  <!--検索内容をwordとしてdef searchアクションに送る-->
+                  <%= f.text_field :word %>
+                  <!--"btn"箇所=検索ボタン記述-->
+                    <!--style: =Bootstrap内でのCSS記述（<div>や<link_to>内では上手く動作しないことも）カスタマイズツールなどある-->
+                  <%= f.submit "検索", class: "btn btn-outline-secondary", style: "padding:0;" %>
+                <% end %>
+              </th>
             <% end %>
-          </div>
-        <% end %>
-          <table class="mx-3 my-3 table table-hover table-inverse align-middle text-secondary">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Content</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!--複数のデータを登録する記述-->
-              <% @posts.each do |post| %>
-                <tr>
-                  <!--<td>-->
-                  <!--  <%#= link_to user_path(book.user) do %>-->
-                  <!--  <%#= image_tag book.user.get_profile_image(100,100) %>-->
-                  <!--  <%# end %>-->
-                  <!--</td>-->
-                  <td>
-                    <%#= link_to public_book_store_path(post.book_store) do %>
-                      <%= post.title %>
-                    <%# end %>
-                  </td>
-                  <td>
-                    <!--感想コメント作成・特定の投稿に紐づく感想コメント一覧表示ページに遷移(public/posts/show)-->
-                    <%= link_to admin_comments_path(id: post.id) do %>
-                      <%= post.content %>
-                    <% end %>
-                  </td>
-                  <td>
-                    <%= link_to "削除", admin_post_path(post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger float-end" %>
-                  </td>
-                </tr>
+          </tr>
+        </thead>
+        <tbody>
+        <!--複数のデータを登録する記述-->
+        <% @posts.each do |post| %>
+          <tr>
+            <!--<td>-->
+              <!--  <%#= link_to user_path(book.user) do %>-->
+              <!--  <%#= image_tag book.user.get_profile_image(100,100) %>-->
+              <!--  <%# end %>-->
+            <!--</td>-->
+            <td>
+              <%#= link_to public_book_store_path(post.book_store) do %>
+                <%= post.title %>
+              <%# end %>
+            </td>
+            <td>
+              <!--感想コメント作成・特定の投稿に紐づく感想コメント一覧表示ページに遷移(public/posts/show)-->
+              <%= link_to admin_comments_path(id: post.id) do %>
+                <%= post.content %>
               <% end %>
-            </tbody>
-          </table>
+            </td>
+            <td>
+              <%= link_to "削除", admin_post_path(post), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger float-end" %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <!--kaminari(ページネーション)記述-->
+      <%= paginate @posts %>
     </div>
   </div>
 </div>
-<!--kaminari(ページネーション)記述-->
-<%= paginate @posts %>

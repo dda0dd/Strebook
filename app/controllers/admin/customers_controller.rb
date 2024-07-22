@@ -53,9 +53,11 @@ class Admin::CustomersController < ApplicationController
           # ("address LIKE?", "%#{@word}%")で部分一致検索
             # 下記はwhere変数で{}内にBookStoreの検索結果からpluck(:id)でbook_store_idだけを持ってくる
       if @word.present?
-        @customers = Customer.where(is_active: @word)
+        # 検索結果にもページネーション反映させるため.page(params[:page]).per(5)追記
+        @customers = Customer.where(is_active: @word).page(params[:page]).per(5)
       else
-        @customers = Customer.all
+        # 検索結果にもページネーション反映させるため.page(params[:page]).per(5)追記
+        @customers = Customer.all.page(params[:page]).per(5)
       end
       # where=Postの中(右の括弧内)を検索する
         # book_store_idでbook_store_idsを検索する

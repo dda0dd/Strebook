@@ -46,8 +46,10 @@
               <% end %>
             </tbody>
           </table>
+          <!--kaminari(ページネーション)導入で下記追記-->
+          <div class="mx-3">
+            <%= paginate @request_comments %>
+          </div>
         </div>
       </div>
     </div>
-          <!--kaminari(ページネーション)導入で下記追記-->
-          <%= paginate @request_comments %>

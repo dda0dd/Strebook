@@ -62,8 +62,10 @@
             <% end %>
             </table>
           </tbody>
+          <!--kaminari(ページネーション)記述-->
+          <div class="mx-3">
+            <%= paginate @posts %>
+          </div>
         </div>
       </div>
     </div>
-    <!--kaminari(ページネーション)記述-->
-    <%= paginate @posts %>

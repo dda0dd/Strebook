@@ -9,8 +9,8 @@ class Admin::RequestCommentsController < ApplicationController
   def destroy
     @request_comment = RequestComment.find(params[:id])
     @request_comment.destroy
-    # コメント削除後は行う前（books/show）に遷移記述
-        # redirect_to book_path(params[:book_id])
+    # コメント削除後は行う前（admin/request_comments/index）に遷移記述
+    redirect_to admin_request_comments_path
   end
 
   def search
