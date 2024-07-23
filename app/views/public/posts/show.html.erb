@@ -12,15 +12,38 @@
           <%= f.label :content, "感想" %>
           <%= f.text_area :content, rows: '8', class: "form-control" %>
         </div>
-
-        <div class="mx-3 my-3 text-secondary">
-          <%= f.label :evaluation_score, "評価" %>
-          <%= f.select :evaluation_score, (1..5), { include_blank: "評価を選ぶ" }, { class: "form-control" } %>
+        <!--レビュー機能を表示(星で5段階評価)-->
+        <div class="mx-3 my-3 text-secondary" id="star">
+          <%= f.label :"評価" %>
+          <%= f.hidden_field :star, id: :review_star, class: 'form-control' %>
+          <div id="post_raty"></div>
         </div>
+
+        <!--<div class="mx-3 my-3 text-secondary">-->
+        <!--  <%#= f.label :evaluation_score, "評価" %>-->
+        <!--  <%#= f.select :evaluation_score, (1..5), { include_blank: "評価を選ぶ" }, { class: "form-control" } %>-->
+        <!--</div>-->
         <%= f.submit "感想コメント", class:"mx-3 my-3 btn btn-outline-primary btn-sm" %>
+
+        <script>
+          $(document).on('turbolinks:load', function() {
+            let elem = document.querySelector('#post_raty');
+            if (elem == null) return;
+
+            elem.innerHTML = ""
+            let opt = {
+              starOn: "<%= asset_path('star-on.png') %>",
+              starOff: "<%= asset_path('star-off.png') %>",
+              starHalf: "<%= asset_path('star-half.png') %>",
+              scoreName: 'book[star]',
+            };
+            raty(elem, opt);
+          });
+        </script>
+      <!--form_with内にf.labelなどfは入れないとエラー原因になる-->
       <% end %>
     </div>
-
+    <!--書店投稿から遷移して確認できるページ-->
     <div class="col-md-8">
       <h3 class="mx-3  my-3 text-secondary border border-3 rounded-top col-7 text-center">感想コメント一覧</h3>
       <!--特定投稿に紐づく感想コメント一覧-->
@@ -40,8 +63,8 @@
           <% end %>
         </tbody>
       </table>
+      <!--kaminari(ページネーション)記述-->
+      <%= paginate @thoughtse_comments %>
     </div>
   </div>
 </div>
-<!--kaminari(ページネーション)記述-->
-<%= paginate @thoughtse_comments %>

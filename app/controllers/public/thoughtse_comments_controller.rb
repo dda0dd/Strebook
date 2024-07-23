@@ -30,6 +30,7 @@ class Public::ThoughtseCommentsController < ApplicationController
    private
 
   def thoughtse_comment_params
-    params.require(:thoughtse_comment).permit(:content, :post_id, :evaluation_score)
+    # starカラム追加したので保存できるようにデータ操作許可(permitに:starで追加で保存できる)
+    params.require(:thoughtse_comment).permit(:content, :post_id, :evaluation_score, :star)
   end
 end
