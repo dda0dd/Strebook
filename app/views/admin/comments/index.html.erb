@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-<div class="col-md-8">
+    <div class="col-md-8">
       <h3 class="mx-3  my-3 text-secondary border border-3 rounded-top col-7 text-center">感想コメント一覧</h3>
         <!--ワード(不適切な言葉など)で感想コメントを検索できる検索窓設置-->
         <% if admin_signed_in? %>
@@ -27,9 +27,26 @@
           <% @thoughtse_comments.each do |thoughtse_comment|%>
             <tr>
               <td><%= thoughtse_comment.content %></td>
-              <td><%= thoughtse_comment.evaluation_score %></td>
+              <td><%#= thoughtse_comment.evaluation_score %></td>
+              <td id="show_raty<%= thoughtse_comment.id %>">></td>
               <td><%= link_to "削除", admin_comment_path(thoughtse_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger float-end" %></td>
             </tr>
+            <script>
+              $(document).on('turbolinks:load', function() {
+                let elem = document.querySelector('#show_raty<%= thoughtse_comment.id %>');
+                if (elem == null) return;
+                
+                elem.innerHTML = "";
+                let opt = {  
+                  starOn: "<%= asset_path('star-on.png') %>",
+                  starOff: "<%= asset_path('star-off.png') %>",
+                  starHalf: "<%= asset_path('star-half.png') %>",
+                  score: "<%= thoughtse_comment.evaluation_score %>",
+                  readOnly: true,
+                };
+                raty(elem, opt);
+              });
+            </script>
           <% end %>
 
         </tbody>

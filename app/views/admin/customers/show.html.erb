@@ -30,7 +30,7 @@
         </tr>
         <tr>
           <td></td>
-          <td><%= link_to "退会", unsubscribe_public_customers_path, data: { confirm: "退会してもよろしいですか？" }, class:"btn btn-outline-success ml-2 btn-sm" %>
+          <td><%= link_to "退会", unsubscribe_admin_customer_path(@customer), class:"btn btn-outline-success ml-2 btn-sm" %>
         </tr>
       </table>
     </div>

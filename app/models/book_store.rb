@@ -5,6 +5,9 @@ class BookStore < ApplicationRecord
          :recoverable, :rememberable
   # バリデーション記載(書店名が空の場合はバリデーション実行される)全てのモデルにバリデーション
   validates :name, presence: true
+  validates :age, presence: true
+  validates :address, presence: true
+  validates :telephone_number, presence: true
     # guest/sessions_controller.rbの.guestメソッドを定義
     def self.guest
       # データの検索・作成を自動で判断して処理する(!=処理失敗時にエラー発生させる)

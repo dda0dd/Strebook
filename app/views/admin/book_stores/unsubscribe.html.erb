@@ -1,0 +1,14 @@
+<!--会員(書店)退会画面-->
+<div class="container">
+  <div class="row">
+    <div class="col">
+			<h3 class="mx-3  my-5 text-secondary border border-3 rounded-top col-5 text-center" alt="...">本当に退会されますか？</h3>
+<!--会員(書店)マイページに遷移-->
+<!--current_book_storeなのでbook_stores_controllerのunsubscribeには@book_storeなどの記述不要-->
+			<%= link_to "退会しない", admin_book_store_path(@book_store), class:"btn btn-outline-primary ml-2 btn-sm" %>
+<!--退会後は会員(書店)管理者書店一覧画面に遷移-->
+<!--data: { confirm: "退会してもよろしいですか？" }=退会するボタン押した後確認メッセージ表示させる-->
+			<%= link_to "退会する", withdraw_admin_book_store_path(@book_store), method: :patch, data: { confirm: "退会ボタンです。このまま実行されますか？" }, class:"btn btn-outline-danger ml-1" %>
+		</div>
+  </div>
+</div>

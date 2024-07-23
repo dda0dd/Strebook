@@ -15,7 +15,7 @@
         <!--レビュー機能を表示(星で5段階評価)-->
         <div class="mx-3 my-3 text-secondary" id="star">
           <%= f.label :"評価" %>
-          <%= f.hidden_field :star, id: :review_star, class: 'form-control' %>
+          <%= f.hidden_field :evaluation_score, id: :review_star, class: 'form-control' %>
           <div id="post_raty"></div>
         </div>
 
@@ -35,7 +35,7 @@
               starOn: "<%= asset_path('star-on.png') %>",
               starOff: "<%= asset_path('star-off.png') %>",
               starHalf: "<%= asset_path('star-half.png') %>",
-              scoreName: 'book[star]',
+              scoreName: 'thoughtse_comment[evaluation_score]',
             };
             raty(elem, opt);
           });
@@ -58,8 +58,24 @@
           <% @thoughtse_comments.each do |thoughtse_comment|%>
             <tr>
               <td><%= thoughtse_comment.content %></td>
-              <td><%= thoughtse_comment.evaluation_score %></td>
+              <td id="show_raty<%= thoughtse_comment.id %>"></td>
             </tr>
+            <script>
+              $(document).on('turbolinks:load', function() {
+                let elem = document.querySelector('#show_raty<%= thoughtse_comment.id %>');
+                if (elem == null) return;
+    
+                elem.innerHTML = ""
+                let opt = {
+                  starOn: "<%= asset_path('star-on.png') %>",
+                  starOff: "<%= asset_path('star-off.png') %>",
+                  starHalf: "<%= asset_path('star-half.png') %>",
+                  readOnly: true,
+                  score: <%= thoughtse_comment.evaluation_score %>
+                };
+                raty(elem, opt);
+              });
+        </script>
           <% end %>
         </tbody>
       </table>

@@ -27,7 +27,7 @@ class BookStore::BookStoresController < ApplicationController
       render "book_store/book_stores/edit"
     end
   end
-   # unsubscribe.htmlのlink_toでcurrent_book_storeを記述しているのでcontrollerに記述不要
+  # unsubscribe.htmlのlink_toでcurrent_book_storeを記述しているのでcontrollerに記述不要
   def unsubscribe
   end
 

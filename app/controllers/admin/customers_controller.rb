@@ -43,6 +43,18 @@ class Admin::CustomersController < ApplicationController
       render :edit
     end
   end
+  # unsubscribe.htmlのlink_toでcurrent_book_storeを記述しているのでcontrollerに記述不要
+  def unsubscribe
+     @customer = Customer.find(params[:id])
+  end
+
+  def withdraw
+    customer = Customer.find(params[:id])
+    customer.update(is_active: false)
+    # reset_session
+    #管理者のお客様一覧画面に遷移
+    redirect_to admin_customers_path
+  end
 
   def search
     # 検索フォームから情報を受け取る params[:range](検索モデル)

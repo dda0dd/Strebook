@@ -20,6 +20,18 @@ class Admin::BookStoresController < ApplicationController
       redirect_to book_stores_path
     end
   end
+  # unsubscribe.htmlのlink_toでcurrent_book_storeを記述しているのでcontrollerに記述不要
+  def unsubscribe
+    @book_store = BookStore.find(params[:id])
+  end
+  
+  def withdraw
+    book_store = BookStore.find(params[:id])
+    book_store.update(is_active: false)
+    # reset_session
+    #管理者の書店一覧画面に遷移
+    redirect_to admin_book_stores_path
+  end
   # # 書店情報更新の設定を記述
   # def update
   #   # フォームに入力されたデータ(body,title,image)が@bookに格納される

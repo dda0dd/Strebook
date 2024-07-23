@@ -115,6 +115,11 @@ Rails.application.routes.draw do
 	  #お客様詳細情報(管理者)
     resources :customers, only: [:index, :show, :destroy] do
       # お客様一覧で有効か退会かの検索窓設置
+        # adminでお客様を退会できるように追記
+      member do
+        get 'unsubscribe'
+        patch 'withdraw'
+      end
       collection do
         get 'search'
       end
@@ -123,14 +128,19 @@ Rails.application.routes.draw do
 	  resources :comments, only: [:index, :show, :destroy] do
 	   # 投稿に紐づく感想コメント一覧で不適切なワード検索窓設置
 	   collection do
-	     get 'search'
+      get 'search'
 	   end
 	  end
 	  #書店詳細情報(管理者)
 	  resources :book_stores, only: [:index, :show, :destroy] do
 	   # 書店一覧で有効か退会かの検索窓を設置
+	   # adminで書店を退会できるように追記
+	   member do
+	    get 'unsubscribe'
+      patch 'withdraw'
+    end
 	   collection do
-	     get 'search'
+	    get 'search'
 	   end
 	  end
 	 # 投稿一覧

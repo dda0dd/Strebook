@@ -5,7 +5,10 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable
     # バリデーション記載(空の時に実行される)
     validates :name, presence: true
-
+    validates :age, presence: true
+    validates :address, presence: true
+    validates :occupation, presence: true
+    
     has_many :request_comments
     has_many :thoughtse_comments
     # guest/sessions_controller.rbの.guestメソッドを定義

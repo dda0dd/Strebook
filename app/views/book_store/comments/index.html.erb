@@ -16,10 +16,10 @@
               <%= thoughtse_comment.content %>
             </td>
             <td>
-              <%= thoughtse_comment.evaluation_score %>
+              <%#= thoughtse_comment.evaluation_score %>
             </td>
             <!--感想コメント時にレビューされた(5段階評価)を表示-->
-            <td id="star_<%= post.id %>"></td>
+            <td id="index_raty<%= thoughtse_comment.id %>"></td>
             <!--<div id="star_<%#= book.id %>"></div>-->
           <% end %>
           </tbody>
@@ -31,7 +31,7 @@
 </div>
 <script>
 $(document).on('turbolinks:load', function() {
-  let elem = document.querySelector('#star_<%= book.id %>');
+  let elem = document.querySelector('#index_raty<%= thoughtse_comment.id %>');
   if (elem == null) return;
   
   elem.innerHTML = "";
@@ -39,7 +39,7 @@ $(document).on('turbolinks:load', function() {
     starOn: "<%= asset_path('star-on.png') %>",
     starOff: "<%= asset_path('star-off.png') %>",
     starHalf: "<%= asset_path('star-half.png') %>",
-    score: "<%= book.star %>",
+    score: "<%= thoughtse_comment.evaluation_score %>",
     readOnly: true,
   };
   raty(elem, opt);

@@ -20,7 +20,8 @@
               <td>
                 <!--新規登録時に住所(都道府県のみ)記載してもらう-->
                 <%= f.label :address, "住所" %><br />
-                <%= f.text_field :address, autofocus: true, placefield: "大阪府", placeholder: "大阪府" %>
+                <!--都道府県を選択してもらう形に設定(helpers/application_helper.rbに都道府県情報記載)-->
+                <%= f.select :address, options_for_select(prefecture_options), { include_blank: '選択してください' } %>
               </td>
             </tr>
             <tr>

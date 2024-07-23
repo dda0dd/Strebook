@@ -19,6 +19,8 @@ class BookStore::PostsController < ApplicationController
     @post.book_store_id = current_book_store.id
     # save（保存のメソッド）
     if @post.save
+      # タグの保存
+      @post.save_tags(params[:post][:tag])
       # フラッシュメッセージ(book_stores/showへリンク)if~end
       flash[:notice] = "You have created book successfully."
       # アクションを通してviewを指定（redirect_to）
@@ -40,6 +42,8 @@ class BookStore::PostsController < ApplicationController
   def update
     @book_store = Book_store.find(params[:id])
     if @book_store.update(book_store_params)
+      # タグの更新
+      @post.save_tags(params[:post][:tag])
       flash[:notice] = "You have updated the book_store successfully."
       redirect_to book_store_path(@book_store)
     else
