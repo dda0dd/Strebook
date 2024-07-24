@@ -3,32 +3,32 @@
   <header class="shadow-sm">
   	<nav class="navbar navbar-expand-lg navbar-light bg-light">
   	  <div class="container">
-				<span class="border border-5 rounded-pill px-3 py-2">
-					<%= link_to "Strebook", root_path, class:"text-secondary" %>
-				</span>
+				<!--<span class="border border-5 rounded-pill px-3 py-2">-->
+					<%#= link_to "Strebook", root_path, class:"text-secondary" %>
+				<!--</span>-->
 					<!--お客様ログイン時のヘッダー-->
-					<% if customer_signed_in? %>
+					<% if customer_signed_in? && !current_customer.guest? %>
 	        <!--<div class="text-secondary mx-3 my-3">-->
 					<!--	<b>ようこそ、<%#= current_customer.last_name %>さん！</b>-->
 					<!--</div>-->
 					  <!--マイページリンク-->
 					  <%= link_to "マイページ", public_customer_path(current_customer), class:"text-secondary" %>
 					  <!--投稿一覧リンク-->
-					  <%= link_to "投稿一覧", public_posts_path %>
+					  <%= link_to "投稿一覧", public_posts_path, class:"text-secondary" %>
 					  <!--リクエストリンク-->
-					  <%= link_to "リクエスト", new_public_request_comment_path %>
+					  <%= link_to "リクエスト", new_public_request_comment_path, class:"text-secondary" %>
 					  <!--ログアウトリンク-->
-					  <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+					  <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"text-secondary" %>
 					<!--書店ログイン時のヘッダー-->
-					<% elsif book_store_signed_in? %>
+					<% elsif book_store_signed_in? && !current_book_store.guest? %>
 					  <!--マイページリンク-->
 					  <%= link_to "マイページ", book_store_book_store_path(current_book_store), class:"text-secondary" %>
 					  <!--リクエスト一覧リンク-->
-					  <%= link_to "リクエスト一覧", book_store_request_comments_path %>
+					  <%= link_to "リクエスト一覧", book_store_request_comments_path, class:"text-secondary" %>
 					  <!--投稿リンク-->
-					  <%= link_to "投稿", new_book_store_post_path %>
+					  <%= link_to "投稿", new_book_store_post_path, class:"text-secondary" %>
 					  <!--ログアウトリンク-->
-					  <%= link_to "ログアウト", destroy_book_store_session_path, method: :delete %>
+					  <%= link_to "ログアウト", destroy_book_store_session_path, method: :delete, class:"text-secondary" %>
 					<!--サイト管理者ログイン時のヘッダー-->
 					<% elsif admin_signed_in? %>
 						<!--お客様一覧リンク-->
@@ -45,19 +45,19 @@
 	        	<!--elsifは3つ以上の条件分岐実装時に使用-->
 					<% elsif customer_signed_in? && current_customer.guest? %>
 					  <!--マイページリンク-->
-					  <%= link_to "マイページ", guest_customer_path(current_customer), class:"text-secondary" %>
+					  <%= link_to "マイページ", public_customer_path(current_customer), class:"text-secondary" %>
 					  <!--投稿一覧リンク-->
-					  <%= link_to "投稿一覧", guest_customer_posts_path %>
+					  <%= link_to "投稿一覧", public_posts_path, class:"text-secondary" %>
 					  <!--ログアウトリンク-->
-					  <%= link_to "ログアウト", destroy_guest_customer_session_path, method: :delete %>
+					  <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"text-secondary" %>
 					<!--ゲストログイン時のヘッダー-->
 					<% elsif book_store_signed_in? && current_book_store.guest? %>
 					  <!--マイページリンク-->
-					  <%= link_to "マイページ", guest_book_store_path(current_book_store), class:"text-secondary" %>
+					  <%= link_to "マイページ", book_store_book_store_path(current_book_store), class:"text-secondary" %>
 					  <!--リクエスト一覧リンク-->
-					  <%= link_to "リクエスト一覧", guest_book_store_request_comments_path %>
+					  <%= link_to "リクエスト一覧", book_store_request_comments_path, class:"text-secondary" %>
 					  <!--ログアウトリンク-->
-					  <%= link_to "ログアウト", destroy_guest_book_store_session_path, method: :delete %>
+					  <%= link_to "ログアウト", destroy_book_store_session_path, method: :delete, class:"text-secondary" %>
 					<!--誰もログインしていない時のヘッダー-->
 					<% else %>
 						<!--Aboutリンク-->

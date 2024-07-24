@@ -19,6 +19,8 @@ Rails.application.routes.draw do
       resources :posts do
         resources :comments, only: [:index]
       end
+      #タグ作成, 取得, 削除(管理者で削除できた方がいい？)createいらないかも？
+      resources :tags, only: [:index, :create, :destroy]
       collection do
         get 'unsubscribe'
         patch 'withdraw'
@@ -36,8 +38,6 @@ Rails.application.routes.draw do
         # delete 'destroy_all'
         # end
       # end
-      #タグ作成, 取得, 削除(管理者で削除できた方がいい？)createいらないかも？
-      resources :tags, only: [:index, :create, :destroy]
         # collection do
         #   get 'thanks'
         # end

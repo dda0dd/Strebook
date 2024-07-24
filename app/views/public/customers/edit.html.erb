@@ -1,26 +1,33 @@
 <!--会員(お客様)情報編集画面-->
-<%= form_with model:@customer, url: public_customer_path(@customer), local:true do |f| %>
-  <table class="table table-borderless text-secondary">
-    <tr>
-      <td>ニックネーム</td>
-      <td><%= f.text_field :name, class:"border border-secondary form-text text-muted form-control-sm" %></td>
-    </tr>
-    <tr>
-      <td>年齢</td>
-      <td><%= f.text_field :age, class:"border border-secondary form-text text-muted form-control-sm" %></td>
-    </tr>
-    <tr>
-      <td>職業</td>
-      <td><%= f.text_field :occupation, class:"border border-secondary form-text text-muted form-control-sm" %></td>
-    </tr>
-    <tr>
-      <td>住所</td>
-      <td><%= f.text_field :address, class:"border border-secondary form-text text-muted form-control-sm" %></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td><%= f.submit "編集内容を保存", class:"btn btn-outline-success" %></td>
-    </tr>
-  </table>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h3 class="mx-1 my-5 text-secondary border-bottom col-3"><b>マイページ編集</b></h3>
+      <%= form_with model:@customer, url: public_customer_path(@customer), local:true do |f| %>
+        <table class="table table-borderless text-secondary">
+          <tr>
+            <td><%= f.label :name, "ニックネーム", class:"border-bottom" %></td>
+            <td><%= f.text_field :name, class:"border border-secondary text-secondary rounded" %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :age, "年齢", class:"border-bottom" %></td>
+            <td><%= f.text_field :age, class:"border border-secondary text-secondary rounded" %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :occupation, "職業", class:"border-bottom" %></td>
+            <td><%= f.text_field :occupation, class:"border border-secondary text-secondary rounded" %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :address, "住所", class:"border-bottom" %></td>
+            <td><%= f.text_field :address, class:"border border-secondary text-secondary rounded" %></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><%= f.submit "編集内容を保存", class:"btn btn-outline-success btn-sm" %></td>
+          </tr>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>

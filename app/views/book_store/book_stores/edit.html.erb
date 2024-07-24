@@ -26,6 +26,13 @@
       <td><%= f.file_field :image, placeholder: "店内画像", accept: "image/*" %></td>
     </tr>
     <tr>
+      <td><%= f.label :tag, 'タグ' %></td>
+      <%# Edit用に@post.tags.pluck(:name)でタグの配列を取得 %>
+      <td><%= f.text_field :tag, value: f.object.tags.pluck(:name) %><br>
+        <small>スペースで区切ることで複数指定できます。</small>
+      </td>   
+    </tr>
+    <tr>
       <td></td>
       <td><%= f.submit "編集内容を保存", class:"btn btn-outline-success" %></td>
     </tr>

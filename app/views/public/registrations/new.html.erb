@@ -1,47 +1,47 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h4 class="mx-3 my-3 text-secondary border border-3 rounded-top col-3 text-center">新規会員登録</h4>
+      <h3 class="mx-5 my-5 text-secondary border-bottom col-3 text-center"><b>新規会員登録</b></h3>
         <!--form_forをform_withに変更-->
         <%= form_with model: @customer, url: customer_registration_path do |f| %>
         <!--<%#= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>-->
           <!--publicsからpublicにフォルダ名を改名したためpublicsのsを削除-->
             <!--新規登録画面でのエラーメッセージを呼び出し記述-->
           <%= render "public/shared/error_messages", resource: resource %>
-          <table class="field text-secondary mx-3 my-3">
+          <table class="field text-secondary mx-5 my-3">
             <tr>
               <td>
                 <!--emailをnameに変更(ニックネームで新規登録してもらうため)-->
-                <%= f.label :name, "ニックネーム" %><br />
-                <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "はるちゃん" %>
+                <%= f.label :name, "ニックネーム", class:"border-bottom" %><br />
+                <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "はるちゃん", class:"text-secondary border boder-secondary rounded" %>
               </td>
             </tr>
             <tr>
               <td>
                 <!--新規登録時に住所(都道府県のみ)記載してもらう-->
-                <%= f.label :address, "住所" %><br />
+                <%= f.label :address, "住所", class:"border-bottom mt-2" %><br />
                 <!--都道府県を選択してもらう形に設定(helpers/application_helper.rbに都道府県情報記載)-->
-                <%= f.select :address, options_for_select(prefecture_options), { include_blank: '選択してください' } %>
+                <%= f.select :address, options_for_select(prefecture_options), { include_blank: '選択してください' }, class:"text-secondary border boder-secondary rounded" %>
               </td>
             </tr>
             <tr>
               <td>
                 <!--新規登録時に年齢(数字のみ)記載してもらう-->
-                <%= f.label :age, "年齢" %><br />
+                <%= f.label :age, "年齢", class:"border-bottom mt-2" %><br />
                 <%= f.text_field :age, autofocus: true, placefield: "67", placeholder: "67" %>
               </td>
             </tr>
             <tr>
               <td>
                 <!--新規登録時に職業記載してもらう-->
-                <%= f.label :occupation, "職業" %><br />
+                <%= f.label :occupation, "職業", class:"border-bottom mt-2" %><br />
                 <%= f.text_field :occupation, autofocus: true, placefield: "管理職", placeholder: "管理職" %>
               </td>
             </tr>
             <tr>
               <td>
                 <!--新規登録時にパスワード(英数字8文字上)記載してもらう-->
-                <%= f.label :password, "パスワード" %><br />
+                <%= f.label :password, "パスワード", class:"border-bottom mt-2" %><br />
                 <%# if @minimum_password_length %>
                 <!--<em>(<%#= @minimum_password_length %> characters minimum)</em>-->
                 <%# end %>
@@ -50,14 +50,14 @@
             </tr>
             <tr>
               <td>
-                <%= f.label :password_confirmation, "確認用" %><br />
+                <%= f.label :password_confirmation, "確認用", class:"border-bottom mt-2" %><br />
                 <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "半角英数字8文字以上" %>
               </td>
             </tr>
           </table>
           <!--新規登録ボタン設置-->
           <div class="actions">
-            <%= f.submit "新規登録", class:"text-center btn btn-outline-success ml-3 btn-sm" %>
+            <%= f.submit "新規登録", class:"ml-5 mr-3 text-center btn btn-outline-success btn-sm" %>
             <!--publicsからpublicにフォルダ名を改名したためpublicsのsを削除-->
               <!--お客様の会員登録画面呼び出し記述-->
             <%= render "public/shared/links" %>

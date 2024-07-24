@@ -21,6 +21,14 @@
             <td class="bg-light">住所</td>
             <td><%= @book_store.address %></td>
           </tr>
+          <tr>
+            <td class="bg-light">タグ</td>
+            <%# 該当のPostからアソシエーションでタグを取得 %>
+            <% @book_store.tags.each do |tag| %>
+              <%# タグを展開 %>
+              <td><%= link_to tag.name, book_store_book_store_tags_path(@book_store), class:"border border-success rounded" %></td>
+            <% end %>
+          </tr>
             <!--book_storeでログインかつ(&&)じゃなければ(!)if~end内実行される-->
             <% if book_store_signed_in? && !current_book_store.guest? %>
           <tr>
@@ -54,9 +62,9 @@
           <tr>
             <td><%= post.title %></td>
             <!--投稿に紐づく感想コメントが見られるページ(book_store/comments/search)に遷移-->
-            <%#= link_to book_store_book_store_post_comments_path(post.book_store, post) do %>
+            <%= link_to book_store_book_store_post_comments_path(post.book_store, post) do %>
             <td><%= link_to post.content, book_store_book_store_post_comments_path(post.book_store, post) %></td>
-            <%# end %>
+            <% end %>
           </tr>
           <% end %>
            </tbody>

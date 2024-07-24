@@ -2,11 +2,11 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h2 class="mx-3  my-3 text-secondary border border-3 rounded-top col-3 text-center">書店投稿一覧</h2>
-        <table class="mx-3 my-3 table table-hover table-inverse align-middle text-secondary">
+      <h2 class="mx-1 my-5 text-secondary border-bottom col-3"><b>書店投稿一覧</b></h2>
+        <table class="mx-1 my-5 table table-hover table-inverse align-middle text-secondary">
           <thead>
             <tr>
-              <th>Title</th>
+              <th>Name</th>
               <th>Content</th>
               <% if customer_signed_in? %>
               <th>
@@ -14,13 +14,13 @@
                 <%= form_with url: search_public_posts_path, local: true, method: :get do |f| %>
                 <!--検索内容をwordとしてdef searchアクションに送る-->
                   <!--検索例をtext_field内に表示する-->
-                <%= f.text_field :word %>
+                <%= f.text_field :word, class:"text-secondary border border-secondary rounded" %>
                 <!--"btn"箇所=検索ボタン記述-->
                   <!--style: =Bootstrap内でのCSS記述（<div>や<link_to>内では上手く動作しないことも）カスタマイズツールなどある-->
                 <%= f.submit "検索", class: "btn btn-outline-secondary", style: "padding:0;" %>
                 <% end %>
-              <% end %>
               </th>
+              <% end %>
             </tr>
           </thead>
           <tbody>
@@ -33,13 +33,13 @@
                   <!--  <%# end %>-->
                   <!--</td>-->
               <td>
-                <%= link_to public_book_store_path(post.book_store) do %>
+                <%= link_to public_book_store_path(post.book_store), class:"text-secondary" do %>
                   <%= post.title %>
                 <% end %>
               </td>
               <td>
                 <!--感想コメント作成・特定の投稿に紐づく感想コメント一覧表示ページに遷移(public/posts/show)-->
-                <%= link_to public_post_path(post) do %>
+                <%= link_to public_post_path(post), class:"text-secondary" do %>
                   <%= post.content %>
                 <% end %>
               </td>

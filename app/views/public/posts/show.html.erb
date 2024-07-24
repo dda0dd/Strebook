@@ -3,17 +3,17 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4">
-      <h3 class="mx-3 my-3 text-secondary border border-3 rounded-top text-center">感想コメント</h3>
+      <h3 class="mx-1 my-5 text-secondary border-bottom col-9"><b>感想コメント作成</b></h3>
       <%= form_with model: @thoughtse_comment, url: public_book_store_thoughtse_comments_path(@post.book_store) do |f| %>
         <%= render 'layouts/error_messages', model: f.object %>
         <%= f.hidden_field :post_id, value: @post.id %>
 
-        <div class="mx-3 my-3 text-secondary">
+        <div class="mx-1 my-2 text-secondary">
           <%= f.label :content, "感想" %>
           <%= f.text_area :content, rows: '8', class: "form-control" %>
         </div>
         <!--レビュー機能を表示(星で5段階評価)-->
-        <div class="mx-3 my-3 text-secondary" id="star">
+        <div class="mx-1 my-2 text-secondary" id="star">
           <%= f.label :"評価" %>
           <%= f.hidden_field :evaluation_score, id: :review_star, class: 'form-control' %>
           <div id="post_raty"></div>
@@ -23,7 +23,7 @@
         <!--  <%#= f.label :evaluation_score, "評価" %>-->
         <!--  <%#= f.select :evaluation_score, (1..5), { include_blank: "評価を選ぶ" }, { class: "form-control" } %>-->
         <!--</div>-->
-        <%= f.submit "感想コメント", class:"mx-3 my-3 btn btn-outline-primary btn-sm" %>
+        <%= f.submit "感想コメント", class:"mx-1 my-2 btn btn-outline-primary btn-sm" %>
 
         <script>
           $(document).on('turbolinks:load', function() {
@@ -45,9 +45,9 @@
     </div>
     <!--書店投稿から遷移して確認できるページ-->
     <div class="col-md-8">
-      <h3 class="mx-3  my-3 text-secondary border border-3 rounded-top col-7 text-center">感想コメント一覧</h3>
+      <h3 class="mx-1  my-5 text-secondary border-bottom col-5"><b>感想コメント一覧</b></h3>
       <!--特定投稿に紐づく感想コメント一覧-->
-      <table class="mx-3 my-3 table table-hover align-middle text-secondary">
+      <table class="mx-1 my-5 table table-hover align-middle text-secondary">
         <thead>
           <tr>
             <th>content</th>
@@ -64,7 +64,7 @@
               $(document).on('turbolinks:load', function() {
                 let elem = document.querySelector('#show_raty<%= thoughtse_comment.id %>');
                 if (elem == null) return;
-    
+
                 elem.innerHTML = ""
                 let opt = {
                   starOn: "<%= asset_path('star-on.png') %>",

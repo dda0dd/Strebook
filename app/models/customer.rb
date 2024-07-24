@@ -8,7 +8,8 @@ class Customer < ApplicationRecord
     validates :age, presence: true
     validates :address, presence: true
     validates :occupation, presence: true
-    
+    validates :password, length: { minimum: 8 }
+
     has_many :request_comments
     has_many :thoughtse_comments
     # guest/sessions_controller.rbの.guestメソッドを定義
@@ -19,6 +20,8 @@ class Customer < ApplicationRecord
         customer.password = SecureRandom.urlsafe_base64
         # nameをguestcustomerに固定
         customer.name = "guestcustomer"
+        customer.address = "大阪府"
+        customer.occupation = "事務職"
       end
     end
     # def(def=定義するの意味)~endで定義されている
