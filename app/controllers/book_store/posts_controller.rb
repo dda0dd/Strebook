@@ -20,7 +20,6 @@ class BookStore::PostsController < ApplicationController
     # save（保存のメソッド）
     if @post.save
       # タグの保存
-      @post.save_tags(params[:post][:tag])
       # フラッシュメッセージ(book_stores/showへリンク)if~end
       flash[:notice] = "You have created book successfully."
       # アクションを通してviewを指定（redirect_to）

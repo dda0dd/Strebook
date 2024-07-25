@@ -16,6 +16,13 @@
                 <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "はるちゃん", class:"text-secondary border rounded" %>
               </td>
             </tr>
+             <tr>
+              <td>
+                <!--emailをnameに変更(ニックネームで新規登録してもらうため)-->
+                <%= f.label :email, "メールアドレス", class:"border-bottom" %><br />
+                <%= f.text_field :email, autofocus: true, autocomplete: "email", placeholder: "email@email", class:"text-secondary border rounded" %>
+              </td>
+            </tr>
             <tr>
               <td>
                 <!--新規登録時に住所(都道府県のみ)記載してもらう-->

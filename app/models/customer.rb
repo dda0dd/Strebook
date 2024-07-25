@@ -9,6 +9,7 @@ class Customer < ApplicationRecord
     validates :address, presence: true
     validates :occupation, presence: true
     validates :password, length: { minimum: 8 }
+   # validates :password_confirmation, length: { minimum: 8 }
 
     has_many :request_comments
     has_many :thoughtse_comments

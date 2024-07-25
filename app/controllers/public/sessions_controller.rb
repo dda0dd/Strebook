@@ -2,7 +2,7 @@
 
 class Public::SessionsController < Devise::SessionsController
   before_action :customer_status, only: [:create]
-  # before_action :configure_sign_in_params, only: [:create]
+# before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
   # def new
@@ -12,6 +12,7 @@ class Public::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   # def create
   #   super
+
   # end
 
   # DELETE /resource/sign_out
@@ -26,7 +27,7 @@ class Public::SessionsController < Devise::SessionsController
   def after_sign_out_path_for(resource)
 	  root_path
   end
-  
+
   def guest_sign_in
     # Customer.guestのguestメソッドをcustomer.rbで定義
     customer = Customer.guest
@@ -37,6 +38,10 @@ class Public::SessionsController < Devise::SessionsController
   end
 
   protected
+
+  def configure_sign_in_params
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:name])
+  end
 
   def customer_status
       customer = Customer.find_by(name: params[:customer][:name])

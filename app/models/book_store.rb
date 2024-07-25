@@ -4,7 +4,7 @@ class BookStore < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable
     # アソシエーション(投稿)
-    has_many :post
+    has_many :posts, dependent: :destroy
     # 中間テーブル(book_store_tags)とのアソシエーション記載
     has_many :book_store_tags, dependent: :destroy
     # tagsテーブルとのアソシエーション記載(タグ機能実装で)

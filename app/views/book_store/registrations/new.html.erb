@@ -16,6 +16,13 @@
                 <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "春書店", class:"text-secondary border rounded" %>
               </td>
             </tr>
+            <tr>
+              <td>
+                <!--新規登録時にemail記載してもらう-->
+                <%= f.label :email, "メールアドレス", class:"border-bottom" %><br />
+                <%= f.text_field :email, autofocus: true, autocomplete: "email", placeholder: "email@email", class:"text-secondary border rounded" %>
+              </td>
+            </tr>
              <!--新規登録時に住所記載してもらう-->
             <tr>
               <td>

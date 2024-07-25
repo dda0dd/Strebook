@@ -2,7 +2,7 @@
 
 class BookStore::SessionsController < Devise::SessionsController
    before_action :book_store_status, only: [:create]
-  # before_action :configure_sign_in_params, only: [:create]
+   #before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
   # def new
@@ -37,8 +37,12 @@ class BookStore::SessionsController < Devise::SessionsController
 
   protected
 
+  def configure_sign_in_params
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:name])
+  end
+
   def book_store_status
-      book_store = Book_store.find_by(name: params[:book_store][:name])
+      book_store = BookStore.find_by(name: params[:book_store][:name])
       # 登録されていないnameの場合if文がtrueとなりreturnが実行される→ログインできず
       return if book_store.nil?
       # nameとパスワードの組み合わせが正しくない場合unless文がtrueとなりreturnが実行される→ログインできず

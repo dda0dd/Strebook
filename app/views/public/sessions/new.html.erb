@@ -3,13 +3,13 @@
     <div class="col">
       <h2 class="mx-1 my-5 text-secondary border-bottom col-3"><b>ログイン</b></h2>
         <!--form_forをform_withに変更-->
-        <%= form_with model: @customer, url: customer_session_path do |f| %>
+        <%= form_with model: @customer, url: customer_session_path, local: true  do |f| %>
           <!--<%#= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>-->
           <table class="field text-secondary mx-1 my-2">
             <tr>
               <td>
                 <!--emailをnameに変更(ニックネームでログインしてもらうため)-->
-                <%= f.label :name, "ニックネーム", class:"border-bottom" %><br />
+                <%= f.label :name, "name", class:"border-bottom" %><br />
                 <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "はるちゃん" %>
               </td>
             </tr>
@@ -27,9 +27,14 @@
                 </td>
               </tr>
             <% end %>
+               <tr>
+                <td>
+                    <%= f.submit "ログイン", class:"ml-1 mr-3 btn btn-outline-info btn-sm" %>
+                </td>
+              </tr>
           </table>
           <div class="actions">
-            <%= f.submit "ログイン", class:"ml-1 mr-3 btn btn-outline-info btn-sm" %>
+          
             <!--publicsからpublicにフォルダ名を改名したためpublicsのsを削除-->
               <!--お客様のログイン画面呼び出し記述-->
             <%= render "public/shared/links" %>

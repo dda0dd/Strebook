@@ -36,6 +36,7 @@
           <tr>
             <th>Name</th>
             <th>Content</th>
+            <th>Tag</th>
           </tr>
         </thead>
         <tbody>
@@ -47,6 +48,13 @@
               </td>
               <td>
                 <%= post.content %>
+              </td>
+              <%# 該当のPostからアソシエーションでタグを取得 %>
+               <td>
+                <% @book_store.tags.each do |tag| %>
+                  <%# タグを展開 %>
+                 <span class=" rounded", style= "background: gray; padding: 3px; color: white;"><%= tag.name %></span>
+                <% end %>
               </td>
               <!--感想コメント作成・特定の投稿に紐づく感想コメント一覧表示ページに遷移(public/posts/show)-->
               <td>

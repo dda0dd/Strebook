@@ -24,10 +24,12 @@
           <tr>
             <td class="bg-light">タグ</td>
             <%# 該当のPostからアソシエーションでタグを取得 %>
-            <% @book_store.tags.each do |tag| %>
-              <%# タグを展開 %>
-              <td><%= link_to tag.name, book_store_book_store_tags_path(@book_store), class:"border border-success rounded" %></td>
-            <% end %>
+             <td>
+              <% @book_store.tags.each do |tag| %>
+                <%# タグを展開 %>
+               <span class=" rounded", style= "background: gray; padding: 3px; color: white;"><%= tag.name %></span>
+              <% end %>
+            </td>
           </tr>
             <!--book_storeでログインかつ(&&)じゃなければ(!)if~end内実行される-->
             <% if book_store_signed_in? && !current_book_store.guest? %>
