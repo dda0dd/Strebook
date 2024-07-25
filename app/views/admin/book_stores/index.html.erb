@@ -2,8 +2,8 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h2 class="mx-3 my-5 text-secondary border border-3 rounded-top col-3 text-center">書店一覧</h2>
-      <table class="table table-hover align-middle text-secondary">
+      <h2 class="mx-1 my-5 text-secondary border-bottom col-3"><b>書店一覧</b></h2>
+      <table class="mx-1 my-2 table table-hover align-middle text-secondary">
         <thead>
           <tr>
             <th>書店ID</th>
@@ -33,7 +33,7 @@
             </td>
             <!--書店名表示のためのメソッドを定義して、それをリンクにする-->
             <td>
-              <%= link_to book_store.name, admin_book_store_path(book_store.id) %>
+              <%= link_to book_store.name, admin_book_store_path(book_store.id), class:"text-secondary" %>
             </td>
             <!--ステータス-->
               <!--No Method Error発生でdeletedをactiveに変更-->
@@ -43,7 +43,9 @@
         <% end %>
       </table>
       <!--kaminari(ページネーション)記述-->
-      <%= paginate @book_stores %>
+      <div class="mx-1">
+        <%= paginate @book_stores %>
+      </div>
     </div>
   </div>
 </div>

@@ -8,7 +8,10 @@
         <%= form_with model: @request_comment, url: public_request_comments_path do |f| %>
           <div class="mx-1 my-2 text-secondary ">
             <!--リクエストコメント作成したお客様のニックネーム表示する-->
-            <%= f.text_area :content, rows: '8', style: "width:80%", id: "request_comment_textarea", class:"border border-3 text-secondary rounded" %>
-            <%= f.submit "新規作成", class: "mx-2 mb-4 btn btn-outline-primary btn-sm" %>
+            <%= f.text_area :content, rows: '8', style: "width:80%", id: "request_comment_textarea", placeholder: "全国の書店に対しての要望やあなたのアイデアをリクエストとして送りましょう", class:"border border-3 text-secondary rounded" %>
+            <%= f.submit "新規リクエスト", class: "mx-2 mb-4 btn btn-outline-success btn-sm" %>
           </div>
         <% end %>
+    </div>
+  </div>
+</div>

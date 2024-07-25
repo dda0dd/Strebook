@@ -1,6 +1,6 @@
 <!--お客様はログイン・新規登録機能のみ存在するので下記を残す-->
 <%- if controller_name != 'sessions' %>
-  <%= link_to "ログイン", new_session_path(resource_name), class:"btn btn-outline-primary ml-3 btn-sm" %><br />
+  <%= link_to "ログイン", new_session_path(resource_name), class:"btn btn-outline-info ml-3 btn-sm" %><br />
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>

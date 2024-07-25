@@ -26,7 +26,7 @@ class Public::RequestCommentsController < ApplicationController
     @request_comment = RequestComment.find(params[:id])
     @request_comment.destroy
     # コメント削除後は行う前（books/show）に遷移記述
-        # redirect_to book_path(params[:book_id])
+    redirect_to public_customer_path(params[:id])
 
     # 非同期通信記述
       # redirect_backを削除（redirect_toがない時Railsは自動で対応するJavaScriptファイルを探し。読み込む）

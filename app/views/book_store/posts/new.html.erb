@@ -1,26 +1,24 @@
 <!--投稿作成ページ-->
-<div class='container px-5 px-sm-0'>
+<div class='container'>
   <div class='row'>
-    <div class='col-md-3'>
-      <h4 class="mx-3  my-3 text-secondary border border-3 rounded-top text-center">新規投稿</h4>
-        <!--フォーム作成（入力するbox）,編集時（box）,五段階評価（◯◯◯◯◯）時に使用（送信ボタンアリ）-->
-        <%= form_with model: @post, url: book_store_posts_path, local:true do |f| %>
-          <!--本の投稿ができないエラーメッセージ-->
-          <%= render 'layouts/error_messages', model: f.object %>
-          <div class="form-group mx-3 my-3 text-secondary">
-            <%= f.label :書店名 %>
-            <!--打ち込んだ情報を:titleに入れる-->
-            <%= f.text_field :title, class: 'form-control book_title text-secondary' %>
-          </div>
-          <div class="form-group mx-3 my-3 text-secondary">
-            <%= f.label :投稿内容 %>
-            <!--打ち込んだ情報を:bodyに入れる-->
-            <%= f.text_area :content, class: 'form-control book_body text-secondary' %>
-          </div>
-          <div class="form-group mx-3 my-3">
-            <%= f.submit '新規投稿', class:"btn btn-outline-success" %>
-          </div>
-        <% end %>
+    <div class='col'>
+      <h2 class="mx-1 my-5 text-secondary border-bottom col-4"><b>新規投稿</b></h2>
+      <!--フォーム作成（入力するbox）,編集時（box）,五段階評価（◯◯◯◯◯）時に使用（送信ボタンアリ）-->
+      <%= form_with model: @post, url: book_store_posts_path, local:true do |f| %>
+        <!--本の投稿ができないエラーメッセージ-->
+        <%= render 'layouts/error_messages', model: f.object %>
+          <%= f.label :書店名,class:"mx-1 border-bottom text-secondary" %>
+        <div class="form-group mx-1 my-2 text-secondary">
+          <!--打ち込んだ情報を:titleに入れる-->
+          <%= f.text_field :name, class: 'border border-3 text-secondary rounded' %>
+        </div>
+          <%= f.label :投稿内容,class:"mx-1 mt-2 border-bottom text-secondary" %>
+        <div class="form-group mx-1 my-2 text-secondary">
+          <!--打ち込んだ情報を:bodyに入れる-->
+          <%= f.text_area :content, rows: '8', style: "width:80%", placeholder: "リクエストを実施した場合はその旨も投稿しましょう", class: 'border border-3 text-secondary rounded' %>
+          <%= f.submit '新規投稿', class:"mx-2 mb-4 btn btn-outline-success btn-sm" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

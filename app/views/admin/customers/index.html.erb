@@ -2,8 +2,8 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h2 class="mx-3 my-5 text-secondary border border-3 rounded-top col-3 text-center">お客様一覧</h2>
-      <table class="table table-hover align-middle text-secondary">
+      <h2 class="mx-1 my-5 text-secondary border-bottom col-3"><b>お客様一覧</b></h2>
+      <table class="mx-1 my-2 table table-hover align-middle text-secondary">
         <thead>
           <tr>
             <th>会員ID</th>
@@ -28,14 +28,16 @@
           <tr>
             <!--会員ID-->
             <td><%= customer.id %></td>
-            <td><%= link_to customer.name, admin_customer_path(customer.id) %></td>
+            <td><%= link_to customer.name, admin_customer_path(customer.id), class:"text-secondary" %></td>
             <!--三項演算子は式、true、falseの順-->
             <td class="<%= customer.is_active ? 'text-green' : 'text-gray' %>"><%= customer.is_active ? '有効' : '退会' %></td>
           </tr>
         <% end %>
       </table>
       <!--kaminari(ページネーション)記述-->
-      <%= paginate @customers %>
+      <div class="mx-1">
+        <%= paginate @customers %>
+      </div>
     </div>
   </div>
 </div>

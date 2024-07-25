@@ -2,8 +2,8 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h2 class="mx-3 my-3 text-secondary border border-3 rounded-top col-4 text-center">リクエスト一覧</h2>
-        <table class="mx-3 my-3 table table-hover table-inverse align-middle text-secondary">
+      <h2 class="mx-1 my-5 text-secondary border-bottom col-4"><b>リクエスト一覧</b></h2>
+        <table class="mx-1 my-2 table table-hover table-inverse align-middle text-secondary">
           <thead>
             <tr>
               <th>Name</th>
@@ -14,7 +14,7 @@
                   <!--url: search_public_posts_path=検索内容をresources :postsのget 'search'に送信-->
                   <%= form_with url: search_admin_request_comments_path, local: true, method: :get do |f| %>
                     <!--検索内容をwordとしてdef searchアクションに送る-->
-                    <%= f.text_field :word %>
+                    <%= f.text_field :word, class:"text-secondary border border-secondary rounded" %>
                     <!--"btn"箇所=検索ボタン記述-->
                       <!--style: =Bootstrap内でのCSS記述（<div>や<link_to>内では上手く動作しないことも）カスタマイズツールなどある-->
                     <%= f.submit "検索", class: "btn btn-outline-secondary", style: "padding:0;" %>
@@ -38,7 +38,7 @@
                 <td>
                   <!--(@book=book_idのこと) book_comment#destroyのパス（book_book_comment_path）-->
                     <!--remote: true=非同期通信行うためのオプション（Railsはデフォルトで非同期通信を処理するライブラリが組み込まれているので実装時ページがリロードされず変更を反映できる）-->
-                  <%= link_to "削除", admin_request_comment_path(request_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger float-end" %>
+                  <%= link_to "削除", admin_request_comment_path(request_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger float-end" %>
                 </td>
                   <% end %>
               </tr>
@@ -46,7 +46,9 @@
           </tbody>
         </table>
         <!--kaminari(ページネーション)記述-->
-        <%= paginate @request_comments %>
+        <div class="mx-1">
+          <%= paginate @request_comments %>
+        </div>
     </div>
   </div>
 </div>

@@ -2,8 +2,8 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h2 class="mx-3 my-5 text-secondary border border-3 rounded-top col-4 text-center">書店マイページ</h2>
-      <table class="mx-3 my-3 table table-hover align-middle text-secondary">
+      <h2 class="mx-1 my-5 text-secondary border-bottom col-4"><b>書店マイページ</b></h2>
+      <table class="mx-1 my-2 table table-hover align-middle text-secondary">
         <tr>
           <th>書店ID</td>
           <td><%= @book_store.id %></td>
@@ -30,7 +30,7 @@
         </tr>
         <tr>
           <td></td>
-          <td><%= link_to "退会する", unsubscribe_admin_book_store_path(@book_store), data: { confirm: "退会してもよろしいですか？" }, class:"btn btn-outline-success btn-sm" %>
+          <td><%= link_to "退会", unsubscribe_admin_book_store_path(@book_store), class:"btn btn-outline-danger btn-sm" %>
         </tr>
       </table>
     </div>

@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col">
       <h3 class="mx-1 my-5 text-secondary border-bottom col-3"><b>お客様マイページ</b></h3>
-          <table class="mx-1 my-3 table table-hover align-middle text-secondary">
+          <table class="mx-1 my-3 table table-hover text-secondary">
             <tr>
               <td class="bg-light">ニックネーム</td>
               <td><%= @customer.name %></td>
@@ -23,9 +23,9 @@
               <!--customerでログインかつ(&&)じゃなければ(!)if~end内実行される(models/customer.rbにguest?の定義必要)-->
               <% if customer_signed_in? && !current_customer.guest? %>
             <tr>
-              <td><%= link_to "編集", edit_public_customer_path(current_customer.id), class:"btn btn-outline-primary btn-sm" %></td>
+              <td><%= link_to "編集", edit_public_customer_path(current_customer.id), class:"btn btn-outline-secondary btn-sm" %></td>
               <!--退会するボタン押した時確認メッセージ表示させる(退会後退会画面に遷移)-->
-              <td><%= link_to "退会する", unsubscribe_public_customers_path, data: { confirm: "退会してもよろしいですか？" }, class:"btn btn-outline-danger ml-1" %></td>
+              <td><%= link_to "退会する", unsubscribe_public_customers_path, data: { confirm: "退会してもよろしいですか？" }, class:"btn btn-outline-danger ml-1 btn-sm" %></td>
             </tr>
               <% end %>
           </table>
@@ -41,12 +41,14 @@
               <% @request_comments.each do |request_comment|%>
                 <tr>
                   <td><%= request_comment.content %></td>
+                  <!--リクエストコメント削除ボタン設置-->
+                  <td><%= link_to "削除", public_request_comment_path(request_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger" %></td>
                 </tr>
               <% end %>
             </tbody>
           </table>
           <!--kaminari(ページネーション)導入で下記追記-->
-          <div class="mx-3">
+          <div class="mx-1">
             <%= paginate @request_comments %>
           </div>
         </div>

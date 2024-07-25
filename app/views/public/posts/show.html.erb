@@ -23,7 +23,7 @@
         <!--  <%#= f.label :evaluation_score, "評価" %>-->
         <!--  <%#= f.select :evaluation_score, (1..5), { include_blank: "評価を選ぶ" }, { class: "form-control" } %>-->
         <!--</div>-->
-        <%= f.submit "感想コメント", class:"mx-1 my-2 btn btn-outline-primary btn-sm" %>
+        <%= f.submit "感想コメント", class:"mx-1 my-2 btn btn-outline-success btn-sm" %>
 
         <script>
           $(document).on('turbolinks:load', function() {
@@ -45,7 +45,7 @@
     </div>
     <!--書店投稿から遷移して確認できるページ-->
     <div class="col-md-8">
-      <h3 class="mx-1  my-5 text-secondary border-bottom col-5"><b>感想コメント一覧</b></h3>
+      <h3 class="mx-1 my-5 text-secondary border-bottom col-5"><b>感想コメント一覧</b></h3>
       <!--特定投稿に紐づく感想コメント一覧-->
       <table class="mx-1 my-5 table table-hover align-middle text-secondary">
         <thead>
@@ -59,28 +59,32 @@
             <tr>
               <td><%= thoughtse_comment.content %></td>
               <td id="show_raty<%= thoughtse_comment.id %>"></td>
+              <script>
+                $(document).on('turbolinks:load', function() {
+                  let elem = document.querySelector('#show_raty<%= thoughtse_comment.id %>');
+                  if (elem == null) return;
+  
+                  elem.innerHTML = ""
+                  let opt = {
+                    starOn: "<%= asset_path('star-on.png') %>",
+                    starOff: "<%= asset_path('star-off.png') %>",
+                    starHalf: "<%= asset_path('star-half.png') %>",
+                    readOnly: true,
+                    score: <%= thoughtse_comment.evaluation_score %>
+                  };
+                  raty(elem, opt);
+                });
+              </script>
+              <!--削除ボタン表示-->
+              <td><%= link_to "削除", public_book_store_thoughtse_comment_path(@book_store.thoughtse_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger float-end" %></td>
             </tr>
-            <script>
-              $(document).on('turbolinks:load', function() {
-                let elem = document.querySelector('#show_raty<%= thoughtse_comment.id %>');
-                if (elem == null) return;
-
-                elem.innerHTML = ""
-                let opt = {
-                  starOn: "<%= asset_path('star-on.png') %>",
-                  starOff: "<%= asset_path('star-off.png') %>",
-                  starHalf: "<%= asset_path('star-half.png') %>",
-                  readOnly: true,
-                  score: <%= thoughtse_comment.evaluation_score %>
-                };
-                raty(elem, opt);
-              });
-        </script>
           <% end %>
         </tbody>
       </table>
       <!--kaminari(ページネーション)記述-->
-      <%= paginate @thoughtse_comments %>
+      <div class="mx-1">
+        <%= paginate @thoughtse_comments %>
+      </div>
     </div>
   </div>
 </div>

@@ -1,14 +1,16 @@
 <!--会員(お客様)退会画面-->
 <div class="container">
   <div class="row">
-    <div class="col">
-			<h3 class="mx-3  my-5 text-secondary border border-3 rounded-top col-5 text-center" alt="...">本当に退会されますか？</h3>
-<!--会員(お客様)マイページに遷移-->
-<!--current_customerなのでcustomers_controllerのunsubscribeには@customerなどの記述不要-->
-			<%= link_to "退会しない", public_customer_path(current_customer.id), class:"btn btn-outline-primary ml-2 btn-sm" %>
-<!--退会後は会員(お客様)新規登録画面に遷移-->
-<!--data: { confirm: "退会してもよろしいですか？" }=退会するボタン押した後確認メッセージ表示させる-->
-			<%= link_to "退会する", withdraw_public_customers_path, method: :patch, data: { confirm: "退会ボタンです。このまま実行されますか？" }, class:"btn btn-outline-danger ml-1" %>
+    <div class="main-content col-11">
+      <div class="row justify-content-center">
+			  <h2 class="mx-1 my-5 row justify-content-center text-secondary text-center border-bottom"><b>本当に退会されますか？</b></h2>
+			</div>
+      <!--会員(お客様)マイページに遷移-->
+        <!--current_customerなのでcustomers_controllerのunsubscribeには@customerなどの記述不要-->
+			<%= link_to "退会しない", public_customer_path(current_customer.id), class:"btn btn-outline-secondary btn-sm" %>
+      <!--退会後は会員(お客様)新規登録画面に遷移-->
+        <!--data: { confirm: "退会してもよろしいですか？" }=退会するボタン押した後確認メッセージ表示させる-->
+			<%= link_to "退会する", withdraw_public_customers_path, method: :patch, data: { confirm: "退会ボタンです。このまま実行されますか？" }, class:"ml-2 mr-7 btn btn-outline-danger btn-sm" %>
 		</div>
   </div>
 </div>

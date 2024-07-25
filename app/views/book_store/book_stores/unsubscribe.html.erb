@@ -2,10 +2,10 @@
 <div class="container">
   <div class="row">
     <div class="col">
-			<h3 class="mx-3  my-5 text-secondary border border-3 rounded-top col-5 text-center" alt="...">本当に退会されますか？</h3>
+			<h2 class="mx-1 my-5 text-secondary border-bottom col-5">本当に退会されますか？</h2>
 <!--会員(書店)マイページに遷移-->
 <!--current_book_storeなのでbook_stores_controllerのunsubscribeには@book_storeなどの記述不要-->
-			<%= link_to "退会しない", book_store_book_store_path(current_book_store.id), class:"btn btn-outline-primary ml-2 btn-sm" %>
+			<%= link_to "退会しない", book_store_book_store_path(current_book_store.id), class:"btn btn-outline-secondary ml-2 btn-sm" %>
 <!--退会後は会員(書店)新規登録画面に遷移-->
 <!--data: { confirm: "退会してもよろしいですか？" }=退会するボタン押した後確認メッセージ表示させる-->
 			<%= link_to "退会する", withdraw_book_store_book_stores_path, method: :patch, data: { confirm: "退会ボタンです。このまま実行されますか？" }, class:"btn btn-outline-danger ml-1" %>

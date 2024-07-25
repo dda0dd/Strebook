@@ -2,25 +2,25 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h2 class="mx-3 my-3 text-secondary border border-3 rounded-top col-4 text-center">リクエスト一覧</h2>
-        <table class="mx-3 my-3 table table-hover table-inverse align-middle text-secondary">
+      <h2 class="mx-1 my-5 text-secondary border-bottom col-4"><b>リクエスト一覧</b></h2>
+        <table class="mx-1 my-2 table table-hover table-inverse align-middle text-secondary">
           <thead>
             <tr>
               <th>Name</th>
               <th>Content</th>
-            <!--ワード(イベント・新刊)でお客様のリクエストを検索できる検索窓設置-->
-            <% if book_store_signed_in? %>
+              <!--ワード(イベント・新刊)でお客様のリクエストを検索できる検索窓設置-->
+              <% if book_store_signed_in? %>
               <th>
                 <!--url: search_public_posts_path=検索内容をresources :postsのget 'search'に送信-->
                 <%= form_with url: search_book_store_request_comments_path, local: true, method: :get do |f| %>
                   <!--検索内容をwordとしてdef searchアクションに送る-->
-                  <%= f.text_field :word %>
+                  <%= f.text_field :word, class:"text-secondary border border-secondary rounded" %>
                   <!--"btn"箇所=検索ボタン記述-->
                     <!--style: =Bootstrap内でのCSS記述（<div>や<link_to>内では上手く動作しないことも）カスタマイズツールなどある-->
                   <%= f.submit "検索", class: "btn btn-outline-secondary", style: "padding:0;" %>
                 <% end %>
               </th>
-            <% end %>
+              <% end %>
             </tr>
           </thead>
           <tbody>
@@ -37,10 +37,10 @@
           <% end %>
           </tbody>
         </table>
-        <!--kaminari(ページネーション)記述-->
-        <div class="mx-3">
-          <%= paginate @request_comments %>
-        </div>
+      <!--kaminari(ページネーション)記述-->
+      <div class="mx-1">
+        <%= paginate @request_comments %>
+      </div>
     </div>
   </div>
 </div>

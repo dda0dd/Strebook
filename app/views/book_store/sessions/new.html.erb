@@ -1,11 +1,11 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h4 class="mx-3 my-3 text-secondary border border-3 rounded-top col-2 text-center" alt="...">ログイン</h4>
+      <h2 class="mx-1 my-5 text-secondary border-bottom col-3"><b>ログイン</b></h2>
         <!--form_forをform_withに変更-->
         <%= form_with model: @book_store, url: book_store_session_path do |f| %>
         <%#= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <table class="field text-secondary mx-3 my-3">
+          <table class="field text-secondary mx-1 my-2">
             <tr>
               <td>
                 <!--emailをnameに変更(書店名でログインしてもらうため)-->
@@ -29,14 +29,14 @@
             <% end %>
           </table>
           <div class="actions">
-            <%= f.submit "ログイン", class:"btn btn-outline-primary ml-3 btn-sm" %>
+            <%= f.submit "ログイン", class:"ml-1 mr-3 btn btn-outline-info btn-sm" %>
             <!--book_storesからbook_storeにフォルダ名を改名したためbook_storesのsを削除-->
               <!--書店のログイン画面呼び出し記述-->
             <%= render "book_store/shared/links" %>
           </div>
           <!--ゲストログインボタン追記-->
           <div class="actions">
-            <%= link_to "ゲストログイン", book_stores_guest_sign_in_path, class: "btn btn-outline-secondary ml-3 btn-sm" %>
+            <%= link_to "ゲストログイン", book_stores_guest_sign_in_path, class: "ml-1 my-2 btn btn-outline-secondary btn-sm" %>
           </div>
         <% end %>
     </div>
