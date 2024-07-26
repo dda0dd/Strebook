@@ -36,7 +36,7 @@ class BookStore::BookStoresController < ApplicationController
     current_book_store.update(is_active: false)
     reset_session
     #新規会員(書店)登録画面に遷移
-    redirect_to root_path
+    redirect_to new_book_store_registration_path
   end
 
    private

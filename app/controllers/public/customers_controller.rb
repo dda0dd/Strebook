@@ -31,7 +31,7 @@ class Public::CustomersController < ApplicationController
     current_customer.update(is_active: false)
     reset_session
     #新規会員(お客様)登録画面に遷移
-    redirect_to root_path
+    redirect_to new_customer_registration_path
   end
 
   private

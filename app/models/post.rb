@@ -1,5 +1,7 @@
 class Post < ApplicationRecord
 
+  validates :title, presence: true
+  validates :content, presence: true
   # ヘッダーに投稿リンクを表示しない処理
   def guest?
     #ゲストログイン時はif~end内を表示しない(==論理演算子の比較の意味)

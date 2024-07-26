@@ -26,7 +26,7 @@ class BookStore::PostsController < ApplicationController
       redirect_to book_store_book_store_path(current_book_store)
     # バリデーションで保存できなかった時はsaveメソッドがfalseになり、renderでbook_stores/index.html.erbが表示され投稿ページを再表示する設定
     else
-      @book_stores = Book_store.all
+      @book_stores = BookStore.all
       # @book_storeを定義
       @book_store = current_book_store
       # 直接viewを指定
