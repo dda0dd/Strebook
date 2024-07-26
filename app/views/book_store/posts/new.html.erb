@@ -1,4 +1,4 @@
-<!--投稿作成ページ-->
+<!--投稿作成画面-->
 <div class='container'>
   <div class='row'>
     <div class='col'>
@@ -8,16 +8,16 @@
         <!--本の投稿ができないエラーメッセージ-->
         <%= render 'layouts/error_messages', model: f.object %>
           <%= f.label :書店名,class:"mx-1 border-bottom text-secondary" %>
-        <div class="form-group mx-1 my-2 text-secondary">
-          <!--打ち込んだ情報を:titleに入れる-->
-          <%= f.text_field :title, class: 'border border-3 text-secondary rounded' %>
-        </div>
+          <div class="form-group mx-1 my-2 text-secondary">
+            <!--打ち込んだ情報を:titleに入れる-->
+            <%= f.text_field :title, class: 'border border-3 text-secondary rounded' %>
+          </div>
           <%= f.label :投稿内容,class:"mx-1 mt-2 border-bottom text-secondary" %>
-        <div class="form-group mx-1 my-2 text-secondary">
-          <!--打ち込んだ情報を:bodyに入れる-->
-          <%= f.text_area :content, rows: '8', style: "width:80%", placeholder: "リクエストを実施した場合はその旨も投稿しましょう", class: 'border border-3 text-secondary rounded' %>
-          <%= f.submit '新規投稿', class:"mx-2 mb-4 btn btn-outline-success btn-sm" %>
-        </div>
+          <div class="form-group mx-1 my-2 text-secondary">
+            <!--打ち込んだ情報を:bodyに入れる-->
+            <%= f.text_area :content, rows: '8', style: "width:80%", placeholder: "リクエストを実施した場合はその旨も投稿しましょう", class: 'border border-3 text-secondary rounded' %>
+            <%= f.submit '新規投稿', class:"mx-2 mb-4 btn btn-outline-success btn-sm" %>
+          </div>
       <% end %>
     </div>
   </div>

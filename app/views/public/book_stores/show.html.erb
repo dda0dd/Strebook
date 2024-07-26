@@ -1,42 +1,64 @@
-<!--書店のマイページ(詳細)表示ページ-->
+<!--書店名のリンク先(書店マイページ)-->
 <div class="container">
   <div class="row">
     <div class="col">
-      <h2 class="mx-1 my-5 text-secondary border-bottom col-3"><b>書店詳細ページ</b></h2>
-      <table class="mx-1 my-5 table table-hover align-middle text-secondary">
+      <h2 class="mx-1 my-5 text-secondary border-bottom col-4"><b>書店詳細ページ</b></h2>
+      <div style="display: flex;">
+      <table class="mx-1 my-5 table table-hover align-middle text-secondary" style="flex: 1">
         <tr>
-          <td class="bg-light">書店名</td>
+          <th class="bg-light">書店名</th>
           <td><%= @book_store.name %></td>
         </tr>
         <tr>
-          <td class="bg-light">創立年齢</td>
+          <th class="bg-light">メールアドレス</th>
+          <td><%= @book_store.email %></td>
+        </tr>
+        <tr>
+          <th class="bg-light">創立年齢</th>
           <td><%= @book_store.age %></td>
         </tr>
         <tr>
-          <td class="bg-light">電話番号</td>
+          <th class="bg-light">電話番号</th>
           <td><%= @book_store.telephone_number %></td>
         </tr>
         <tr>
-          <td class="bg-light">住所</td>
+          <th class="bg-light">住所</th>
           <td><%= @book_store.address %></td>
         </tr>
         <tr>
+          <!--タグ表示-->
+          <th class="bg-light">タグ</th>
+          <td>
+            <% @book_store.tags.each do |tag| %>
+              <span class=" rounded", style= "background: gray; padding: 3px; color: white;"><%= tag.name %></span>
+            <% end %>
+          </td>
         </tr>
-          <!--book_storeでログインかつ(&&)じゃなければ(!)if~end内実行される-->
-          <% if book_store_signed_in? && !current_book_store.guest? %>
-        <tr>
+        <!--book_storeでログインかつ(&&)じゃなければ(!)if~end内実行される-->
+        <% if book_store_signed_in? && !current_book_store.guest? %>
+          <tr>
             <td><%= link_to "編集", edit_book_store_book_store_path(current_book_store.id), class:"btn btn-outline-primary btn-sm" %></td>
             <!--退会するボタン押した時確認メッセージ表示させる(退会後退会画面に遷移)-->
             <td><%= link_to "退会する", unsubscribe_book_store_book_stores_path, data: { confirm: "退会してもよろしいですか？" }, class:"btn btn-outline-danger ml-1" %></td>
-        </tr>
-          <% end %>
+          </tr>
+        <% end %>
       </table>
+      <!--画像サイズをstyleで指定-->
+        <div style="flex: 1; text-align: center;">
+          <% if @book_store.image.attached? %>
+            <!--book_storeに紐づいているimageをimage_tagに渡して画像を表示する-->
+            <%= image_tag @book_store.image, size: "200x200", style: "width: 350px ;height: 350px;" %>
+          <% else %>
+            <%= image_tag 'no-image.jpg', size: "200x200", style: "width: 350px ;height: 350px;"  %>
+          <% end %>
+        </div>
+      </div>
+      <!--投稿一覧表示-->
       <table class="mx-1 my-5 table table-hover align-middle text-secondary">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Content</th>
-            <th>Tag</th>
+            <th>書店名</th>
+            <th>投稿内容</th>
           </tr>
         </thead>
         <tbody>
@@ -49,23 +71,18 @@
               <td>
                 <%= post.content %>
               </td>
-              <%# 該当のPostからアソシエーションでタグを取得 %>
-               <td>
-                <% @book_store.tags.each do |tag| %>
-                  <%# タグを展開 %>
-                 <span class=" rounded", style= "background: gray; padding: 3px; color: white;"><%= tag.name %></span>
-                <% end %>
-              </td>
               <!--感想コメント作成・特定の投稿に紐づく感想コメント一覧表示ページに遷移(public/posts/show)-->
               <td>
-                <%= link_to "感想コメント", public_post_path(post.id), class:"btn btn-outline-primary btn-sm" %>
+                <%= link_to "感想コメント", public_post_path(post.id), class:"btn btn-outline-success btn-sm" %>
               </td>
             </tr>
           <% end %>
         </tbody>
       </table>
       <!--kaminari(ページネーション)記述-->
-      <%= paginate @book_store_posts %>
+      <div class="mx-1">
+        <%= paginate @book_store_posts %>
+      </div>
     </div>
   </div>
 </div>

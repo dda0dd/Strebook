@@ -23,6 +23,7 @@ class Customer < ApplicationRecord
         customer.name = "guestcustomer"
         customer.address = "大阪府"
         customer.occupation = "事務職"
+        customer.email = "@guest.cutomer"
       end
     end
     # def(def=定義するの意味)~endで定義されている

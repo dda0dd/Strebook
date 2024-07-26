@@ -2,23 +2,27 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h3 class="mx-1 my-5 text-secondary border-bottom col-3"><b>マイページ編集</b></h3>
+      <h2 class="mx-1 my-5 text-secondary border-bottom col-4"><b>マイページ編集</b></h2>
       <%= form_with model:@customer, url: public_customer_path(@customer), local:true do |f| %>
         <table class="table table-borderless text-secondary">
           <tr>
-            <td><%= f.label :name, "ニックネーム", class:"border-bottom" %></td>
+            <th><%= f.label :name, "ニックネーム", class:"border-bottom" %></th>
             <td><%= f.text_field :name, class:"border border-secondary text-secondary rounded" %></td>
           </tr>
           <tr>
-            <td><%= f.label :age, "年齢", class:"border-bottom" %></td>
+            <th><%= f.label :email, "メールアドレス", class:"border-bottom" %></th>
+            <td><%= f.text_field :email, class:"border border-secondary text-secondary rounded" %></td>
+          </tr>
+          <tr>
+            <th><%= f.label :age, "年齢", class:"border-bottom" %></th>
             <td><%= f.text_field :age, class:"border border-secondary text-secondary rounded" %></td>
           </tr>
           <tr>
-            <td><%= f.label :occupation, "職業", class:"border-bottom" %></td>
+            <th><%= f.label :occupation, "職業", class:"border-bottom" %></th>
             <td><%= f.text_field :occupation, class:"border border-secondary text-secondary rounded" %></td>
           </tr>
           <tr>
-            <td><%= f.label :address, "住所", class:"border-bottom" %></td>
+            <th><%= f.label :address, "住所", class:"border-bottom" %></th>
             <td><%= f.text_field :address, class:"border border-secondary text-secondary rounded" %></td>
             <td></td>
           </tr>

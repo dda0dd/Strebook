@@ -3,12 +3,12 @@
   <div class="row">
     <div class="col">
       <h2 class="mx-1 my-5 text-secondary border-bottom col-4"><b>書店投稿一覧</b></h2>
-        <table class="mx-1 my-2 table table-hover table-inverse align-middle text-secondary">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Content</th>
-              <% if customer_signed_in? %>
+      <table class="mx-1 my-2 table table-hover table-inverse align-middle text-secondary">
+        <thead>
+          <tr>
+            <th>書店名</th>
+            <th>投稿内容</th>
+            <% if customer_signed_in? %>
               <th>
                 <!--url: search_public_posts_path=検索内容をresources :postsのget 'search'に送信-->
                 <%= form_with url: search_public_posts_path, local: true, method: :get do |f| %>
@@ -22,38 +22,32 @@
                 <%= f.submit "検索", class: "btn btn-outline-secondary", style: "padding:0;" %>
                 <% end %>
               </th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+        <!--複数のデータを登録する記述-->
+        <% @posts.each do |post| %>
+          <tr>
+            <td>
+              <%= link_to public_book_store_path(post.book_store), class:"text-secondary" do %>
+                <%= post.title %>
               <% end %>
-            </tr>
-          </thead>
-          <tbody>
-          <!--複数のデータを登録する記述-->
-          <% @posts.each do |post| %>
-            <tr>
-                  <!--<td>-->
-                  <!--  <%#= link_to user_path(book.user) do %>-->
-                  <!--  <%#= image_tag book.user.get_profile_image(100,100) %>-->
-                  <!--  <%# end %>-->
-                  <!--</td>-->
-              <td>
-                <%= link_to public_book_store_path(post.book_store), class:"text-secondary" do %>
-                  <%= post.title %>
-                <% end %>
-              </td>
-              <td>
-                <!--感想コメント作成・特定の投稿に紐づく感想コメント一覧表示ページに遷移(public/posts/show)-->
-                <%= link_to public_post_path(post), class:"text-secondary" do %>
-                  <%= post.content %>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-          </tbody>
-        </table>
-        <!--kaminari(ページネーション)記述-->
-        <div class="mx-1">
-          <%= paginate @posts %>
-        </div>
-      <!--タグで検索できる検索窓設置-->
+            </td>
+            <td>
+              <!--感想コメント作成・特定の投稿に紐づく感想コメント一覧表示ページに遷移(public/posts/show)-->
+              <%= link_to public_post_path(post), class:"text-secondary" do %>
+                <%= post.content %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <!--kaminari(ページネーション)記述-->
+      <div class="mx-1">
+        <%= paginate @posts %>
+      </div>
     </div>
   </div>
 </div>

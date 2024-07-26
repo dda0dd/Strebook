@@ -4,7 +4,6 @@ class Public::CustomersController < ApplicationController
   # edit(編集)アクション実行前に処理を行う
   before_action :ensure_guest_customer, only: [:edit]
 
-
   def show
     # 現在ログインしているお客様
     @customer = current_customer

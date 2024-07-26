@@ -1,13 +1,14 @@
+<!--特定の投稿に紐づく感想コメント一覧画面-->
 <div class="container">
   <div class="row">
     <div class="col-md-8">
-      <h3 class="mx-1  my-5 text-secondary border-bottom col-7"><b>感想コメント一覧</b></h3>
+      <h2 class="mx-1 my-5 text-secondary border-bottom col-7"><b>感想コメント一覧</b></h2>
       <!--特定投稿に紐づく感想コメント一覧-->
       <table class="mx-1 my-2 table table-hover text-secondary">
         <thead>
           <tr>
-            <th>content</th>
-            <th>evaluation_score</th>
+            <th>投稿の感想</th>
+            <th>書店評価</th>
             <!--ワード(不適切な言葉など)で感想コメントを検索できる検索窓設置-->
             <% if admin_signed_in? %>
               <th>
@@ -26,9 +27,11 @@
         <tbody>
           <% @thoughtse_comments.each do |thoughtse_comment|%>
             <tr>
+              <!--感想コメント内容-->
               <td><%= thoughtse_comment.content %></td>
-              <td><%#= thoughtse_comment.evaluation_score %></td>
-              <td id="show_raty<%= thoughtse_comment.id %>">></td>
+              <!--星レビュー(書店に対しての)-->
+              <td id="show_raty<%= thoughtse_comment.id %>"></td>
+              <!--不適切な言葉使用の感想コメント削除ボタン-->
               <td><%= link_to "削除", admin_comment_path(thoughtse_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger float-end" %></td>
             </tr>
             <script>

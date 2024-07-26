@@ -3,11 +3,10 @@
 <div class="container">
   <div class="row">
     <div class="col-md-4">
-      <h3 class="mx-1 my-5 text-secondary border-bottom col-9"><b>感想コメント作成</b></h3>
+      <h2 class="mx-1 my-5 text-secondary border-bottom col-12"><b>感想コメント作成</b></h2>
       <%= form_with model: @thoughtse_comment, url: public_book_store_thoughtse_comments_path(@post.book_store) do |f| %>
         <%= render 'layouts/error_messages', model: f.object %>
         <%= f.hidden_field :post_id, value: @post.id %>
-
         <div class="mx-1 my-2 text-secondary">
           <%= f.label :content, "感想" %>
           <%= f.text_area :content, rows: '8', class: "form-control" %>
@@ -18,13 +17,7 @@
           <%= f.hidden_field :evaluation_score, id: :review_star, class: 'form-control' %>
           <div id="post_raty"></div>
         </div>
-
-        <!--<div class="mx-3 my-3 text-secondary">-->
-        <!--  <%#= f.label :evaluation_score, "評価" %>-->
-        <!--  <%#= f.select :evaluation_score, (1..5), { include_blank: "評価を選ぶ" }, { class: "form-control" } %>-->
-        <!--</div>-->
         <%= f.submit "感想コメント", class:"mx-1 my-2 btn btn-outline-success btn-sm" %>
-
         <script>
           $(document).on('turbolinks:load', function() {
             let elem = document.querySelector('#post_raty');
@@ -45,13 +38,13 @@
     </div>
     <!--書店投稿から遷移して確認できるページ-->
     <div class="col-md-8">
-      <h3 class="mx-1 my-5 text-secondary border-bottom col-5"><b>感想コメント一覧</b></h3>
-      <!--特定投稿に紐づく感想コメント一覧-->
+      <h2 class="mx-1 my-5 text-secondary border-bottom col-7"><b>感想コメント一覧</b></h2>
+      <!--特定の投稿に紐づく感想コメント一覧-->
       <table class="mx-1 my-5 table table-hover align-middle text-secondary">
         <thead>
           <tr>
-            <th>content</th>
-            <th>evaluation_score</th>
+            <th>感想</th>
+            <th>書店評価</th>
           </tr>
         </thead>
         <tbody>
@@ -76,7 +69,7 @@
                 });
               </script>
               <!--削除ボタン表示-->
-              <td><%= link_to "削除", public_book_store_thoughtse_comment_path(@book_store.thoughtse_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger float-end" %></td>
+              <td><%= link_to "削除", public_book_store_thoughtse_comment_path(@post.thoughtse_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger float-end" %></td>
             </tr>
           <% end %>
         </tbody>

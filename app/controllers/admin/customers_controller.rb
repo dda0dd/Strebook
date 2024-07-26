@@ -4,20 +4,11 @@ class Admin::CustomersController < ApplicationController
 
   def index
     @customers = Customer.all.page(params[:page]).per(5)
-    # @book_stores = BookStore.all
-    #管理者のお客様一覧記述
-    #ページネーション対応に変更
-    # @customers = Customer.page(params[:page])
-    #管理者の書店一覧記述
-    #ページネーション対応に変更
-    # @book_stores = Book_store.page(params[:page])
   end
 
   def show
     # 会員(お客様)
     @customer = Customer.find(params[:id])
-    # 会員(書店)
-    # @book_store = BookStore.find(params[:id])
   end
 
   def edit
@@ -43,7 +34,7 @@ class Admin::CustomersController < ApplicationController
       render :edit
     end
   end
-  # unsubscribe.htmlのlink_toでcurrent_book_storeを記述しているのでcontrollerに記述不要
+
   def unsubscribe
      @customer = Customer.find(params[:id])
   end
@@ -51,28 +42,20 @@ class Admin::CustomersController < ApplicationController
   def withdraw
     customer = Customer.find(params[:id])
     customer.update(is_active: false)
-    # reset_session
     #管理者のお客様一覧画面に遷移
     redirect_to admin_customers_path
   end
 
   def search
-    # 検索フォームから情報を受け取る params[:range](検索モデル)
-    # searches/search.htmlの"<%= @word %>"を定義
-      @word = params[:is_active]
-      # 検索フォームから情報を受け取るparams[:word](検索ワード)
-        # pluck(:id)でIDだけ持ってくる
-          # ("address LIKE?", "%#{@word}%")で部分一致検索
-            # 下記はwhere変数で{}内にBookStoreの検索結果からpluck(:id)でbook_store_idだけを持ってくる
-      if @word.present?
-        # 検索結果にもページネーション反映させるため.page(params[:page]).per(5)追記
-        @customers = Customer.where(is_active: @word).page(params[:page]).per(5)
-      else
-        # 検索結果にもページネーション反映させるため.page(params[:page]).per(5)追記
-        @customers = Customer.all.page(params[:page]).per(5)
-      end
-      # where=Postの中(右の括弧内)を検索する
-        # book_store_idでbook_store_idsを検索する
+    # 検索フォームから情報を受け取る params[:word](検索モデル)
+    @word = params[:is_active]
+    if @word.present?
+      # 検索結果にもページネーション反映させるため.page(params[:page]).per(5)追記
+      @customers = Customer.where(is_active: @word).page(params[:page]).per(5)
+    else
+      # 検索結果にもページネーション反映させるため.page(params[:page]).per(5)追記
+      @customers = Customer.all.page(params[:page]).per(5)
+    end
     # 検索後に検索結果を下記ページに表示(検索後の遷移先)
     render "admin/customers/index"
   end

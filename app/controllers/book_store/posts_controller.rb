@@ -19,7 +19,6 @@ class BookStore::PostsController < ApplicationController
     @post.book_store_id = current_book_store.id
     # save（保存のメソッド）
     if @post.save
-      # タグの保存
       # フラッシュメッセージ(book_stores/showへリンク)if~end
       flash[:notice] = "You have created book successfully."
       # アクションを通してviewを指定（redirect_to）
@@ -55,9 +54,9 @@ class BookStore::PostsController < ApplicationController
     book_store.destroy
     redirect_to book_stores_path
   end
-  
+
   private
-  
+
   def post_params
     params.require(:post).permit(:title, :content)
   end

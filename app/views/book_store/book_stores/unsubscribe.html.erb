@@ -8,7 +8,7 @@
 			<%= link_to "退会しない", book_store_book_store_path(current_book_store.id), class:"btn btn-outline-secondary ml-2 btn-sm" %>
 <!--退会後は会員(書店)新規登録画面に遷移-->
 <!--data: { confirm: "退会してもよろしいですか？" }=退会するボタン押した後確認メッセージ表示させる-->
-			<%= link_to "退会する", withdraw_book_store_book_stores_path, method: :patch, data: { confirm: "退会ボタンです。このまま実行されますか？" }, class:"btn btn-outline-danger ml-1" %>
+			<%= link_to "退会する", withdraw_book_store_book_stores_path, method: :patch, data: { confirm: "退会ボタンです。このまま実行されますか？" }, class:"btn btn-outline-danger ml-1 btn-sm" %>
 		</div>
   </div>
 </div>

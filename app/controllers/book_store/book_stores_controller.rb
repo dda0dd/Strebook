@@ -2,12 +2,11 @@ class BookStore::BookStoresController < ApplicationController
   # 権限の設定：ログインしていない書店が作業できないように設定
   before_action :authenticate_book_store!
 
-
   def show
     # 現在ログインしている書店
     @book_store = current_book_store
     @posts = @book_store.posts.page(params[:page]).per(5)
-    # 店内の画像を背景画像として選択できる
+    # 店内の画像
     # @image = Image.page(params[:page])
   end
 

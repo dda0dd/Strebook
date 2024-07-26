@@ -8,32 +8,35 @@
         <%= render 'layouts/error_messages', model: f.object %>
         <table class="mx-1 my-2 table table-borderless text-secondary">
           <tr>
-            <td>書店名</td>
+            <th><%= f.label :name, "書店名", class:"border-bottom" %></th>
             <td><%= f.text_field :name, class:"border border-secondary form-text text-muted form-control-sm" %></td>
           </tr>
           <tr>
-            <td>年齢</td>
+            <th><%= f.label :email, "メールアドレス", class:"border-bottom" %></th>
+            <td><%= f.text_field :email, class:"border border-secondary form-text text-muted form-control-sm" %></td>
+          </tr>
+          <tr>
+            <th><%= f.label :age, "創立年齢", class:"border-bottom" %></th>
             <td><%= f.text_field :age, class:"border border-secondary form-text text-muted form-control-sm" %></td>
           </tr>
           <tr>
-            <td>電話番号(ハイフンなし)</td>
+            <th><%= f.label :telephone_number, "電話番号 [ハイフンなし]", class:"border-bottom" %></th>
             <td><%= f.text_field :telephone_number, class:"border border-secondary form-text text-muted form-control-sm" %></td>
           </tr>
           <tr>
-            <td>住所</td>
+            <th><%= f.label :address, "住所", class:"border-bottom" %></th>
             <td><%= f.text_field :address, class:"border border-secondary form-text text-muted form-control-sm" %></td>
-            <td></td>
           </tr>
           <tr>
             <!--店内画像を設定してもらう-->
-            <td>店内画像</td>
+            <th>店内画像</th>
             <td><%= f.file_field :image, placeholder: "店内画像", accept: "image/*" %></td>
           </tr>
           <tr>
-            <td><%= f.label :tag, 'タグ' %></td>
+            <th><%= f.label :tag, 'タグ' %></th>
             <%# Edit用に@post.tags.pluck(:name)でタグの配列を取得 %>
             <td><%= f.text_field :tag, value: f.object.tags.pluck(:name) %><br>
-              <small>スペースで区切ることで複数指定できます。</small>
+            <small>半角スペースで区切ることで複数指定できます。</small>
             </td>
           </tr>
           <tr>

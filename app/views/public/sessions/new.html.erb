@@ -1,49 +1,46 @@
+<!--お客様(customer)ログイン画面-->
 <div class="container">
   <div class="row">
     <div class="col">
-      <h2 class="mx-1 my-5 text-secondary border-bottom col-3"><b>ログイン</b></h2>
-        <!--form_forをform_withに変更-->
-        <%= form_with model: @customer, url: customer_session_path, local: true  do |f| %>
-          <!--<%#= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>-->
-          <table class="field text-secondary mx-1 my-2">
+      <h2 class="mx-1 my-5 text-secondary border-bottom col-4"><b>ログイン</b></h2>
+      <!--form_forをform_withに変更-->
+      <%= form_with model: @customer, url: customer_session_path, local: true  do |f| %>
+        <table class="field text-secondary mx-1 my-2">
+          <tr>
+            <td>
+              <!--emailをnameに変更(ニックネームでログインしてもらうため)-->
+              <%= f.label :name, "ニックネーム", class:"border-bottom" %><br />
+              <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "はるちゃん" %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= f.label :password, "パスワード", class:"border-bottom mt-2" %><br />
+              <%= f.password_field :password, autocomplete: "current-password", placeholder: "英数字8文字以上" %>
+            </td>
+          </tr>
+          <% if devise_mapping.rememberable? %>
             <tr>
               <td>
-                <!--emailをnameに変更(ニックネームでログインしてもらうため)-->
-                <%= f.label :name, "name", class:"border-bottom" %><br />
-                <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "はるちゃん" %>
+                <%= f.check_box :remember_me %>
+                <%= f.label :remember_me %>
               </td>
             </tr>
+          <% end %>
             <tr>
               <td>
-                <%= f.label :password, "パスワード", class:"border-bottom mt-2" %><br />
-                <%= f.password_field :password, autocomplete: "current-password", placeholder: "英数字8文字以上" %>
+                <%= f.submit "ログイン", class:"mr-3 btn btn-outline-info btn-sm" %>
+                <!--publicsからpublicにフォルダ名を改名したためpublicsのsを削除-->
+                  <!--お客様のログイン画面呼び出し記述-->
+                <%= render "public/shared/links" %>
               </td>
             </tr>
-            <% if devise_mapping.rememberable? %>
-              <tr>
-                <td>
-                  <%= f.check_box :remember_me %>
-                  <%= f.label :remember_me %>
-                </td>
-              </tr>
-            <% end %>
-               <tr>
-                <td>
-                    <%= f.submit "ログイン", class:"ml-1 mr-3 btn btn-outline-info btn-sm" %>
-                </td>
-              </tr>
-          </table>
-          <div class="actions">
-          
-            <!--publicsからpublicにフォルダ名を改名したためpublicsのsを削除-->
-              <!--お客様のログイン画面呼び出し記述-->
-            <%= render "public/shared/links" %>
-          </div>
-          <!--ゲストログインボタン追記-->
-          <div class="actions">
-            <%= link_to "ゲストログイン", customers_guest_sign_in_path, class: "ml-1 my-2 btn btn-outline-secondary btn-sm" %>
-          </div>
-        <% end %>
+        </table>
+        <!--ゲストログインボタン追記-->
+        <div class="actions">
+          <%= link_to "ゲストログイン", customers_guest_sign_in_path, class: "ml-1 my-2 btn btn-outline-secondary btn-sm" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

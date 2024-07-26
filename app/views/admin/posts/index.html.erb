@@ -1,3 +1,4 @@
+<!--書店投稿一覧画面-->
 <div class="container">
   <div class="row">
     <div class="col">
@@ -5,8 +6,8 @@
       <table class="mx-1 my-2 table table-hover table-inverse align-middle text-secondary">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Content</th>
+            <th>書店名</th>
+            <th>投稿内容</th>
             <!--ワード(不適切な言葉など)で投稿を検索できる検索窓設置-->
             <% if admin_signed_in? %>
               <th>
@@ -26,15 +27,8 @@
         <!--複数のデータを登録する記述-->
         <% @posts.each do |post| %>
           <tr>
-            <!--<td>-->
-              <!--  <%#= link_to user_path(book.user) do %>-->
-              <!--  <%#= image_tag book.user.get_profile_image(100,100) %>-->
-              <!--  <%# end %>-->
-            <!--</td>-->
             <td>
-              <%#= link_to public_book_store_path(post.book_store) do %>
-                <%= post.title %>
-              <%# end %>
+              <%= post.title %>
             </td>
             <td>
               <!--感想コメント作成・特定の投稿に紐づく感想コメント一覧表示ページに遷移(public/posts/show)-->

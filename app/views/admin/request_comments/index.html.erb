@@ -1,4 +1,4 @@
-<!--コメント一覧を部分テンプレート化（非同期通信用いて実装）-->
+<!--リクエストコメント一覧画面-->
 <div class="container">
   <div class="row">
     <div class="col">
@@ -6,8 +6,8 @@
         <table class="mx-1 my-2 table table-hover table-inverse align-middle text-secondary">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Content</th>
+              <th>ニックネーム</th>
+              <th>リクエスト内容</th>
               <!--ワード(不適切な言葉など)でリクエストを検索できる検索窓設置-->
               <% if admin_signed_in? %>
                 <th>
@@ -24,31 +24,31 @@
             </tr>
           </thead>
           <tbody>
-            <% @request_comments.each do |request_comment| %>
-              <tr>
-                <td>
-                  <!--リクエストコメントしたお客様のニックネーム表示する-->
-                  <%= request_comment.customer.name %>
-                </td>
-                <td>
-                  <%= request_comment.content %>
-                </td>
-                  <!--コメントをしたユーザ以外にはDestroyボタン表示しない記述-->
-                  <% if request_comment.customer == current_customer || current_admin %>
-                <td>
-                  <!--(@book=book_idのこと) book_comment#destroyのパス（book_book_comment_path）-->
-                    <!--remote: true=非同期通信行うためのオプション（Railsはデフォルトで非同期通信を処理するライブラリが組み込まれているので実装時ページがリロードされず変更を反映できる）-->
-                  <%= link_to "削除", admin_request_comment_path(request_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger float-end" %>
-                </td>
-                  <% end %>
-              </tr>
-            <% end %>
+          <% @request_comments.each do |request_comment| %>
+            <tr>
+              <td>
+                <!--リクエストコメントしたお客様のニックネーム表示する-->
+                <%= request_comment.customer.name %>
+              </td>
+              <td>
+                <%= request_comment.content %>
+              </td>
+                <!--コメントをしたユーザ以外にはDestroyボタン表示しない記述-->
+                <% if request_comment.customer == current_customer || current_admin %>
+              <td>
+                <!--(@book=book_idのこと) book_comment#destroyのパス（book_book_comment_path）-->
+                  <!--remote: true=非同期通信行うためのオプション（Railsはデフォルトで非同期通信を処理するライブラリが組み込まれているので実装時ページがリロードされず変更を反映できる）-->
+                <%= link_to "削除", admin_request_comment_path(request_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger float-end" %>
+              </td>
+                <% end %>
+            </tr>
+          <% end %>
           </tbody>
         </table>
-        <!--kaminari(ページネーション)記述-->
-        <div class="mx-1">
-          <%= paginate @request_comments %>
-        </div>
+      <!--kaminari(ページネーション)記述-->
+      <div class="mx-1">
+        <%= paginate @request_comments %>
+      </div>
     </div>
   </div>
 </div>
