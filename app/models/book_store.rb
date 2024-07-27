@@ -26,6 +26,7 @@ class BookStore < ApplicationRecord
       book_store.name = "guestbook_store"
       book_store.address = "大阪府〇〇市〇〇町7-6-11"
       book_store.telephone_number = "072-0000-0000"
+      book_store.tag = "イベント カフェ併設"
     end
   end
   # def~endで定義されている

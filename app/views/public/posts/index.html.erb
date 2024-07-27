@@ -39,6 +39,7 @@
                 <!--ゲストでお客様ログイン時には投稿内容をリンクにしない-->
               <%= link_to_if customer_signed_in? && !current_customer.guest?, post.content, public_post_path(post), class:"text-secondary" %>
             </td>
+            <td></td>
           </tr>
         <% end %>
         </tbody>

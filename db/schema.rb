@@ -119,7 +119,6 @@ ActiveRecord::Schema.define(version: 2024_07_24_121343) do
     t.integer "post_id", null: false
     t.float "evaluation_score", null: false
     t.string "content", default: "", null: false
-    t.string "star"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

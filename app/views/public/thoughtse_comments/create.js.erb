@@ -1,8 +1,0 @@
-<!--コメント機能を非同期通信用いて実装-->
-  <!--book:=book_comments/_counter.htmlのbook.のことで@comment.bookをbook.に渡す記述-->
-$('#comment_counter').html("<%= j(render 'book_comments/counter', book: @comment.book) %>");
-$('#comment_index').html("<%= j(render 'book_comments/index', book: @comment.book) %>");
-<!--コメントフォームのテキストエリア値（入力された文字）を空にするためのコード-->
-  <!--val("")=指定要素の値を設定するための関数（カッコ内は新しい値指定する）-->
-    <!--$('#comment_textarea'=IDがcomment_textareaである要素を選択するセレクタ.val("")でテキストエリア値が空文字列設定（テキストエリアが空になる動作を意味）-->
-$('#comment_textarea').val("");
