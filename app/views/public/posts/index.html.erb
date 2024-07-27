@@ -36,9 +36,8 @@
             </td>
             <td>
               <!--感想コメント作成・特定の投稿に紐づく感想コメント一覧表示ページに遷移(public/posts/show)-->
-              <%= link_to public_post_path(post), class:"text-secondary" do %>
-                <%= post.content %>
-              <% end %>
+                <!--ゲストでお客様ログイン時には投稿内容をリンクにしない-->
+              <%= link_to_if customer_signed_in? && !current_customer.guest?, post.content, public_post_path(post), class:"text-secondary" %>
             </td>
           </tr>
         <% end %>

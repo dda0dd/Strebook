@@ -46,7 +46,8 @@ class BookStore::BookStoresController < ApplicationController
                                      :address,
                                      :telephone_number,
                                     # 店内画像を追記
-                                     :image
+                                     :image,
+                                     :email,
                                      )
   end
 end

@@ -3,7 +3,8 @@
   <div class="row">
     <div class="col">
       <h2 class="mx-1 my-5 text-secondary border-bottom col-4"><b>マイページ編集</b></h2>
-      <%= form_with model:@customer, url: public_customer_path(@customer), local:true do |f| %>
+      <%= form_with model: @customer, url: public_customer_path(@customer), local: true do |f| %>
+       <%= render 'layouts/error_messages', model: f.object %>
         <table class="table table-borderless text-secondary">
           <tr>
             <th><%= f.label :name, "ニックネーム", class:"border-bottom" %></th>

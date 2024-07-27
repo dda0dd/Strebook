@@ -33,24 +33,27 @@
             </tr>
           <% end %>
         </table>
-        <!--リクエストコメントを表示させる-->
-        <h4 class="mx-1 my-5 text-secondary border-bottom col-4"><b>リクエスト一覧</b></h4>
-          <table class="mx-1 my-3 table table-hover align-middle text-secondary">
-            <thead>
-              <tr>
-                <th>リクエスト内容</th>
-              </tr>
-            </thead>
-            <tbody>
-            <% @request_comments.each do |request_comment|%>
-              <tr>
-                <td><%= request_comment.content %></td>
-                <!--リクエストコメント削除ボタン設置-->
-                <td><%= link_to "削除", public_request_comment_path(request_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger" %></td>
-              </tr>
-            <% end %>
-            </tbody>
-          </table>
+        <!--お客様(customer)ログイン時のみ表示させる-->
+        <% if customer_signed_in? && !current_customer.guest? %>
+          <!--リクエストコメントを表示させる-->
+          <h4 class="mx-1 my-5 text-secondary border-bottom col-4"><b>リクエスト一覧</b></h4>
+            <table class="mx-1 my-3 table table-hover align-middle text-secondary">
+              <thead>
+                <tr>
+                  <th>リクエスト内容</th>
+                </tr>
+              </thead>
+              <tbody>
+              <% @request_comments.each do |request_comment|%>
+                <tr>
+                  <td><%= request_comment.content %></td>
+                  <!--リクエストコメント削除ボタン設置-->
+                  <td><%= link_to "削除", public_request_comment_path(request_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger" %></td>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+          <% end %>
           <!--kaminari(ページネーション)導入で下記追記-->
           <div class="mx-1">
             <%= paginate @request_comments %>

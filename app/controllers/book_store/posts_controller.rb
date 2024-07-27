@@ -20,7 +20,7 @@ class BookStore::PostsController < ApplicationController
     # save（保存のメソッド）
     if @post.save
       # フラッシュメッセージ(book_stores/showへリンク)if~end
-      flash[:notice] = "You have created book successfully."
+      flash[:notice] = "You have created book_store successfully."
       # アクションを通してviewを指定（redirect_to）
       redirect_to book_store_book_store_path(current_book_store)
     # バリデーションで保存できなかった時はsaveメソッドがfalseになり、renderでbook_stores/index.html.erbが表示され投稿ページを再表示する設定
@@ -50,9 +50,11 @@ class BookStore::PostsController < ApplicationController
   end
   # createで作成した投稿を削除(投稿の削除後は書店マイページに遷移)
   def destroy
-    @book_store = Book_store.find(params[:id])
-    book_store.destroy
-    redirect_to book_stores_path
+    # ActiveRecord::RecordNotFoundのエラー発生したので下記を書き換えた
+    @post = Post.find(params[:id])
+    @post.destroy
+    # 書店のマイページに遷移する
+    redirect_to book_store_book_store_path(@post.book_store)
   end
 
   private

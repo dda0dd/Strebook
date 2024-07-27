@@ -75,8 +75,6 @@ Rails.application.routes.draw do
       end
       # 書店一覧表示, 書店マイページ表示
       resources :book_stores do
-        # 感想コメント保存, 削除
-        resources :thoughtse_comments, only: [:index, :create, :destroy]
           # 都道府県で書店を検索する機能(searchはresourcesで作成されない)
         # resources :searches, only: [:search] do
           # collection do
@@ -91,6 +89,8 @@ Rails.application.routes.draw do
       end
       # 投稿一覧
       resources :posts, only: [:index, :show] do
+        # 感想コメント保存, 削除
+        resources :thoughtse_comments, only: [:index, :create, :destroy]
         # お客様の書店投稿一覧で都道府県検索(書店を)窓設置
           # collection=do~end内をID含まないものとして指定できる
           collection do
@@ -100,8 +100,7 @@ Rails.application.routes.draw do
       # リクエストコメント保存, 削除
       resources :request_comments, only: [:new, :index, :create, :destroy]
     end
-
-
+    
    # skipオプションで不要ルーティングを削除(管理者登録：パスワード変更)
     # サイト管理者(ログイン)
   devise_for :admin, skip: [:registrations, :passwords], controllers: {

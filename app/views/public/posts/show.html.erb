@@ -2,40 +2,43 @@
   <!--感想コメント作成-->
 <div class="container">
   <div class="row">
-    <div class="col-md-4">
-      <h2 class="mx-1 my-5 text-secondary border-bottom col-12"><b>感想コメント作成</b></h2>
-      <%= form_with model: @thoughtse_comment, url: public_book_store_thoughtse_comments_path(@post.book_store) do |f| %>
-        <%= render 'layouts/error_messages', model: f.object %>
-        <%= f.hidden_field :post_id, value: @post.id %>
-        <div class="mx-1 my-2 text-secondary">
-          <%= f.label :content, "感想" %>
-          <%= f.text_area :content, rows: '8', class: "form-control" %>
-        </div>
-        <!--レビュー機能を表示(星で5段階評価)-->
-        <div class="mx-1 my-2 text-secondary" id="star">
-          <%= f.label :"評価" %>
-          <%= f.hidden_field :evaluation_score, id: :review_star, class: 'form-control' %>
-          <div id="post_raty"></div>
-        </div>
-        <%= f.submit "感想コメント", class:"mx-1 my-2 btn btn-outline-success btn-sm" %>
-        <script>
-          $(document).on('turbolinks:load', function() {
-            let elem = document.querySelector('#post_raty');
-            if (elem == null) return;
+    <!--ゲストでお客様ログイン時には表示しない-->
+    <% if customer_signed_in? && !current_customer.guest? %>
+      <div class="col-md-4">
+        <h2 class="mx-1 my-5 text-secondary border-bottom col-12"><b>感想コメント作成</b></h2>
+        <%= form_with model: @thoughtse_comment, url: public_post_thoughtse_comments_path(@post) do |f| %>
+          <%= render 'layouts/error_messages', model: f.object %>
+          <%= f.hidden_field :post_id, value: @post.id %>
+          <div class="mx-1 my-2 text-secondary">
+            <%= f.label :content, "感想" %>
+            <%= f.text_area :content, rows: '8', class: "form-control" %>
+          </div>
+          <!--レビュー機能を表示(星で5段階評価)-->
+          <div class="mx-1 my-2 text-secondary" id="star">
+            <%= f.label :"評価" %>
+            <%= f.hidden_field :evaluation_score, id: :review_star, class: 'form-control' %>
+            <div id="post_raty"></div>
+          </div>
+          <%= f.submit "感想コメント", class:"mx-1 my-2 btn btn-outline-success btn-sm" %>
+          <script>
+            $(document).on('turbolinks:load', function() {
+              let elem = document.querySelector('#post_raty');
+              if (elem == null) return;
 
-            elem.innerHTML = ""
-            let opt = {
-              starOn: "<%= asset_path('star-on.png') %>",
-              starOff: "<%= asset_path('star-off.png') %>",
-              starHalf: "<%= asset_path('star-half.png') %>",
-              scoreName: 'thoughtse_comment[evaluation_score]',
-            };
-            raty(elem, opt);
-          });
-        </script>
-      <!--form_with内にf.labelなどfは入れないとエラー原因になる-->
-      <% end %>
-    </div>
+              elem.innerHTML = ""
+              let opt = {
+                starOn: "<%= asset_path('star-on.png') %>",
+                starOff: "<%= asset_path('star-off.png') %>",
+                starHalf: "<%= asset_path('star-half.png') %>",
+                scoreName: 'thoughtse_comment[evaluation_score]',
+              };
+              raty(elem, opt);
+            });
+          </script>
+        <!--form_with内にf.labelなどfは入れないとエラー原因になる-->
+        <% end %>
+      </div>
+    <% end %>
     <!--書店投稿から遷移して確認できるページ-->
     <div class="col-md-8">
       <h2 class="mx-1 my-5 text-secondary border-bottom col-7"><b>感想コメント一覧</b></h2>
@@ -56,7 +59,7 @@
                 $(document).on('turbolinks:load', function() {
                   let elem = document.querySelector('#show_raty<%= thoughtse_comment.id %>');
                   if (elem == null) return;
-  
+
                   elem.innerHTML = ""
                   let opt = {
                     starOn: "<%= asset_path('star-on.png') %>",
@@ -68,8 +71,10 @@
                   raty(elem, opt);
                 });
               </script>
-              <!--削除ボタン表示-->
-              <td><%= link_to "削除", public_book_store_thoughtse_comment_path(@post.thoughtse_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger float-end" %></td>
+              <% if customer_signed_in? && !current_customer.guest? %>
+                <!--削除ボタン表示-->
+                <td><%= link_to "削除", public_post_thoughtse_comment_path(@post,thoughtse_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger float-end" %></td>
+              <% end %>
             </tr>
           <% end %>
         </tbody>

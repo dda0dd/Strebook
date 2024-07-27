@@ -8,9 +8,6 @@
 				<!--</span>-->
 					<!--お客様ログイン時のヘッダー-->
 					<% if customer_signed_in? && !current_customer.guest? %>
-	        <!--<div class="text-secondary mx-3 my-3">-->
-					<!--	<b>ようこそ、<%#= current_customer.last_name %>さん！</b>-->
-					<!--</div>-->
 					  <!--マイページリンク-->
 					  <%= link_to "マイページ", public_customer_path(current_customer), class:"text-secondary" %>
 					  <!--投稿一覧リンク-->

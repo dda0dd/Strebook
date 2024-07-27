@@ -3,16 +3,6 @@
   <dic class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
       <h2 class="mx-1 my-5 text-secondary border-bottom col-3"><b>投稿編集</b></h2>
-        <!--エラーメッセージの記述-->
-        <!--<%# if @book_store.errors.any? %>-->
-        <!--      <%#= @book_store.errors.count %>errors prohibited this obj from being saved:-->
-        <!--        <ul>-->
-        <!--          <%# @book_store.errors.full_messages.each do |message| %>-->
-        <!--            <li><%#= message %></li>-->
-        <!--          <%# end %>-->
-        <!--        </ul>-->
-        <!--<%# end %>-->
-
         <!--urlとmethod指定で編集を行うためのリクエストを特定のURL(投稿した書店の詳細)に送信-->
         <%= form_with url: book_store_path(@book_store), method: :patch do |f| %>
           <!--Title（本のタイトル記述箇所）作成-->

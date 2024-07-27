@@ -50,30 +50,38 @@
             <!--book_storeに紐づいているimageをimage_tagに渡して画像を表示する-->
             <%= image_tag @book_store.image, size: "200x200", style: "width: 350px ;height: 350px;" %>
           <% else %>
-            <%= image_tag 'no-image.j', size: "200x200", style: "width: 350px ;height: 350px;"  %>
+            <%= image_tag 'no_image.jpg', size: "200x200", style: "width: 350px ;height: 350px;"  %>
           <% end %>
         </div>
       </div>
-      <table class="mx-1 my-2 table table-hover table-inverse align-middle text-secondary">
-        <thead>
-          <tr>
-            <th>書店名</th>
-            <th>投稿内容</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!--投稿した投稿内容を表示させる-->
-          <% @book_store.posts.each do |post|%>
+      <!--書店(book_store)ログイン時のみ表示させる-->
+      <% if book_store_signed_in? && !current_book_store.guest? %>
+        <table class="mx-1 my-2 table table-hover table-inverse align-middle text-secondary">
+          <thead>
             <tr>
-              <td><%= post.title %></td>
-              <!--投稿に紐づく感想コメントが見られるページ(book_store/comments/search)に遷移-->
-              <%= link_to book_store_book_store_post_comments_path(post.book_store, post) do %>
-                <td><%= link_to post.content, book_store_book_store_post_comments_path(post.book_store, post), class:"text-secondary" %></td>
-              <% end %>
+              <th>書店名</th>
+              <th>投稿内容</th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <!--投稿した投稿内容を表示させる-->
+            <% @book_store.posts.each do |post|%>
+              <tr>
+                <td><%= post.title %></td>
+                <!--投稿に紐づく感想コメントが見られるページ(book_store/comments/search)に遷移-->
+                <%= link_to book_store_book_store_post_comments_path(post.book_store, post) do %>
+                  <td><%= link_to post.content, book_store_book_store_post_comments_path(post.book_store, post), class:"text-secondary" %></td>
+                <% end %>
+                <!--ログイン書店のみ表示される(ゲスト書店にも表示されない)-->
+                <% if book_store_signed_in? && !current_book_store.guest? %>
+                  <!--作成した投稿を削除できる削除ボタン設置-->
+                  <td><%= link_to "削除", book_store_post_path(post.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger float-end" %></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
       <!--kaminari(ページネーション)記述-->
       <div class="mx-1">
         <%= paginate @posts %>

@@ -11,7 +11,7 @@ class Public::ThoughtseCommentsController < ApplicationController
     @thoughtse_comment = ThoughtseComment.find(params[:id])
     @thoughtse_comment.destroy
     # コメント削除後は行う前（public/posts/show）に遷移記述
-    redirect_to public_book_store_thoughtse_comments_path(params[:book_id])
+    redirect_to public_post_path(params[:post_id])
   end
 
    private

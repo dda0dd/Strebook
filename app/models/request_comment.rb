@@ -1,7 +1,6 @@
 class RequestComment < ApplicationRecord
 
   belongs_to :customer
-
   # 空のコメントは保存できないバリデーション
   validates :content, presence:true
   # 検索方法の分岐定義(検索方法毎に適した検索が行われる)

@@ -1,14 +1,12 @@
 <!--会員(書店)退会画面-->
 <div class="container">
-  <div class="row">
-    <div class="col">
-			<h2 class="mx-1 my-5 text-secondary border-bottom col-5">本当に退会されますか？</h2>
-      <!--会員(お客様)マイページに遷移-->
-        <!--customers_controllerのunsubscribeには@customerなどの記述不要-->
-			<%= link_to "退会しない", admin_customer_path(@customer), class:"btn btn-outline-secondary ml-2 btn-sm" %>
-      <!--退会後は会員(お客様)管理者のお客様一覧画面に遷移-->
-        <!--data: { confirm: "退会してもよろしいですか？" }=退会するボタン押した後確認メッセージ表示させる-->
-			<%= link_to "退会する", withdraw_admin_customer_path(@customer), method: :patch, data: { confirm: "退会ボタンです。このまま実行されますか？" }, class:"btn btn-outline-danger btn-sm" %>
-		</div>
+<h2 class="mx-1 my-5 text-secondary text-center"><span class="border-bottom">本当に退会されますか？</span></h2>
+  <div class="row justify-content-center">
+    <!--会員(お客様)マイページに遷移-->
+      <!--customers_controllerのunsubscribeには@customerなどの記述不要-->
+  	<%= link_to "退会しない", admin_customer_path(@customer), class:"btn btn-outline-secondary btn-sm mr-5" %>
+    <!--退会後は会員(お客様)管理者のお客様一覧画面に遷移-->
+      <!--data: { confirm: "退会してもよろしいですか？" }=退会するボタン押した後確認メッセージ表示させる-->
+  	<%= link_to "退会する", withdraw_admin_customer_path(@customer), method: :patch, data: { confirm: "退会ボタンです。このまま実行されますか？" }, class:"btn btn-outline-danger btn-sm" %>
   </div>
 </div>

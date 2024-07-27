@@ -12,17 +12,14 @@
           </tr>
         </thead>
         <tbody>
-          <% @thoughtse_comments.each do |tc| %>
+          <% @thoughtse_comments.each do |thoughtse_comment| %>
             <tr>
               <td>
+                <!--下記のthoughtse_commentは上記の|thoughtse_comment|から持ってくる-->
                 <%= thoughtse_comment.content %>
-              </td>
-              <td>
-                <%#= thoughtse_comment.evaluation_score %>
               </td>
               <!--感想コメント時にレビューされた(5段階評価)を表示-->
               <td id="index_raty<%= thoughtse_comment.id %>"></td>
-              <!--<div id="star_<%#= book.id %>"></div>-->
             </tr>
             <script>
             $(document).on('turbolinks:load', function() {

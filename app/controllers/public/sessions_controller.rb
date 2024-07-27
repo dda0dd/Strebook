@@ -49,11 +49,9 @@ class Public::SessionsController < Devise::SessionsController
     # nameとパスワードの組み合わせが正しくない場合unless文がtrueとなりreturnが実行される→ログインできず
     return unless customer.valid_password?(params[:customer][:password])
     # is_activeカラムがtrue場合if文がtrueとなりcustomer_stateメソッドが実行完了となり、createアクションが実行される＝ログインできる
-    if customer.is_active == true
-    # before_actionで定義しているからここでcreateの記述は不要かも
-		  create
-    else
-      # ここまで来るのは退会した人（nameは登録済み＋パスワードも正しい、けどis_activeがfalse）→再登録のためにサインアップ画面へ→メールアドレスが登録済みの場合、同じアドレスで会員登録は出来ないはず
+    if customer.is_active == false
+      # 退会した人がログインできないように設定
+        # ここまで来るのは退会した人（nameは登録済み＋パスワードも正しい、けどis_activeがfalse）→再登録のためにサインアップ画面へ→メールアドレスが登録済みの場合、同じアドレスで会員登録は出来ないはず
   	   redirect_to new_customer_registration_path
     end
   end

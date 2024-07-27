@@ -32,10 +32,13 @@
           <th>会員ステータス</th>
           <td><%= @customer.is_active ? '有効' : '無効' %></td>
         </tr>
-        <tr>
-          <td></td>
-          <td><%= link_to "退会", unsubscribe_admin_customer_path(@customer), class:"btn btn-outline-danger btn-sm" %></td>
-        </tr>
+        <!--管理者のゲストお客様マイページに退会ボタンを表示しない-->
+        <% if admin_signed_in? && !@customer.guest? %>
+          <tr>
+            <td></td>
+            <td><%= link_to "退会", unsubscribe_admin_customer_path(@customer), class:"btn btn-outline-danger btn-sm" %></td>
+          </tr>
+        <% end %>
       </table>
     </div>
   </div>
