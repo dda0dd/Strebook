@@ -5,41 +5,35 @@
       <h2 class="mx-1 my-5 text-secondary border-bottom col-4"><b>ログイン</b></h2>
       <!--form_forをform_withに変更-->
       <%= form_with model: @customer, url: customer_session_path, local: true  do |f| %>
-        <table class="field text-secondary mx-1 my-2">
+        <table class="table table-borderless text-secondary mx-1 my-2 log_in">
           <tr>
-            <td>
-              <!--emailをnameに変更(ニックネームでログインしてもらうため)-->
-              <%= f.label :name, "ニックネーム", class:"border-bottom" %><br />
-              <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "はるちゃん" %>
-            </td>
+            <!--emailをnameに変更(ニックネームでログインしてもらうため)-->
+            <th><%= f.label :name, "ニックネーム", class:"border-bottom" %></th>
+            <td><%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "はるちゃん", class:"border border-secondary text-secondary rounded" %></td>
           </tr>
           <tr>
-            <td>
-              <%= f.label :password, "パスワード", class:"border-bottom mt-2" %><br />
-              <%= f.password_field :password, autocomplete: "current-password", placeholder: "英数字8文字以上" %>
-            </td>
+            <th><%= f.label :password, "パスワード", class:"border-bottom" %></th>
+            <td><%= f.password_field :password, autocomplete: "current-password", placeholder: "英数字8文字以上", class:"border border-secondary text-secondary rounded" %></td>
           </tr>
           <% if devise_mapping.rememberable? %>
             <tr>
-              <td>
-                <%= f.check_box :remember_me %>
-                <%= f.label :remember_me %>
-              </td>
+              <th></th>
+              <td><%= f.check_box :remember_me %> <%= f.label :remember_me %></td>
             </tr>
           <% end %>
-            <tr>
-              <td>
-                <%= f.submit "ログイン", class:"mr-3 btn btn-outline-info btn-sm" %>
-                <!--publicsからpublicにフォルダ名を改名したためpublicsのsを削除-->
-                  <!--お客様のログイン画面呼び出し記述-->
-                <%= render "public/shared/links" %>
-              </td>
-            </tr>
         </table>
-        <!--ゲストログインボタン追記-->
-        <div class="actions">
-          <%= link_to "ゲストログイン", customers_guest_sign_in_path, class: "ml-1 my-2 btn btn-outline-secondary btn-sm" %>
-        </div>
+        <table class="table table-borderless text-secondary mx-1 my-2">
+          <tr>
+            <th class="d-flex">
+              <%= f.submit "ログイン", class:"btn btn-outline-info btn-sm mr-2" %>
+              <!--publicsからpublicにフォルダ名を改名したためpublicsのsを削除-->
+                <!--お客様のログイン画面呼び出し記述-->
+              <%= render "public/shared/links" %>
+              <!--ゲストログインボタン追記-->
+              <%= link_to "ゲストログイン", customers_guest_sign_in_path, class: "btn btn-outline-secondary btn-sm" %>
+            </th>
+          </tr>
+        </table>
       <% end %>
     </div>
   </div>

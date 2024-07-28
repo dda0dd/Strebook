@@ -1,3 +1,14 @@
 // bootstrap導入でstylesheetsフォルダ作成してapplication.scss作成、下記記述
 
 @use '~bootstrap/scss/bootstrap';
+
+// 感想コメント一覧レイアウト整えのため追記
+.thoughtse_comment_top {
+  margin-top: 80px;
+}
+
+// ログイン画面のレイアウト整えのため追記
+.log_in {
+  max-width: 450px;
+}
+

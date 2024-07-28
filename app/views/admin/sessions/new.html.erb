@@ -5,36 +5,32 @@
       <h2 class="mx-1 my-5 text-secondary border-bottom col-4"><b>ログイン</b></h2>
       <!--form_forをform_withに変更-->
       <%= form_with model: @admin, url: admin_session_path do |f| %>
-        <table class="field text-secondary mx-1 my-2">
+        <table class="table table-borderless text-secondary mx-1 my-2 log_in">
           <tr>
-            <td>
-              <%= f.label :メールアドレス, class:"border-bottom" %><br />
-              <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-            </td>
+            <th><%= f.label :メールアドレス, class:"border-bottom" %></th>
+            <td><%= f.email_field :email, autofocus: true, autocomplete: "email", class:"border border-secondary text-secondary rounded" %></td>
           </tr>
           <tr>
-            <td>
-              <%= f.label :パスワード, class:"border-bottom mt-2" %><br />
-              <%= f.password_field :password, autocomplete: "current-password" %>
-            </td>
+            <th><%= f.label :パスワード, class:"border-bottom" %></th>
+            <td><%= f.password_field :password, autocomplete: "current-password", class:"border border-secondary text-secondary rounded" %></td>
+          </tr>
+          <% if devise_mapping.rememberable? %>
+            <tr>
+              <th></th>
+              <td><%= f.check_box :remember_me %> <%= f.label :remember_me %></td>
+            </tr>
+            </div>
+          <% end %>
+        </table>
+        <table class="table table-borderless text-secondary mx-1 my-2">
+          <tr>
+            <th class="d-flex">
+              <%= f.submit "ログイン", class:"btn btn-outline-info btn-sm" %>
+              <%= render "admin/shared/links" %>
+            </th>
           </tr>
         </table>
-        <div class="mx-1">
-          <%= f.submit "ログイン", class:"btn btn-outline-info btn-sm" %>
-          <!--adminsからadminにフォルダ名を改名したためadminsのsを削除-->
-          <%= render "admin/shared/links" %>
-        </div>
       <% end %>
     </div>
   </div>
 </div>
-
-  <!--下記は必要ないためコメントアウト-->
-  <%# if devise_mapping.rememberable? %>
-    <!--<div class="field">-->
-      <%#= f.check_box :remember_me %>
-      <%#= f.label :remember_me %>
-    <!--</div>-->
-  <%# end %>
-
-
