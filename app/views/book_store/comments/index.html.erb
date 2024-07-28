@@ -1,49 +1,45 @@
 <!--書店のマイページ内(投稿内容リンクの遷移先)画面-->
 <div class="container">
-  <div class="row">
-    <div class="col-md-8">
-      <h2 class="mx-1 my-5 text-secondary border-bottom col-7">感想コメント一覧</h2>
-      <!--特定投稿に紐づく感想コメント一覧-->
-      <table class="mx-1 my-2 thoughtse_comment_top table table-hover align-middle text-secondary">
-        <thead>
-          <tr>
-            <th>感想</th>
-            <th>書店評価</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @thoughtse_comments.each do |thoughtse_comment| %>
-            <tr>
-              <td>
-                <!--下記のthoughtse_commentは上記の|thoughtse_comment|から持ってくる-->
-                <%= thoughtse_comment.content %>
-              </td>
-              <!--感想コメント時にレビューされた(5段階評価)を表示-->
-              <td id="index_raty<%= thoughtse_comment.id %>"></td>
-            </tr>
-            <script>
-            $(document).on('turbolinks:load', function() {
-              let elem = document.querySelector('#index_raty<%= thoughtse_comment.id %>');
-              if (elem == null) return;
+  <h2 class="mx-1 my-5 text-secondary border-bottom col-7">感想コメント一覧</h2>
+  <!--特定投稿に紐づく感想コメント一覧-->
+  <table class="mx-1 my-2 thoughtse_comment_top table table-hover align-middle text-secondary">
+    <thead>
+      <tr>
+        <th>感想</th>
+        <th>書店評価</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @thoughtse_comments.each do |thoughtse_comment| %>
+        <tr>
+          <td>
+            <!--下記のthoughtse_commentは上記の|thoughtse_comment|から持ってくる-->
+            <%= thoughtse_comment.content %>
+          </td>
+          <!--感想コメント時にレビューされた(5段階評価)を表示-->
+          <td id="index_raty<%= thoughtse_comment.id %>"></td>
+        </tr>
+        <script>
+        $(document).on('turbolinks:load', function() {
+          let elem = document.querySelector('#index_raty<%= thoughtse_comment.id %>');
+          if (elem == null) return;
 
-              elem.innerHTML = "";
-              let opt = {
-                starOn: "<%= asset_path('star-on.png') %>",
-                starOff: "<%= asset_path('star-off.png') %>",
-                starHalf: "<%= asset_path('star-half.png') %>",
-                score: "<%= thoughtse_comment.evaluation_score %>",
-                readOnly: true,
-              };
-              raty(elem, opt);
-            });
-            </script>
-            <% end %>
-          </tbody>
-      </table>
-      <!--kaminari(ページネーション)記述-->
-      <div class="mx-1">
-        <%= paginate @thoughtse_comments %>
-      </div>
-    </div>
+          elem.innerHTML = "";
+          let opt = {
+            starOn: "<%= asset_path('star-on.png') %>",
+            starOff: "<%= asset_path('star-off.png') %>",
+            starHalf: "<%= asset_path('star-half.png') %>",
+            score: "<%= thoughtse_comment.evaluation_score %>",
+            readOnly: true,
+          };
+          raty(elem, opt);
+        });
+        </script>
+        <% end %>
+      </tbody>
+  </table>
+  <!--kaminari(ページネーション)記述-->
+  <div class="mx-1">
+    <%= paginate @thoughtse_comments %>
   </div>
 </div>
