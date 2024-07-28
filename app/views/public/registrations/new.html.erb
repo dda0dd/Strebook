@@ -23,7 +23,7 @@
             <!--新規登録時に住所(都道府県のみ)記載してもらう-->
             <th><%= f.label :address, "住所", class:"border-bottom" %></th>
             <!--都道府県を選択してもらう形に設定(helpers/application_helper.rbに都道府県情報記載)-->
-            <td><%= f.select :address, options_for_select(prefecture_options), { include_blank: '選択してください' }, class:"text-secondary border boder-secondary rounded" %></td>
+            <td><%= f.select :address, options_for_select(prefecture_options), { include_blank: '選択してください' }, {class:"text-secondary border boder-secondary rounded"} %></td>
           </tr>
           <tr>
             <!--新規登録時に年齢(数字のみ)記載してもらう-->

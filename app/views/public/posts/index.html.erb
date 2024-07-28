@@ -16,7 +16,7 @@
                   <!--検索例をtext_field内に表示する-->
                 <%= f.text_field :word, class:"text-secondary border border-secondary rounded" %>
                 <!--都道府県とタグで切り替えて検索する-->
-                <%= f.select :range, options_for_select([['都道府県', 'Address'], ['タグ', 'Tag']]) %>
+                <%= f.select :range, options_for_select([['都道府県', 'Address'], ['タグ', 'Tag']]), {}, {class: "form-control form-control-sm d-inline", style: "width: 125px;"} %>
                 <!--"btn"箇所=検索ボタン記述-->
                   <!--style: =Bootstrap内でのCSS記述（<div>や<link_to>内では上手く動作しないことも）カスタマイズツールなどある-->
                 <%= f.submit "検索", class: "btn btn-outline-secondary", style: "padding:0;" %>

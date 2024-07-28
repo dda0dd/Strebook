@@ -16,7 +16,7 @@
                 <%= form_with url: search_admin_book_stores_path, local: true, method: :get do |f| %>
                   <!--検索内容をwordとしてdef searchアクションに送る-->
                     <!--ブルダウン実装:カラム名, [["表示する値", 送る値]], ""の文字を表示させる-->
-                  <%= f.select :is_active, [["有効", true], ["退会", false]], include_blank: "全て" %>
+                  <%= f.select :is_active, [["有効", true], ["退会", false]], {include_blank: "全て"}, {class: "form-control form-control-sm d-inline", style: "width: 150px;"} %>
                   <!--"btn"箇所=検索ボタン記述-->
                     <!--style: =Bootstrap内でのCSS記述（<div>や<link_to>内では上手く動作しないことも）カスタマイズツールなどある-->
                   <%= f.submit "検索", class: "btn btn-outline-secondary", style: "padding:0;" %>
