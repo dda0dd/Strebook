@@ -1,53 +1,64 @@
 <!--会員(お客様)マイページ画面-->
-
 <div class="container">
   <div class="row">
     <div class="col">
-        <h2 class="mx-3  my-3 text-secondary border border-3 rounded-top col-5 text-center">お客様マイページ</h2>
-          <table class="mx-3 my-3 table table-hover align-middle text-secondary">
+      <h2 class="mx-1 my-5 text-secondary border-bottom col-4"><b>お客様マイページ</b></h2>
+        <table class="mx-1 my-2 table table-hover text-secondary">
+          <tr>
+            <th class="bg-light">ニックネーム</th>
+            <td><%= @customer.name %></td>
+          </tr>
+          <tr>
+            <th class="bg-light">メールアドレス</th>
+            <td><%= @customer.email %></td>
+          </tr>
+          <tr>
+            <th class="bg-light">年齢</th>
+            <td><%= @customer.age %></td>
+          </tr>
+          <tr>
+            <th class="bg-light">職業</th>
+            <td><%= @customer.occupation %></td>
+          </tr>
+          <tr>
+            <th class="bg-light">住所</th>
+            <td><%= @customer.address %></td>
+          </tr>
+          <!--customerでログインかつ(&&)じゃなければ(!)if~end内実行される(models/customer.rbにguest?の定義必要)-->
+          <% if customer_signed_in? && !current_customer.guest? %>
             <tr>
-              <td class="bg-light">ニックネーム</td>
-              <td><%= @customer.name %></td>
-            </tr>
-            <tr>
-              <td class="bg-light">年齢</td>
-              <td><%= @customer.age %></td>
-            </tr>
-            <tr>
-              <td class="bg-light">職業</td>
-              <td><%= @customer.occupation %></td>
-            </tr>
-            <tr>
-              <td class="bg-light">住所</td>
-              <td><%= @customer.address %></td>
-            </tr>
-              <!--customerでログインかつ(&&)じゃなければ(!)if~end内実行される(models/customer.rbにguest?の定義必要)-->
-              <% if customer_signed_in? && !current_customer.guest? %>
-            <tr>
-              <td><%= link_to "編集", edit_public_customer_path(current_customer.id), class:"btn btn-outline-primary btn-sm" %></td>
+              <td><%= link_to "編集", edit_public_customer_path(current_customer.id), class:"btn btn-outline-secondary btn-sm" %></td>
               <!--退会するボタン押した時確認メッセージ表示させる(退会後退会画面に遷移)-->
-              <td><%= link_to "退会する", unsubscribe_public_customers_path, data: { confirm: "退会してもよろしいですか？" }, class:"btn btn-outline-danger ml-1" %></td>
+              <td><%= link_to "退会する", unsubscribe_public_customers_path, data: { confirm: "退会してもよろしいですか？" }, class:"btn btn-outline-danger ml-0 btn-sm" %></td>
             </tr>
-              <% end %>
-          </table>
+          <% end %>
+        </table>
+        <!--お客様(customer)ログイン時のみ表示させる-->
+        <% if customer_signed_in? && !current_customer.guest? %>
           <!--リクエストコメントを表示させる-->
-          <h5 class="mx-3 my-3 text-secondary"><b>リクエスト一覧</b></h5>
-          <table class="mx-3 my-3 table table-hover align-middle text-secondary">
-            <thead>
-              <tr>
-                <th>content</th>
-              </tr>
-            </thead>
-            <tbody>
+          <h4 class="mx-1 my-5 text-secondary border-bottom col-4"><b>リクエスト一覧</b></h4>
+            <table class="mx-1 my-3 table table-hover align-middle text-secondary">
+              <thead>
+                <tr>
+                  <th>リクエスト内容</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
               <% @request_comments.each do |request_comment|%>
                 <tr>
                   <td><%= request_comment.content %></td>
+                  <!--リクエストコメント削除ボタン設置-->
+                  <td><%= link_to "削除", public_request_comment_path(request_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger" %></td>
                 </tr>
               <% end %>
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          <% end %>
+          <!--kaminari(ページネーション)導入で下記追記-->
+          <div class="mx-1">
+            <%= paginate @request_comments %>
+          </div>
         </div>
       </div>
     </div>
-          <!--kaminari(ページネーション)導入で下記追記-->
-          <%= paginate @request_comments %>

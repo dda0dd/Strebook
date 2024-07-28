@@ -17,3 +17,13 @@ import "../stylesheets/application";
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+// raty.jsをGitHubからダウンロードで下記追記
+import Raty from "raty.js"
+window.raty = function(elem,opt) {
+  let raty =  new Raty(elem,opt)
+  raty.init();
+  return raty;
+}
+// jQuery呼び出し記述追記
+window.$ = window.jQuery = require('jquery');

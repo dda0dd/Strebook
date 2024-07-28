@@ -15,6 +15,7 @@
     <!--_headerを呼び出し記述-->
     <%= render 'layouts/header' %>
     <%= yield %>
+    <%= render 'layouts/footer' %>
     <!--下記のdebugでデータ情報をブラウザに表示させる-->
     <%= debug params if Rails.env.development? %>
   </body>

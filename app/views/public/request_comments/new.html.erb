@@ -4,11 +4,14 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h2 class="mx-3  my-3 text-secondary border border-3 rounded-top col-5 text-center">リクエスト新規作成</h2>
-        <%= form_with model: @request_comment, url: public_request_comments_path do |f| %>
-          <div class="mx-3 my-3 text-secondary ">
-            <!--リクエストコメント作成したお客様のニックネーム表示する-->
-            <%= f.text_area :content, rows: '8', style: "width:80%", id: "request_comment_textarea", class:"border border-3 text-secondary" %>
-            <%= f.submit "新規作成", class: "mx-2 btn btn-outline-primary btn-sm" %>
-          </div>
-        <% end %>
+      <h2 class="mx-1 my-5 text-secondary border-bottom col-5"><b>リクエスト新規作成</b></h2>
+      <%= form_with model: @request_comment, url: public_request_comments_path do |f| %>
+        <div class="mx-1 my-2 text-secondary ">
+          <!--リクエストコメント作成したお客様のニックネーム表示する-->
+          <%= f.text_area :content, rows: '8', style: "width:80%", id: "request_comment_textarea", placeholder: "全国の書店に対しての要望やあなたのアイデアをリクエストとして送りましょう", class:"border border-3 text-secondary rounded" %>
+          <%= f.submit "新規リクエスト", class: "mx-2 mb-4 btn btn-outline-success btn-sm" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

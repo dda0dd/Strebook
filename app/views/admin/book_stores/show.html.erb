@@ -1,57 +1,64 @@
 <!--会員(書店)詳細画面(admin/book_stores/:id)-->
-<table class="table table-borderless">
-  <tr>
-    <th>書店ID</td>
-    <td><%= @book_store.id %></td>
-  </tr>
-  <tr>
-    <th>書店名</td>
-    <td><%= @book_store.name %></td>
-  </tr>
-  <tr>
-    <th>創立年齢</td>
-    <td><%= @book_store.age %></td>
-  </tr>
-  <tr>
-    <th>電話番号</td>
-    <td><%= @book_store.telephone_number %></td>
-  </tr>
-  <tr>
-    <th>住所</th>
-    <td><%= @book_store.address %></td>
-  </tr>
-  <tr>
-    <th>会員ステータス</th>
-    <th><%= @book_store.customer_status %></th>
-  </tr>
-  <tr>
-    <td></td>
-    <td><%= link_to "退会する", unsubscribe_book_store_book_stores_path, data: { confirm: "退会してもよろしいですか？" }, class:"btn btn-outline-success ml-2 btn-sm" %>
-  </tr>
-</table>
-<!--書店マイページ(詳細)表示-->
 <div class="container">
   <div class="row">
-    <div class="col-md-3">
-      <!--書店のマイページを呼び出し-->
-      <%= render 'book_store/customers/show', book_store: @book_store_new, customer:@customer %>
-    </div>
-      <table class="table">
-        <tbody>
+    <div class="col">
+      <h2 class="mx-1 my-5 text-secondary border-bottom col-4"><b>書店マイページ</b></h2>
+      <div style="display: flex;">
+        <table class="mx-1 my-2 table table-hover align-middle text-secondary" style="flex: 1">
           <tr>
-          <!--本人なら表示、他人なら不表示にする記述(if~end)-->
-          <% if @book_store == current_book_store %>
-            <!--編集ボタン-->
+            <th>書店ID</th>
+            <td><%= @book_store.id %></td>
+          </tr>
+          <tr>
+            <th>書店名</th>
+            <td><%= @book_store.name %></td>
+          </tr>
+          <tr>
+            <th>メールアドレス</th>
+            <td><%= @book_store.email %></td>
+          </tr>
+          <tr>
+            <th>創立年齢</th>
+            <td><%= @book_store.age %></td>
+          </tr>
+          <tr>
+            <th>電話番号</th>
+            <td><%= @book_store.telephone_number %></td>
+          </tr>
+          <tr>
+            <th>住所</th>
+            <td><%= @book_store.address %></td>
+          </tr>
+          <tr>
+            <th>会員ステータス</th>
+            <td><%= @book_store.is_active ? '有効' : '無効' %></td>
+          </tr>
+          <tr>
+            <th>タグ</th>
             <td>
-              <%= link_to "編集", edit_book_store_path(@book_store), class: "btn btn-sm btn-success" %>
-            </td>
-            <!--削除ボタン-->
-            <td>
-              <%= link_to "削除", book_store_path(@book_store), method: :delete, class: "btn btn-sm btn-danger destroy" %>
+              <% @book_store.tags.each do |tag| %>
+                <span class=" rounded", style= "background: gray; padding: 3px; color: white;"><%= tag.name %></span>
+              <% end %>
             </td>
           </tr>
+          <!--管理者のゲスト書店マイページに退会ボタンを表示しない-->
+          <% if admin_signed_in? && !@book_store.guest? %>
+            <tr>
+              <td></td>
+              <td><%= link_to "退会", unsubscribe_admin_book_store_path(@book_store), class:"btn btn-outline-danger btn-sm" %></td>
+            </tr>
           <% end %>
-        </tbody>
-      </table>
+        </table>
+        <!--画像サイズをstyleで指定-->
+        <div style="flex: 1; text-align: center;">
+          <% if @book_store.image.attached? %>
+            <!--book_storeに紐づいているimageをimage_tagに渡して画像を表示する-->
+            <%= image_tag @book_store.image, size: "200x200", style: "width: 350px ;height: 350px;" %>
+          <% else %>
+            <%= image_tag 'no_image.jpg', size: "200x200", style: "width: 350px ;height: 350px;"  %>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

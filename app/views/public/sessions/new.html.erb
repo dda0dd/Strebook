@@ -1,44 +1,40 @@
+<!--お客様(customer)ログイン画面-->
 <div class="container">
   <div class="row">
     <div class="col">
-      <h4 class="mx-3 my-3 text-secondary border border-3 rounded-top col-2 text-center" alt="...">ログイン</h4>
-        <!--form_forをform_withに変更-->
-        <%= form_with model: @customer, url: customer_session_path do |f| %>
-          <!--<%#= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>-->
-          <table class="field text-secondary mx-3 my-3">
+      <h2 class="mx-1 my-5 text-secondary border-bottom col-4"><b>ログイン</b></h2>
+      <!--form_forをform_withに変更-->
+      <%= form_with model: @customer, url: customer_session_path, local: true  do |f| %>
+        <table class="table table-borderless text-secondary mx-1 my-2 log_in">
+          <tr>
+            <!--emailをnameに変更(ニックネームでログインしてもらうため)-->
+            <th><%= f.label :name, "ニックネーム", class:"border-bottom" %></th>
+            <td><%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "はるちゃん", class:"border border-secondary text-secondary rounded" %></td>
+          </tr>
+          <tr>
+            <th><%= f.label :password, "パスワード", class:"border-bottom" %></th>
+            <td><%= f.password_field :password, autocomplete: "current-password", placeholder: "英数字8文字以上", class:"border border-secondary text-secondary rounded" %></td>
+          </tr>
+          <% if devise_mapping.rememberable? %>
             <tr>
-              <td>
-                <!--emailをnameに変更(ニックネームでログインしてもらうため)-->
-                <%= f.label :name, "ニックネーム" %><br />
-                <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "はるちゃん" %>
-              </td>
+              <th></th>
+              <td><%= f.check_box :remember_me %> <%= f.label :remember_me %></td>
             </tr>
-            <tr>
-              <td>
-                <%= f.label :password, "パスワード" %><br />
-                <%= f.password_field :password, autocomplete: "current-password", placeholder: "英数字8文字以上" %>
-              </td>
-            </tr>
-            <% if devise_mapping.rememberable? %>
-              <tr>
-                <td>
-                  <%= f.check_box :remember_me %>
-                  <%= f.label :remember_me %>
-                </td>
-              </tr>
-            <% end %>
-          </table>
-          <div class="actions">
-            <%= f.submit "ログイン", class:"btn btn-outline-primary ml-3 btn-sm" %>
-            <!--publicsからpublicにフォルダ名を改名したためpublicsのsを削除-->
-              <!--お客様のログイン画面呼び出し記述-->
-            <%= render "public/shared/links" %>
-          </div>
-          <!--ゲストログインボタン追記-->
-          <div class="actions">
-            <%= link_to "ゲストログイン", customers_guest_sign_in_path, class: "btn btn-outline-secondary ml-3 btn-sm" %>
-          </div>
-        <% end %>
+          <% end %>
+        </table>
+        <table class="table table-borderless text-secondary mx-1 my-2">
+          <tr>
+            <th class="d-flex">
+              <%= f.submit "ログイン", class:"btn btn-outline-info btn-sm mr-2" %>
+              <!--publicsからpublicにフォルダ名を改名したためpublicsのsを削除-->
+                <!--お客様のログイン画面呼び出し記述-->
+              <%= render "public/shared/links" %>
+              <!--ゲストログインボタン追記-->
+              <%= link_to "ゲストログイン", customers_guest_sign_in_path, class: "btn btn-outline-secondary btn-sm" %>
+            </th>
+          </tr>
+        </table>
+      <% end %>
     </div>
   </div>
 </div>
