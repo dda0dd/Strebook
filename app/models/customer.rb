@@ -5,6 +5,10 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable
     # バリデーション記載(空の時に実行される)
     validates :name, presence: true
+    validates :age, presence: true
+    validates :address, presence: true
+    validates :occupation, presence: true
+    validates :password, length: { minimum: 8 }, on: :create
 
     has_many :request_comments
     has_many :thoughtse_comments
@@ -16,6 +20,9 @@ class Customer < ApplicationRecord
         customer.password = SecureRandom.urlsafe_base64
         # nameをguestcustomerに固定
         customer.name = "guestcustomer"
+        customer.address = "大阪府"
+        customer.occupation = "事務職"
+        customer.email = "customer@guest"
       end
     end
     # def(def=定義するの意味)~endで定義されている

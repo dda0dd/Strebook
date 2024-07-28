@@ -1,40 +1,36 @@
+<!--管理者(admin)のログイン画面(URLに/admin/sign_in入力で遷移)-->
 <div class="container">
   <div class="row">
     <div class="col">
-      <h4 class="mx-3 my-3 text-secondary border border-3 rounded-top col-2 text-center" alt="...">ログイン</h4>
-        <!--form_forをform_withに変更-->
-        <%= form_with model: @admin, url: admin_session_path do |f| %>
-        <%#= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <table class="field text-secondary mx-3 my-3">
+      <h2 class="mx-1 my-5 text-secondary border-bottom col-4"><b>ログイン</b></h2>
+      <!--form_forをform_withに変更-->
+      <%= form_with model: @admin, url: admin_session_path do |f| %>
+        <table class="table table-borderless text-secondary mx-1 my-2 log_in">
+          <tr>
+            <th><%= f.label :メールアドレス, class:"border-bottom" %></th>
+            <td><%= f.email_field :email, autofocus: true, autocomplete: "email", class:"border border-secondary text-secondary rounded" %></td>
+          </tr>
+          <tr>
+            <th><%= f.label :パスワード, class:"border-bottom" %></th>
+            <td><%= f.password_field :password, autocomplete: "current-password", class:"border border-secondary text-secondary rounded" %></td>
+          </tr>
+          <% if devise_mapping.rememberable? %>
             <tr>
-              <td>
-                <%= f.label :email %><br />
-                <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-              </td>
+              <th></th>
+              <td><%= f.check_box :remember_me %> <%= f.label :remember_me %></td>
             </tr>
-            <tr>
-              <td>
-                <%= f.label :password %><br />
-                <%= f.password_field :password, autocomplete: "current-password" %>
-              </td>
-            </tr>
-          </table>
-          <div class="actions">
-            <%= f.submit "ログイン", class:"btn btn-outline-primary ml-3 btn-sm" %>
-            <!--adminsからadminにフォルダ名を改名したためadminsのsを削除-->
-            <%= render "admin/shared/links" %>
-          </div>
-        <% end %>
+            </div>
+          <% end %>
+        </table>
+        <table class="table table-borderless text-secondary mx-1 my-2">
+          <tr>
+            <th class="d-flex">
+              <%= f.submit "ログイン", class:"btn btn-outline-info btn-sm" %>
+              <%= render "admin/shared/links" %>
+            </th>
+          </tr>
+        </table>
+      <% end %>
     </div>
   </div>
 </div>
-
-  <!--下記は必要ないためコメントアウト-->
-  <%# if devise_mapping.rememberable? %>
-    <!--<div class="field">-->
-      <%#= f.check_box :remember_me %>
-      <%#= f.label :remember_me %>
-    <!--</div>-->
-  <%# end %>
-
-

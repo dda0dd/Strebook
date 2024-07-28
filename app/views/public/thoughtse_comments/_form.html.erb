@@ -1,7 +1,0 @@
-<!--コメント投稿フォームを部分テンプレート化（非同期通信用いて実装）-->
-<!--form_withヘルパーでlocal: falseを指定で非同期通信行うことができる-->
-  <!--id: "comment_textarea"追加でcomment_textareaというIDがテキストエリアに割り当てられる-->
-<%= form_with model: [book, book_comment], local: false do |f| %>
-  <%= f.text_area :comment, rows: '5', style: "width:100%", id: "comment_textarea" %>
-  <%= f.submit "送信" %>
-<% end %>

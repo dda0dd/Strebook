@@ -2,12 +2,11 @@ class BookStore::BookStoresController < ApplicationController
   # 権限の設定：ログインしていない書店が作業できないように設定
   before_action :authenticate_book_store!
 
-
   def show
     # 現在ログインしている書店
     @book_store = current_book_store
     @posts = @book_store.posts.page(params[:page]).per(5)
-    # 店内の画像を背景画像として選択できる
+    # 店内の画像
     # @image = Image.page(params[:page])
   end
 
@@ -18,16 +17,17 @@ class BookStore::BookStoresController < ApplicationController
   def update
     @book_store = BookStore.find(params[:id])
     if @book_store.update(book_store_params)
-      flash[:notice] = "success"
-      # リダイレクト先に会員(書店)マイページ
-      redirect_to book_store_book_store_path(@book_store)
+       @book_store.save_tags(params[:book_store][:tag])
+       flash[:notice] = "success"
+       # リダイレクト先に会員(書店)マイページ
+       redirect_to book_store_book_store_path(@book_store)
     else
-      flash.now[:alert] = "failer"
-      #render :edit
-      render "book_store/book_stores/edit"
+       flash.now[:alert] = "failer"
+       #render :edit
+       render "book_store/book_stores/edit"
     end
   end
-   # unsubscribe.htmlのlink_toでcurrent_book_storeを記述しているのでcontrollerに記述不要
+  # unsubscribe.htmlのlink_toでcurrent_book_storeを記述しているのでcontrollerに記述不要
   def unsubscribe
   end
 
@@ -35,7 +35,7 @@ class BookStore::BookStoresController < ApplicationController
     current_book_store.update(is_active: false)
     reset_session
     #新規会員(書店)登録画面に遷移
-    redirect_to root_path
+    redirect_to new_book_store_registration_path
   end
 
    private
@@ -46,7 +46,8 @@ class BookStore::BookStoresController < ApplicationController
                                      :address,
                                      :telephone_number,
                                     # 店内画像を追記
-                                     :image
+                                     :image,
+                                     :email,
                                      )
   end
 end

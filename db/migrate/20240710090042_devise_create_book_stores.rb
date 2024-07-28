@@ -4,6 +4,7 @@ class DeviseCreateBookStores < ActiveRecord::Migration[6.1]
   def change
     create_table :book_stores do |t|
       ## Database authenticatable
+      t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 
       # 書店情報記述カラム記述

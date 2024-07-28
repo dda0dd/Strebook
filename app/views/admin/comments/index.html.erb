@@ -1,40 +1,62 @@
+<!--特定の投稿に紐づく感想コメント一覧画面-->
 <div class="container">
   <div class="row">
-<div class="col-md-8">
-      <h3 class="mx-3  my-3 text-secondary border border-3 rounded-top col-7 text-center">感想コメント一覧</h3>
-        <!--ワード(不適切な言葉など)で感想コメントを検索できる検索窓設置-->
-        <% if admin_signed_in? %>
-          <div class="search_form">
-            <!--url: search_public_posts_path=検索内容をresources :postsのget 'search'に送信-->
-            <%= form_with url: search_admin_comments_path, local: true, method: :get do |f| %>
-              <!--検索内容をwordとしてdef searchアクションに送る-->
-              <%= f.text_field :word %>
-              <!--"btn"箇所=検索ボタン記述-->
-                <!--style: =Bootstrap内でのCSS記述（<div>や<link_to>内では上手く動作しないことも）カスタマイズツールなどある-->
-              <%= f.submit "検索", class: "btn btn-outline-secondary", style: "padding:0;" %>
-            <% end %>
-          </div>
-        <% end %>
+    <div class="col-md-8">
+      <h2 class="mx-1 my-5 text-secondary border-bottom col-7"><b>感想コメント一覧</b></h2>
       <!--特定投稿に紐づく感想コメント一覧-->
-      <table class="mx-3 my-3 table table-hover align-middle text-secondary">
+      <table class="mx-1 my-2 thoughtse_comment_top table table-hover text-secondary">
         <thead>
           <tr>
-            <th>content</th>
-            <th>evaluation_score</th>
+            <th>投稿の感想</th>
+            <th>書店評価</th>
+            <!--ワード(不適切な言葉など)で感想コメントを検索できる検索窓設置-->
+            <% if admin_signed_in? %>
+              <th>
+                <!--url: search_public_posts_path=検索内容をresources :postsのget 'search'に送信-->
+                <%= form_with url: search_admin_comments_path, local: true, method: :get do |f| %>
+                  <!--検索内容をwordとしてdef searchアクションに送る-->
+                  <%= f.text_field :word, class:"text-secondary border border-secondary rounded" %>
+                  <!--"btn"箇所=検索ボタン記述-->
+                    <!--style: =Bootstrap内でのCSS記述（<div>や<link_to>内では上手く動作しないことも）カスタマイズツールなどある-->
+                  <%= f.submit "検索", class: "btn btn-outline-secondary", style: "padding:0;" %>
+                <% end %>
+              </th>
+            <% end %>
           </tr>
         </thead>
         <tbody>
           <% @thoughtse_comments.each do |thoughtse_comment|%>
             <tr>
+              <!--感想コメント内容-->
               <td><%= thoughtse_comment.content %></td>
-              <td><%= thoughtse_comment.evaluation_score %></td>
-              <td><%= link_to "削除", admin_comment_path(thoughtse_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger float-end" %></td>
+              <!--星レビュー(書店に対しての)-->
+              <td id="show_raty<%= thoughtse_comment.id %>"></td>
+              <!--不適切な言葉使用の感想コメント削除ボタン-->
+              <td><%= link_to "削除", admin_comment_path(thoughtse_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger float-end" %></td>
             </tr>
+            <script>
+              $(document).on('turbolinks:load', function() {
+                let elem = document.querySelector('#show_raty<%= thoughtse_comment.id %>');
+                if (elem == null) return;
+
+                elem.innerHTML = "";
+                let opt = {
+                  starOn: "<%= asset_path('star-on.png') %>",
+                  starOff: "<%= asset_path('star-off.png') %>",
+                  starHalf: "<%= asset_path('star-half.png') %>",
+                  score: "<%= thoughtse_comment.evaluation_score %>",
+                  readOnly: true,
+                };
+                raty(elem, opt);
+              });
+            </script>
           <% end %>
         </tbody>
       </table>
+      <!--kaminari(ページネーション)記述-->
+      <div class="mx-1">
+        <%= paginate @thoughtse_comments %>
+      </div>
     </div>
   </div>
 </div>
-    <!--kaminari(ページネーション)記述-->
-    <%= paginate @thoughtse_comments %>

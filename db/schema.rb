@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_07_19_024850) do
+ActiveRecord::Schema.define(version: 2024_07_24_121343) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -52,7 +52,15 @@ ActiveRecord::Schema.define(version: 2024_07_19_024850) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "book_store_tags", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "book_store_id", null: false
+    t.integer "tag_id", null: false
+  end
+
   create_table "book_stores", force: :cascade do |t|
+    t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "name", default: "", null: false
     t.string "address", default: "", null: false
@@ -67,21 +75,8 @@ ActiveRecord::Schema.define(version: 2024_07_19_024850) do
     t.index ["reset_password_token"], name: "index_book_stores_on_reset_password_token", unique: true
   end
 
-  create_table "book_stote_tags", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "book_store_id", null: false
-    t.string "tag_name", default: "", null: false
-  end
-
-  create_table "customer_tags", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "customer_id", null: false
-    t.string "tag_name", default: "", null: false
-  end
-
   create_table "customers", force: :cascade do |t|
+    t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "name", default: "", null: false
     t.integer "age", null: false
@@ -94,14 +89,6 @@ ActiveRecord::Schema.define(version: 2024_07_19_024850) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
-  end
-
-  create_table "post_tags", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "customer_id", null: false
-    t.integer "book_store_tag_id", null: false
-    t.integer "review_id", null: false
   end
 
   create_table "posts", force: :cascade do |t|
@@ -119,21 +106,10 @@ ActiveRecord::Schema.define(version: 2024_07_19_024850) do
     t.string "content", default: "", null: false
   end
 
-  create_table "review_tags", force: :cascade do |t|
+  create_table "tags", force: :cascade do |t|
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "book_store_id", null: false
-    t.integer "customer_tag_id", null: false
-    t.integer "review_id", null: false
-  end
-
-  create_table "reviews", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "customer_id", null: false
-    t.integer "book_store_id", null: false
-    t.string "thoughtse_comment", default: "", null: false
-    t.float "evaluation_score", null: false
   end
 
   create_table "thoughtse_comments", force: :cascade do |t|

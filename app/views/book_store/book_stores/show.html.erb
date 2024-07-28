@@ -2,68 +2,91 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h2 class="mx-3  my-3 text-secondary border border-3 rounded-top col-3 text-center">書店投稿一覧</h2>
-        <table class="mx-3  my-3 table table-hover align-middle text-secondary">
+      <h2 class="mx-1 my-5 text-secondary border-bottom col-4"><b>書店マイページ</b></h2>
+      <div style="display: flex;">
+        <table class="mx-1 my-2 table table-hover align-middle text-secondary" style="flex: 1">
           <tr>
-            <td class="bg-light">書店名</td>
+            <th class="bg-light">書店名</th>
             <td><%= @book_store.name %></td>
           </tr>
           <tr>
-            <td class="bg-light">創立年齢</td>
+            <th class="bg-light">メールアドレス</th>
+            <td><%= @book_store.email %></td>
+          </tr>
+          <tr>
+            <th class="bg-light">創立年齢</th>
             <td><%= @book_store.age %></td>
           </tr>
           <tr>
-            <td class="bg-light">電話番号</td>
+            <th class="bg-light">電話番号</th>
             <td><%= @book_store.telephone_number %></td>
           </tr>
           <tr>
-            <td class="bg-light">住所</td>
+            <th class="bg-light">住所</th>
             <td><%= @book_store.address %></td>
           </tr>
-            <!--book_storeでログインかつ(&&)じゃなければ(!)if~end内実行される-->
-            <% if book_store_signed_in? && !current_book_store.guest? %>
           <tr>
-              <td><%= link_to "編集", edit_book_store_book_store_path(current_book_store.id), class:"btn btn-outline-primary btn-sm" %></td>
+            <th class="bg-light">タグ</th>
+            <%# 該当のPostからアソシエーションでタグを取得 %>
+            <td>
+              <% @book_store.tags.each do |tag| %>
+                <%# タグを展開 %>
+                <span class=" rounded", style= "background: gray; padding: 3px; color: white;"><%= tag.name %></span>
+              <% end %>
+            </td>
+          </tr>
+          <!--book_storeでログインかつ(&&)じゃなければ(!)if~end内実行される-->
+          <% if book_store_signed_in? && !current_book_store.guest? %>
+            <tr>
+              <td><%= link_to "編集", edit_book_store_book_store_path(current_book_store.id), class:"btn btn-outline-secondary btn-sm" %></td>
               <!--退会するボタン押した時確認メッセージ表示させる(退会後退会画面に遷移)-->
-              <td><%= link_to "退会する", unsubscribe_book_store_book_stores_path, data: { confirm: "退会してもよろしいですか？" }, class:"btn btn-outline-danger ml-1" %></td>
-          </tr>
-            <% end %>
-          <tr>
-            <td class="bg-light">店内画像</td>
-            <td><%#= f.label :店内画像 %></td>
-            <!--accept: "image/*"で画像ファイルのみ投稿できる(ActiveStorage導入で)-->
-            <td><%#= f.file_field :image, accept: "image/*" %></td>
-            <!--image画像ない時にno_imageを表示してエラー回避(imageがないとエラー発生する)-->
-            <% if @book_store.image.attached? %>
-            <!--book_storeに紐づいているimageをimage_tagに渡して画像を表示する-->
-            <td><%= image_tag @book_store.image, size: "200x200" %></td>
-            <% else %>
-            <td><%= image_tag 'no_image.jpg', size: "200x200" %></td>
-            <% end %>
-          </tr>
+              <td><%= link_to "退会する", unsubscribe_book_store_book_stores_path, data: { confirm: "退会してもよろしいですか？" }, class:"btn btn-outline-danger ml-0 btn-sm" %></td>
+            </tr>
+          <% end %>
         </table>
-        <table class="mx-3 my-3 table table-hover table-inverse align-middle text-secondary">
+        <!--画像サイズをstyleで指定-->
+        <div style="flex: 1; text-align: center;">
+          <% if @book_store.image.attached? %>
+            <!--book_storeに紐づいているimageをimage_tagに渡して画像を表示する-->
+            <%= image_tag @book_store.image, size: "200x200", style: "width: 350px ;height: 350px;" %>
+          <% else %>
+            <%= image_tag 'no_image.jpg', size: "200x200", style: "width: 350px ;height: 350px;"  %>
+          <% end %>
+        </div>
+      </div>
+      <!--書店(book_store)ログイン時のみ表示させる-->
+      <% if book_store_signed_in? && !current_book_store.guest? %>
+        <table class="mx-1 my-2 table table-hover table-inverse align-middle text-secondary">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Content</th>
-             </tr>
+              <th>書店名</th>
+              <th>投稿内容</th>
+              <th></th>
+            </tr>
           </thead>
           <tbody>
             <!--投稿した投稿内容を表示させる-->
             <% @book_store.posts.each do |post|%>
-            <tr>
-              <td><%= post.title %></td>
-              <!--投稿に紐づく感想コメントが見られるページ(book_store/comments/search)に遷移-->
-              <%#= link_to book_store_book_store_post_comments_path(post.book_store, post) do %>
-              <td><%= link_to post.content, book_store_book_store_post_comments_path(post.book_store, post) %></td>
-              <%# end %>
-            </tr>
+              <tr>
+                <td><%= post.title %></td>
+                <!--投稿に紐づく感想コメントが見られるページ(book_store/comments/search)に遷移-->
+                <%= link_to book_store_book_store_post_comments_path(post.book_store, post) do %>
+                  <td><%= link_to post.content, book_store_book_store_post_comments_path(post.book_store, post), class:"text-secondary" %></td>
+                <% end %>
+                <!--ログイン書店のみ表示される(ゲスト書店にも表示されない)-->
+                <% if book_store_signed_in? && !current_book_store.guest? %>
+                  <!--作成した投稿を削除できる削除ボタン設置-->
+                  <td><%= link_to "削除", book_store_post_path(post.id), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger float-end" %></td>
+                <% end %>
+              </tr>
             <% end %>
-            </table>
           </tbody>
-        </div>
+        </table>
+      <% end %>
+      <!--kaminari(ページネーション)記述-->
+      <div class="mx-1">
+        <%= paginate @posts %>
       </div>
     </div>
-    <!--kaminari(ページネーション)記述-->
-    <%= paginate @posts %>
+  </div>
+</div>

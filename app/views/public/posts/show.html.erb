@@ -2,46 +2,88 @@
   <!--感想コメント作成-->
 <div class="container">
   <div class="row">
-    <div class="col-md-4">
-      <h3 class="mx-3 my-3 text-secondary border border-3 rounded-top text-center">感想コメント</h3>
-      <%= form_with model: @thoughtse_comment, url: public_book_store_thoughtse_comments_path(@post.book_store) do |f| %>
-        <%= render 'layouts/error_messages', model: f.object %>
-        <%= f.hidden_field :post_id, value: @post.id %>
+    <!--ゲストでお客様ログイン時には表示しない-->
+    <% if customer_signed_in? && !current_customer.guest? %>
+      <div class="col-md-4">
+        <h2 class="mx-1 my-5 text-secondary border-bottom col-12"><b>感想コメント作成</b></h2>
+        <%= form_with model: @thoughtse_comment, url: public_post_thoughtse_comments_path(@post) do |f| %>
+          <%= render 'layouts/error_messages', model: f.object %>
+          <%= f.hidden_field :post_id, value: @post.id %>
+          <div class="mx-1 my-2 text-secondary">
+            <%= f.label :content, "感想" %>
+            <%= f.text_area :content, rows: '8', class: "form-control" %>
+          </div>
+          <!--レビュー機能を表示(星で5段階評価)-->
+          <div class="mx-1 my-2 text-secondary" id="star">
+            <%= f.label :"評価" %>
+            <%= f.hidden_field :evaluation_score, id: :review_star, class: 'form-control' %>
+            <div id="post_raty"></div>
+          </div>
+          <%= f.submit "感想コメント", class:"mx-1 my-2 btn btn-outline-success btn-sm" %>
+          <script>
+            $(document).on('turbolinks:load', function() {
+              let elem = document.querySelector('#post_raty');
+              if (elem == null) return;
 
-        <div class="mx-3 my-3 text-secondary">
-          <%= f.label :content, "感想" %>
-          <%= f.text_area :content, rows: '8', class: "form-control" %>
-        </div>
-
-        <div class="mx-3 my-3 text-secondary">
-          <%= f.label :evaluation_score, "評価" %>
-          <%= f.select :evaluation_score, (1..5), { include_blank: "評価を選ぶ" }, { class: "form-control" } %>
-        </div>
-        <%= f.submit "感想コメント", class:"mx-3 my-3 btn btn-outline-primary btn-sm" %>
-      <% end %>
-    </div>
-
+              elem.innerHTML = ""
+              let opt = {
+                starOn: "<%= asset_path('star-on.png') %>",
+                starOff: "<%= asset_path('star-off.png') %>",
+                starHalf: "<%= asset_path('star-half.png') %>",
+                scoreName: 'thoughtse_comment[evaluation_score]',
+              };
+              raty(elem, opt);
+            });
+          </script>
+        <!--form_with内にf.labelなどfは入れないとエラー原因になる-->
+        <% end %>
+      </div>
+    <% end %>
+    <!--書店投稿から遷移して確認できるページ-->
     <div class="col-md-8">
-      <h3 class="mx-3  my-3 text-secondary border border-3 rounded-top col-7 text-center">感想コメント一覧</h3>
-      <!--特定投稿に紐づく感想コメント一覧-->
-      <table class="mx-3 my-3 table table-hover align-middle text-secondary">
+      <h2 class="mx-1 mt-5 text-secondary border-bottom col-7"><b>感想コメント一覧</b></h2>
+      <!--特定の投稿に紐づく感想コメント一覧-->
+      <table class="mx-1 thoughtse_comment_top table table-hover align-middle text-secondary">
         <thead>
           <tr>
-            <th>content</th>
-            <th>evaluation_score</th>
+            <th>感想</th>
+            <th>書店評価</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <% @thoughtse_comments.each do |thoughtse_comment|%>
             <tr>
               <td><%= thoughtse_comment.content %></td>
-              <td><%= thoughtse_comment.evaluation_score %></td>
+              <td id="show_raty<%= thoughtse_comment.id %>"></td>
+              <script>
+                $(document).on('turbolinks:load', function() {
+                  let elem = document.querySelector('#show_raty<%= thoughtse_comment.id %>');
+                  if (elem == null) return;
+
+                  elem.innerHTML = ""
+                  let opt = {
+                    starOn: "<%= asset_path('star-on.png') %>",
+                    starOff: "<%= asset_path('star-off.png') %>",
+                    starHalf: "<%= asset_path('star-half.png') %>",
+                    readOnly: true,
+                    score: <%= thoughtse_comment.evaluation_score %>
+                  };
+                  raty(elem, opt);
+                });
+              </script>
+              <% if customer_signed_in? && !current_customer.guest? %>
+                <!--削除ボタン表示-->
+                <td><%= link_to "削除", public_post_thoughtse_comment_path(@post,thoughtse_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-outline-danger float-end" %></td>
+              <% end %>
             </tr>
           <% end %>
         </tbody>
       </table>
+      <!--kaminari(ページネーション)記述-->
+      <div class="mx-1">
+        <%= paginate @thoughtse_comments %>
+      </div>
     </div>
   </div>
 </div>
-<!--kaminari(ページネーション)記述-->
-<%= paginate @thoughtse_comments %>

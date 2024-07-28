@@ -1,67 +1,54 @@
+<!--書店(book_store)の新規会員登録画面-->
 <div class="container">
   <div class="row">
     <div class="col">
-      <h4 class="mx-3 my-3 text-secondary border border-3 rounded-top col-3 text-center">新規会員登録</h4>
-        <!--form_forをform_withに変更-->
-        <%= form_with model: @book_store, url: book_store_registration_path do |f| %>
-        <%#= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-          <!--book_storesからbook_storeにフォルダ名を改名したためbook_storesのsを削除-->
-            <!--新規登録画面でのエラーメッセージを呼び出し記述-->
-          <%= render "book_store/shared/error_messages", resource: resource %>
-          <table class="field text-secondary mx-3 my-3">
-            <tr>
-              <td>
-                <!--emailをnameに変更(書店名で新規登録してもらうため)-->
-                <%= f.label :name, "書店名" %><br />
-                <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "春書店" %>
-              </td>
-            </tr>
-             <!--新規登録時に住所記載してもらう-->
-            <tr>
-              <td>
-              <%= f.label :address, "住所" %><br />
-              <%= f.text_field :address, autofocus: true, placefield: "大阪府荒木町0-0-0000", placeholder: "大阪府荒木町0-0-0000" %>
-              </td>
-            </tr>
-            <!--新規登録時に創立年齢(数字のみ)記載してもらう-->
-            <tr>
-              <td>
-              <%= f.label :age, "創立年齢" %><br />
-              <%= f.text_field :age, autofocus: true, placefield: "1857", placeholder: "1857" %>
-              </td>
-            </tr>
-            <!--新規登録時に電話番号(ハイフンなし)記載してもらう-->
-            <tr>
-              <td>
-              <%= f.label :telephone_number, "電話番号（ハイフンなし）" %><br />
-              <%= f.text_field :telephone_number, autofocus: true, placefield: "00000000000", placeholder: "000000000000" %>
-              </td>
-            </tr>
-            <!--新規登録時にパスワード(英数字8文字上)記載してもらう-->
-            <tr>
-              <td>
-                <%= f.label :password, "パスワード" %><br />
-                <%# if @minimum_password_length %>
-                <!--<em>(<%#= @minimum_password_length %> characters minimum)</em>-->
-                <%# end %>
-                <%= f.password_field :password, autocomplete: "new-password", placeholder: "半角英数字8文字以上" %>
-              </td>
-            </tr>
-          
-            <tr>
-              <td>
-                <%= f.label :password_confirmation, "確認用" %><br />
-                <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "半角英数字8文字以上" %>
-              </td>
-            </tr>
-          </table>
-          <div class="actions">
-            <%= f.submit "新規登録", class:"text-center btn btn-outline-success ml-3 btn-sm" %>
-            <!--book_storesからbook_storeにフォルダ名を改名したためbook_storesのsを削除-->
-              <!--書店の会員登録画面呼び出し記述-->
-            <%= render "book_store/shared/links" %>
-          </div>
-        <% end %>
+      <h2 class="mx-1 my-5 text-secondary border-bottom col-4"><b>新規会員登録</b></h2>
+      <!--form_forをform_withに変更-->
+      <%= form_with model: @book_store, url: book_store_registration_path do |f| %>
+        <!--book_storesからbook_storeにフォルダ名を改名したためbook_storesのsを削除-->
+          <!--新規登録画面でのエラーメッセージを呼び出し記述-->
+        <%= render "book_store/shared/error_messages", resource: resource %>
+        <table class="table table-borderless text-secondary mx-1 my-2">
+          <tr>
+            <!--emailをnameに変更(書店名で新規登録してもらうため)-->
+            <th><%= f.label :name, "書店名", class:"border-bottom" %></th>
+            <td><%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "春書店", class:"text-secondary border rounded" %></td>
+          </tr>
+          <tr>
+            <!--新規登録時にemail記載してもらう-->
+            <th><%= f.label :email, "メールアドレス", class:"border-bottom" %></th>
+            <td><%= f.text_field :email, autofocus: true, autocomplete: "email", placeholder: "email@email", class:"text-secondary border rounded" %></td>
+          </tr>
+          <!--新規登録時に住所記載してもらう-->
+          <tr>
+            <th><%= f.label :address, "住所", class:"border-bottom" %></th>
+            <td><%= f.text_field :address, autofocus: true, placefield: "大阪府荒木町0-0-0000", placeholder: "大阪府荒木町0-0-0000", class:"text-secondary border rounded" %></td>
+          </tr>
+          <!--新規登録時に創立年齢(数字のみ)記載してもらう-->
+          <tr>
+            <th><%= f.label :age, "創立年齢", class:"border-bottom" %></th>
+            <td><%= f.text_field :age, autofocus: true, placefield: "1857", placeholder: "1857", class:"text-secondary border rounded" %></td>
+          </tr>
+          <!--新規登録時に電話番号(ハイフンなし)記載してもらう-->
+          <tr>
+            <th><%= f.label :telephone_number, "電話番号 [ハイフンなし]", class:"border-bottom" %></th>
+            <td><%= f.text_field :telephone_number, autofocus: true, placefield: "00000000000", placeholder: "000000000000", class:"text-secondary border rounded" %></td>
+          </tr>
+          <!--新規登録時にパスワード(英数字8文字上)記載してもらう-->
+          <tr>
+            <th><%= f.label :password, "パスワード", class:"border-bottom" %></th>
+            <td><%= f.password_field :password, autocomplete: "new-password", placeholder: "半角英数字8文字以上", class:"text-secondary border rounded" %></td>
+          </tr>
+          <tr>
+            <th><%= f.label :password_confirmation, "確認用", class:"border-bottom" %></th>
+            <td><%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "半角英数字8文字以上", class:"text-secondary border rounded" %></td>
+          </tr>
+          <tr>
+            <td><%= f.submit "新規登録", class:"text-center btn btn-outline-success btn-sm" %></td>
+            <td><%= render "book_store/shared/links" %></td>
+          </tr>
+        </table>
+      <% end %>
     </div>
   </div>
 </div>
