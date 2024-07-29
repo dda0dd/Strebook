@@ -1,6 +1,15 @@
 // bootstrap導入でstylesheetsフォルダ作成してapplication.scss作成、下記記述
+$theme-colors: (
+  "info": #a58f86,
+  "success": #a8bf93,
+  "danger": #eebbcb
+);
 
-@use '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/bootstrap';
+
+html, body {
+  background: linear-gradient(-90deg, #ffffff, #f0f0f0);
+}
 
 // 感想コメント一覧レイアウト整えのため追記
 .thoughtse_comment_top {
