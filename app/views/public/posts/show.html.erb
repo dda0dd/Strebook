@@ -10,12 +10,12 @@
           <%= render 'layouts/error_messages', model: f.object %>
           <%= f.hidden_field :post_id, value: @post.id %>
           <div class="mx-1 my-2 text-secondary">
-            <%= f.label :content, "感想" %>
+            <%= f.label :content, "感想", class:"border-bottom" %>
             <%= f.text_area :content, rows: '8', class: "form-control" %>
           </div>
           <!--レビュー機能を表示(星で5段階評価)-->
           <div class="mx-1 my-2 text-secondary" id="star">
-            <%= f.label :"評価" %>
+            <%= f.label :"評価", class:"border-bottom" %>
             <%= f.hidden_field :evaluation_score, id: :review_star, class: 'form-control' %>
             <div id="post_raty"></div>
           </div>
